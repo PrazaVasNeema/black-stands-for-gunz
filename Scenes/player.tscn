@@ -1,10 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://dsfwn8vjoqwuv"]
+[gd_scene load_steps=4 format=3 uid="uid://dsfwn8vjoqwuv"]
 
 [ext_resource type="Script" path="res://Scripts/player_controller.gd" id="1_ltnee"]
 [ext_resource type="Script" path="res://Scripts/gunz_shogun.gd" id="2_2o8be"]
+[ext_resource type="PackedScene" uid="uid://ct0xeh43q8ku4" path="res://Scenes/gunz_matrix.tscn" id="2_ptbv7"]
 
 [node name="Player" type="Node3D"]
 script = ExtResource("1_ltnee")
+
+[node name="PlayerMainCamera" type="Camera3D" parent="."]
+
+[node name="GunzMatrix" parent="." instance=ExtResource("2_ptbv7")]
 
 [node name="GunzShogun" type="Node" parent="."]
 script = ExtResource("2_2o8be")

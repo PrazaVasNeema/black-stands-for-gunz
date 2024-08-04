@@ -14,6 +14,10 @@ config/name="Black Is For GUNS"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameHelpers="*res://Scripts/Singletons/GameHelpers.gd"
+
 [input]
 
 fire_one={

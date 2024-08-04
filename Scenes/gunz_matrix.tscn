@@ -3,15 +3,13 @@
 [ext_resource type="Script" path="res://Scripts/gunz_matrix.gd" id="1_dflkb"]
 [ext_resource type="Texture2D" uid="uid://pxd74ha8qwdd" path="res://toppng.com-crosshair-crosshair-338x338.png" id="2_y7uje"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_bn1ti"]
+[sub_resource type="SphereMesh" id="SphereMesh_1oaon"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_dqbue"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nhtma"]
+albedo_color = Color(0.795865, 0, 0.166209, 1)
 
-[node name="GunzMatrix" type="Node3D" node_paths=PackedStringArray("matrix_canvas", "main_crosshair", "default_wall")]
+[node name="GunzMatrix" type="Node3D"]
 script = ExtResource("1_dflkb")
-matrix_canvas = NodePath("MatrixCanvas")
-main_crosshair = NodePath("MatrixCanvas/MainCrosshair")
-default_wall = NodePath("default_wall")
 
 [node name="MatrixCanvas" type="CanvasLayer" parent="."]
 
@@ -19,14 +17,7 @@ default_wall = NodePath("default_wall")
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_y7uje")
 
-[node name="default_wall" type="Area3D" parent="."]
-collision_layer = 2147483648
-collision_mask = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="default_wall"]
-transform = Transform3D(3000, 0, 0, 0, 3000, 0, 0, 0, 3000, 0, 0, -2000)
-shape = SubResource("BoxShape3D_bn1ti")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="WSPhantomMainC" type="MeshInstance3D" parent="."]
 visible = false
-mesh = SubResource("BoxMesh_dqbue")
+mesh = SubResource("SphereMesh_1oaon")
+surface_material_override/0 = SubResource("StandardMaterial3D_nhtma")

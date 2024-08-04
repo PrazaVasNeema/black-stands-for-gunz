@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://b8oxi1n8o1lta"]
 
 [ext_resource type="PackedScene" uid="uid://crwyoydc8v8ir" path="res://Scenes/input_shogun.tscn" id="1_u6qad"]
-[ext_resource type="PackedScene" uid="uid://ct0xeh43q8ku4" path="res://Scenes/gunz_matrix.tscn" id="2_8fod7"]
+[ext_resource type="PackedScene" uid="uid://dsfwn8vjoqwuv" path="res://Scenes/player.tscn" id="2_s7gia"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_vdxtb"]
 
@@ -24,13 +24,8 @@ albedo_color = Color(0.795865, 0, 0.166209, 1)
 [node name="InputShogun" parent="." instance=ExtResource("1_u6qad")]
 unique_name_in_owner = true
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.71459, 0)
-
-[node name="GunzMatrix" parent="." node_paths=PackedStringArray("player_camera", "ws_phantom") instance=ExtResource("2_8fod7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.71459, 0)
-player_camera = NodePath("../Camera3D")
-ws_phantom = NodePath("../TargetPhantom")
+[node name="Player" parent="." instance=ExtResource("2_s7gia")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.01273, 0)
 
 [node name="World" type="Node3D" parent="."]
 
@@ -65,5 +60,6 @@ directional_shadow_mode = 0
 
 [node name="TargetPhantom" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.93959, 0)
+visible = false
 mesh = SubResource("SphereMesh_y801c")
 surface_material_override/0 = SubResource("StandardMaterial3D_pkk2y")
