@@ -14,7 +14,10 @@ func _ready() -> void:
 	#_input_shogun.mouse_position_changed.connect(deal_with_mouse)
 	
 	_gunz_matrix.ws_aim_changed.connect(_on_ws_main_position_changed)
+	
+	_gunz_shogun.lock_n_load()
 
 
 func _on_ws_main_position_changed(ws_position : Vector3):
-	print(ws_position)
+	_gunz_shogun.update_targeting(ws_position)
+	#print(ws_position)

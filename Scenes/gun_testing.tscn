@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://6najt77i4v2r"]
+
+[ext_resource type="Script" path="res://Scripts/Gunz/gun_testing.gd" id="1_oelp7"]
+[ext_resource type="Resource" uid="uid://bqk63elsfu4sd" path="res://Resources/GameData/GunzSetConfDefault.tres" id="2_fphis"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ucsdp"]
+
+[node name="GunTesting" type="Node3D"]
+script = ExtResource("1_oelp7")
+set_configuration = ExtResource("2_fphis")
+
+[node name="CGs" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CGs"]
+transform = Transform3D(2.4104, 0, 0, 0, 2.2861, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_ucsdp")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="CGs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 6.44907, 0, 0, -2.26718)
+mesh = SubResource("BoxMesh_ucsdp")
+skeleton = NodePath("../..")
