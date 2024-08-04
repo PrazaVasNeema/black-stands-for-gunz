@@ -1,7 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://b8oxi1n8o1lta"]
+[gd_scene load_steps=10 format=3 uid="uid://b8oxi1n8o1lta"]
 
 [ext_resource type="PackedScene" uid="uid://crwyoydc8v8ir" path="res://Scenes/input_shogun.tscn" id="1_u6qad"]
 [ext_resource type="PackedScene" uid="uid://ct0xeh43q8ku4" path="res://Scenes/gunz_matrix.tscn" id="2_8fod7"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_vdxtb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ysiig"]
+albedo_color = Color(0.332881, 0.332881, 0.332881, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_upwsc"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_1bjoe"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fmbi8"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_y801c"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pkk2y"]
+albedo_color = Color(0.795865, 0, 0.166209, 1)
 
 [node name="TestingPolygon" type="Node3D"]
 
@@ -9,6 +25,45 @@
 unique_name_in_owner = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.71459, 0)
 
-[node name="GunzMatrix" parent="." node_paths=PackedStringArray("player_camera") instance=ExtResource("2_8fod7")]
+[node name="GunzMatrix" parent="." node_paths=PackedStringArray("player_camera", "ws_phantom") instance=ExtResource("2_8fod7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.71459, 0)
 player_camera = NodePath("../Camera3D")
+ws_phantom = NodePath("../TargetPhantom")
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="Ground" type="Node3D" parent="World"]
+transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Ground"]
+mesh = SubResource("BoxMesh_vdxtb")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_ysiig")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Ground"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Ground/StaticBody3D"]
+shape = SubResource("BoxShape3D_upwsc")
+
+[node name="Obstacle" type="Node3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.42277, -8.66319)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Obstacle"]
+mesh = SubResource("BoxMesh_1bjoe")
+
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="World/Obstacle"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Obstacle/AnimatableBody3D"]
+shape = SubResource("BoxShape3D_fmbi8")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.189053, 0.722798, -0.664697, 0, 0.676904, 0.736071, 0.981967, -0.139156, 0.12797, -56.8411, 62.5737, 17.1509)
+shadow_enabled = true
+directional_shadow_mode = 0
+
+[node name="TargetPhantom" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.93959, 0)
+mesh = SubResource("SphereMesh_y801c")
+surface_material_override/0 = SubResource("StandardMaterial3D_pkk2y")
