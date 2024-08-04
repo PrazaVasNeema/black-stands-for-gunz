@@ -1,13 +1,28 @@
-[gd_scene load_steps=4 format=3 uid="uid://6najt77i4v2r"]
+[gd_scene load_steps=8 format=3 uid="uid://6najt77i4v2r"]
 
 [ext_resource type="Script" path="res://Scripts/Gunz/gun_testing.gd" id="1_oelp7"]
 [ext_resource type="Resource" uid="uid://bqk63elsfu4sd" path="res://Resources/GameData/GunzSetConfDefault.tres" id="2_fphis"]
+[ext_resource type="Shader" path="res://Rendering/palka.gdshader" id="3_ljeli"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_ucsdp"]
 
-[node name="GunTesting" type="Node3D"]
+[sub_resource type="BoxMesh" id="BoxMesh_om0r5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_626by"]
+render_priority = 0
+shader = ExtResource("3_ljeli")
+shader_parameter/color = Color(0.029979, 0.612852, 0.261123, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h2fg2"]
+render_priority = 0
+shader = ExtResource("3_ljeli")
+shader_parameter/color = Color(0.716862, 0, 0.206854, 1)
+
+[node name="GunTesting" type="Node3D" node_paths=PackedStringArray("palka1", "palka2")]
 script = ExtResource("1_oelp7")
 set_configuration = ExtResource("2_fphis")
+palka1 = NodePath("MeshInstance3D")
+palka2 = NodePath("MeshInstance3D2")
 
 [node name="CGs" type="Node3D" parent="."]
 
@@ -20,3 +35,15 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 6.44907, 0, 0, -2.26718)
 mesh = SubResource("BoxMesh_ucsdp")
 skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 78.715, 0, 0, 0)
+visible = false
+mesh = SubResource("BoxMesh_om0r5")
+surface_material_override/0 = SubResource("ShaderMaterial_626by")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 78.715, 0, 0, 0)
+visible = false
+mesh = SubResource("BoxMesh_om0r5")
+surface_material_override/0 = SubResource("ShaderMaterial_h2fg2")
