@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsfwn8vjoqwuv"]
+
+[ext_resource type="Script" path="res://Scripts/player_controller.gd" id="1_ltnee"]
+[ext_resource type="Script" path="res://Scripts/gunz_shogun.gd" id="2_2o8be"]
+
+[node name="Player" type="Node3D"]
+script = ExtResource("1_ltnee")
+
+[node name="GunzShogun" type="Node" parent="."]
+script = ExtResource("2_2o8be")
+
+[node name="GunzSlots" type="Node3D" parent="."]
+
+[node name="Slot1" type="Node3D" parent="GunzSlots"]
+
+[node name="Slot2" type="Node3D" parent="GunzSlots"]
+
+[node name="Slot3" type="Node3D" parent="GunzSlots"]
+
+[node name="Slot4" type="Node3D" parent="GunzSlots"]
+
+[node name="CGs" type="Node3D" parent="."]

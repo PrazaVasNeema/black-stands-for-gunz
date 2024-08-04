@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8oxi1n8o1lta"]
+
+[ext_resource type="PackedScene" uid="uid://crwyoydc8v8ir" path="res://Scenes/input_shogun.tscn" id="1_u6qad"]
+[ext_resource type="PackedScene" uid="uid://ct0xeh43q8ku4" path="res://Scenes/gunz_matrix.tscn" id="2_8fod7"]
+
+[node name="TestingPolygon" type="Node3D"]
+
+[node name="InputShogun" parent="." instance=ExtResource("1_u6qad")]
+unique_name_in_owner = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+
+[node name="GunzMatrix" parent="." node_paths=PackedStringArray("player_camera") instance=ExtResource("2_8fod7")]
+player_camera = NodePath("../Camera3D")
