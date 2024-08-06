@@ -26,3 +26,4 @@ func _on_ws_main_position_changed(ws_position : Vector3):
 
 func _on_change_current_set(set_ind : int):
 	_gunz_shogun.set_current_set(set_ind)
+	

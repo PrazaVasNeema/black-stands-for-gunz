@@ -1,7 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://b8oxi1n8o1lta"]
+[gd_scene load_steps=9 format=3 uid="uid://dfrd8l87tppc0"]
 
-[ext_resource type="PackedScene" uid="uid://crwyoydc8v8ir" path="res://Scenes/input_shogun.tscn" id="1_u6qad"]
-[ext_resource type="PackedScene" uid="uid://dsfwn8vjoqwuv" path="res://Scenes/Depricated/player_depr.tscn" id="2_s7gia"]
+[ext_resource type="PackedScene" uid="uid://dsfwn8vjoqwuv" path="res://Scenes/Depricated/player_depr.tscn" id="2_uhsjk"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_vdxtb"]
 
@@ -21,10 +20,7 @@ albedo_color = Color(0.795865, 0, 0.166209, 1)
 
 [node name="TestingPolygon" type="Node3D"]
 
-[node name="InputShogun" parent="." instance=ExtResource("1_u6qad")]
-unique_name_in_owner = true
-
-[node name="Player" parent="." instance=ExtResource("2_s7gia")]
+[node name="Player" parent="." instance=ExtResource("2_uhsjk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.628918, 3.99497, 0.427011)
 
 [node name="World" type="Node3D" parent="."]

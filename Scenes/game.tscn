@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://ne0jf6mreu8o"]
+
+[ext_resource type="PackedScene" uid="uid://crwyoydc8v8ir" path="res://Scenes/input_shogun.tscn" id="1_1ipqt"]
+
+[node name="Game" type="Node3D"]
+
+[node name="MHNs" type="Node3D" parent="."]
+
+[node name="GameShogun" type="Node3D" parent="MHNs"]
+
+[node name="InputShogun" parent="MHNs" instance=ExtResource("1_1ipqt")]
+
+[node name="GameStatesRoot" type="Node3D" parent="."]
+
+[node name="TheWorld" type="Node3D" parent="."]
