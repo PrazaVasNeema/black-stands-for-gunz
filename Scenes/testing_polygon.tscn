@@ -25,7 +25,7 @@ albedo_color = Color(0.795865, 0, 0.166209, 1)
 unique_name_in_owner = true
 
 [node name="Player" parent="." instance=ExtResource("2_s7gia")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.01273, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.628918, 3.99497, 0.427011)
 
 [node name="World" type="Node3D" parent="."]
 

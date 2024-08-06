@@ -16,8 +16,13 @@ func _ready() -> void:
 	_gunz_matrix.ws_aim_changed.connect(_on_ws_main_position_changed)
 	
 	_gunz_shogun.lock_n_load()
+	
+	_input_shogun.choose_set_pressed.connect(_on_change_current_set)
 
 
 func _on_ws_main_position_changed(ws_position : Vector3):
 	_gunz_shogun.update_targeting(ws_position)
 	#print(ws_position)
+
+func _on_change_current_set(set_ind : int):
+	_gunz_shogun.set_current_set(set_ind)

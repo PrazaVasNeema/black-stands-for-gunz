@@ -3,9 +3,7 @@ extends Node
 
 
 @export var gunz_slots_root : Node3D
-@export_range(0.0, 90.0) var max_horizontal_rotation : float = 60.0
-@export_range(0.0, 90.0) var max_vertical_rotation : float = 30.0
-@export_range(0.0, 10.0) var max_turning_speed : float = 1.0
+
 
 var active_set : int
 
@@ -23,6 +21,10 @@ func lock_n_load() -> void:
 		Vector3.ZERO))
 		i += 2
 	active_set = 0
+	for gunz_set in _gunz_sets_array:
+		print_debug((gunz_set as GunzSetData).gun_one)
+		print_debug((gunz_set as GunzSetData).gun_two)
+	#print_debug(_gunz_sets_array)
 	
 
 
@@ -31,3 +33,7 @@ func update_targeting(target_ws_position : Vector3):
 	_current_target = target_ws_position
 	(_gunz_sets_array[active_set] as GunzSetData).gun_one.update_targeting(_current_target)
 	(_gunz_sets_array[active_set] as GunzSetData).gun_two.update_targeting(_current_target)
+
+
+func set_current_set(set_ind : int):
+	active_set = set_ind - 1
