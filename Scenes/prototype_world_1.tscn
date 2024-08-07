@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://dfrd8l87tppc0"]
+[gd_scene load_steps=10 format=3 uid="uid://dfrd8l87tppc0"]
 
+[ext_resource type="Script" path="res://Scripts/Teikyou/WorldTeikyou.gd" id="1_ijihl"]
 [ext_resource type="PackedScene" uid="uid://dsfwn8vjoqwuv" path="res://Scenes/Depricated/player_depr.tscn" id="2_uhsjk"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_vdxtb"]
@@ -19,6 +20,7 @@ albedo_color = Color(0.332881, 0.332881, 0.332881, 1)
 albedo_color = Color(0.795865, 0, 0.166209, 1)
 
 [node name="TestingPolygon" type="Node3D"]
+script = ExtResource("1_ijihl")
 
 [node name="Player" parent="." instance=ExtResource("2_uhsjk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.628918, 3.99497, 0.427011)

@@ -1,14 +1,16 @@
 [gd_scene load_steps=5 format=3 uid="uid://c3cy58cow0rdg"]
 
-[ext_resource type="Script" path="res://Scripts/player_controller.gd" id="1_fpgfa"]
-[ext_resource type="Material" uid="uid://du1l7f5grvd4e" path="res://Materials/DevMats/gun_slot.tres" id="2_xvdld"]
+[ext_resource type="Script" path="res://Scripts/Teikyou/PlayerTeikyou.gd" id="1_fllvl"]
+[ext_resource type="Material" uid="uid://ctgv3igu21j6w" path="res://Materials/DevMats/gun_slot_visualizer.tres" id="2_3ehpc"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_ergkj"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_7f3b7"]
 
-[node name="Player" type="Node3D"]
-script = ExtResource("1_fpgfa")
+[node name="Player" type="Node3D" node_paths=PackedStringArray("_gunz_slots_root", "_player_main_camera")]
+script = ExtResource("1_fllvl")
+_gunz_slots_root = NodePath("GunzSlots")
+_player_main_camera = NodePath("PlayerMainCamera")
 
 [node name="PlayerMainCamera" type="Camera3D" parent="."]
 
@@ -18,26 +20,58 @@ script = ExtResource("1_fpgfa")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.99445, 3.80245, -2.10806)
 
 [node name="GunSlotVisualizer" type="MeshInstance3D" parent="GunzSlots/Slot1"]
-material_override = ExtResource("2_xvdld")
+material_override = ExtResource("2_3ehpc")
+material_overlay = ExtResource("2_3ehpc")
 mesh = SubResource("SphereMesh_ergkj")
+surface_material_override/0 = ExtResource("2_3ehpc")
 
 [node name="Slot2" type="Node3D" parent="GunzSlots"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.994, 3.802, -2.09739)
 
+[node name="GunSlotVisualizer" type="MeshInstance3D" parent="GunzSlots/Slot2"]
+material_override = ExtResource("2_3ehpc")
+material_overlay = ExtResource("2_3ehpc")
+mesh = SubResource("SphereMesh_ergkj")
+surface_material_override/0 = ExtResource("2_3ehpc")
+
 [node name="Slot3" type="Node3D" parent="GunzSlots"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.99445, 1.40257, -2.10806)
+
+[node name="GunSlotVisualizer" type="MeshInstance3D" parent="GunzSlots/Slot3"]
+material_override = ExtResource("2_3ehpc")
+material_overlay = ExtResource("2_3ehpc")
+mesh = SubResource("SphereMesh_ergkj")
+surface_material_override/0 = ExtResource("2_3ehpc")
 
 [node name="Slot4" type="Node3D" parent="GunzSlots"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.994, 1.40212, -2.09739)
 
+[node name="GunSlotVisualizer" type="MeshInstance3D" parent="GunzSlots/Slot4"]
+material_override = ExtResource("2_3ehpc")
+material_overlay = ExtResource("2_3ehpc")
+mesh = SubResource("SphereMesh_ergkj")
+surface_material_override/0 = ExtResource("2_3ehpc")
+
 [node name="Slot5" type="Node3D" parent="GunzSlots"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.99445, -1.06563, -2.10806)
+
+[node name="GunSlotVisualizer" type="MeshInstance3D" parent="GunzSlots/Slot5"]
+material_override = ExtResource("2_3ehpc")
+material_overlay = ExtResource("2_3ehpc")
+mesh = SubResource("SphereMesh_ergkj")
+surface_material_override/0 = ExtResource("2_3ehpc")
 
 [node name="Slot6" type="Node3D" parent="GunzSlots"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.994, -1.06608, -2.09739)
 
+[node name="GunSlotVisualizer" type="MeshInstance3D" parent="GunzSlots/Slot6"]
+material_override = ExtResource("2_3ehpc")
+material_overlay = ExtResource("2_3ehpc")
+mesh = SubResource("SphereMesh_ergkj")
+surface_material_override/0 = ExtResource("2_3ehpc")
+
 [node name="CGs" type="Node3D" parent="."]
 
 [node name="Cabin" type="MeshInstance3D" parent="CGs"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.373147)
+transform = Transform3D(8.09167, 0, 0, 0, 8.63652, 0, 0, 0, 5.93591, 0, 2.0398, 1.46843)
 mesh = SubResource("BoxMesh_7f3b7")
