@@ -16,7 +16,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GameHelpers="*res://Scripts/Singletons/GameHelpers.gd"
+G_GameHelpers="*res://Scripts/Globals/G_GameHelpers.gd"
 
 [input]
 

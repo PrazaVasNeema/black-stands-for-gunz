@@ -12,14 +12,19 @@ var player_main_camera : Camera3D:
 var gunz_slots_array : Array[GunSlotData]
 
 
-func _init() -> void:
+func _ready() -> void:
 	var all_gunz_slots : Array = _gunz_slots_root.get_children()
 	for gun_slot in all_gunz_slots:
 		gunz_slots_array.append(GunSlotData.new(gun_slot, null))
 
 
-func equip_gun(gun : GunKiso, slot_num : int):
-	gunz_slots_array[slot_num].gun = gun
+func equip_gun(gun_scene : PackedScene, slot_num : int):
+	if gunz_slots_array[slot_num].gun:
+		gunz_slots_array[slot_num].gun.queue_free()
+	
+	var gun_itself : GunKiso = gun_scene.instantiate() as GunKiso
+	gunz_slots_array[slot_num].slot_node_ref.add_child(gun_itself)
+	gunz_slots_array[slot_num].gun = gun_itself
 
 
 func reset_gunz():

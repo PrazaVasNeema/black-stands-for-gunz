@@ -1,4 +1,4 @@
-class_name InputShogun
+class_name InputService
 extends Node
 
 signal fire_one_pressed

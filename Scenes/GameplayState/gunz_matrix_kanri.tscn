@@ -1,21 +1,21 @@
 [gd_scene load_steps=5 format=3 uid="uid://ct0xeh43q8ku4"]
 
-[ext_resource type="Script" path="res://Scripts/gunz_matrix.gd" id="1_dflkb"]
-[ext_resource type="Texture2D" uid="uid://pxd74ha8qwdd" path="res://toppng.com-crosshair-crosshair-338x338.png" id="2_y7uje"]
+[ext_resource type="Script" path="res://Scripts/Kanri/gunz_matrix_kanri.gd" id="1_q6q30"]
+[ext_resource type="Texture2D" uid="uid://pxd74ha8qwdd" path="res://toppng.com-crosshair-crosshair-338x338.png" id="2_nehvk"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_1oaon"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nhtma"]
 albedo_color = Color(0.795865, 0, 0.166209, 1)
 
-[node name="GunzMatrix" type="Node3D"]
-script = ExtResource("1_dflkb")
+[node name="GunzMatrixKanri" type="Node3D"]
+script = ExtResource("1_q6q30")
 
 [node name="MatrixCanvas" type="CanvasLayer" parent="."]
 
 [node name="MainCrosshair" type="Sprite2D" parent="MatrixCanvas"]
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("2_y7uje")
+texture = ExtResource("2_nehvk")
 
 [node name="WSPhantomMainC" type="MeshInstance3D" parent="."]
 visible = false

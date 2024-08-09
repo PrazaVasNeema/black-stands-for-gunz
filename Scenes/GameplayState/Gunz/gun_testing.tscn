@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://6najt77i4v2r"]
 
-[ext_resource type="Script" path="res://Scripts/Gunz/gun_testing.gd" id="1_oelp7"]
+[ext_resource type="Script" path="res://Scripts/Buhin/Gunz/gun_testing.gd" id="1_oelp7"]
 [ext_resource type="Resource" uid="uid://bqk63elsfu4sd" path="res://Resources/GameData/GunzSetConfDefault.tres" id="2_fphis"]
 [ext_resource type="Shader" path="res://Rendering/palka.gdshader" id="3_ljeli"]
 

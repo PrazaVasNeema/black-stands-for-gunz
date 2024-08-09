@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://dsfwn8vjoqwuv"]
 
 [ext_resource type="Script" path="res://Scripts/player_controller.gd" id="1_ltnee"]
-[ext_resource type="Script" path="res://Scripts/gunz_shogun.gd" id="2_2o8be"]
-[ext_resource type="PackedScene" uid="uid://ct0xeh43q8ku4" path="res://Scenes/gunz_matrix.tscn" id="2_ptbv7"]
-[ext_resource type="PackedScene" uid="uid://6najt77i4v2r" path="res://Scenes/gun_testing.tscn" id="4_jthag"]
+[ext_resource type="Script" path="res://Scripts/Kanri/gunz_kanri.gd" id="2_2o8be"]
+[ext_resource type="PackedScene" uid="uid://ct0xeh43q8ku4" path="res://Scenes/GameplayState/gunz_matrix_kanri.tscn" id="2_ptbv7"]
+[ext_resource type="PackedScene" uid="uid://6najt77i4v2r" path="res://Scenes/GameplayState/Gunz/gun_testing.tscn" id="4_jthag"]
 
 [node name="Player" type="Node3D"]
 script = ExtResource("1_ltnee")

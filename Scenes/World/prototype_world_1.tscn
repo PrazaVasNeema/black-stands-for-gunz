@@ -1,7 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://dfrd8l87tppc0"]
+[gd_scene load_steps=8 format=3 uid="uid://dfrd8l87tppc0"]
 
 [ext_resource type="Script" path="res://Scripts/Teikyou/WorldTeikyou.gd" id="1_ijihl"]
-[ext_resource type="PackedScene" uid="uid://dsfwn8vjoqwuv" path="res://Scenes/Depricated/player_depr.tscn" id="2_uhsjk"]
+[ext_resource type="PackedScene" uid="uid://c3cy58cow0rdg" path="res://Scenes/World/player.tscn" id="2_plawd"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_vdxtb"]
 
@@ -14,16 +14,14 @@ albedo_color = Color(0.332881, 0.332881, 0.332881, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fmbi8"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_y801c"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pkk2y"]
-albedo_color = Color(0.795865, 0, 0.166209, 1)
-
-[node name="TestingPolygon" type="Node3D"]
+[node name="TestingPolygon" type="Node3D" node_paths=PackedStringArray("player_teikou")]
 script = ExtResource("1_ijihl")
+player_teikou = NodePath("Player")
 
-[node name="Player" parent="." instance=ExtResource("2_uhsjk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.628918, 3.99497, 0.427011)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.546814, 0.537032, -0.642333, 0, 0.76719, 0.64142, 0.837254, -0.350738, 0.41951, -56.8411, 62.5737, 17.1509)
+shadow_enabled = true
+directional_shadow_mode = 0
 
 [node name="World" type="Node3D" parent="."]
 
@@ -51,13 +49,5 @@ mesh = SubResource("BoxMesh_1bjoe")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/Obstacle/AnimatableBody3D"]
 shape = SubResource("BoxShape3D_fmbi8")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.189053, 0.722798, -0.664697, 0, 0.676904, 0.736071, 0.981967, -0.139156, 0.12797, -56.8411, 62.5737, 17.1509)
-shadow_enabled = true
-directional_shadow_mode = 0
-
-[node name="TargetPhantom" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.93959, 0)
-visible = false
-mesh = SubResource("SphereMesh_y801c")
-surface_material_override/0 = SubResource("StandardMaterial3D_pkk2y")
+[node name="Player" parent="." instance=ExtResource("2_plawd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.71334, 0)
