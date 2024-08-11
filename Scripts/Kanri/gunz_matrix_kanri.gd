@@ -32,3 +32,6 @@ func deal_with_mouse(relative : Vector2):
 	new_position.y = clamp(new_position.y, _final_boundaries.z, _final_boundaries.w)
 	_main_crosshair.position = new_position
 	ws_aim_changed.emit(G_GameHelpers.get_ws_position_from_mouse(_player_camera, new_position))
+
+func just_plainly_set_position(new_position_ws : Vector3):
+	_main_crosshair.position = _player_camera.unproject_position(new_position_ws)

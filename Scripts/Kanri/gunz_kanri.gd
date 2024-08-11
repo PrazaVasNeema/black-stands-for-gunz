@@ -3,6 +3,7 @@ extends Node
 
 
 #signal targets_position_changed(Vector4)
+signal loaded_old_position(Vector3)
 
 
 var active_set : int
@@ -28,7 +29,10 @@ func update_targeting(target_ws_position : Vector3):
 
 
 func set_current_set(set_ind : int):
+	_gunz_sets_array[active_set].set_target_position = _current_target
 	active_set = set_ind - 1
+	if _gunz_sets_array[active_set].set_target_position != Vector3.ZERO:
+		loaded_old_position.emit(_gunz_sets_array[active_set].set_target_position)
 
 
 func get_current_set() -> GunzSetData:
