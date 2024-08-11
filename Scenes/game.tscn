@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://ne0jf6mreu8o"]
+[gd_scene load_steps=5 format=3 uid="uid://ne0jf6mreu8o"]
 
 [ext_resource type="Script" path="res://scripts/_MHNs/game_shogun.gd" id="1_0efs4"]
-[ext_resource type="PackedScene" uid="uid://crwyoydc8v8ir" path="res://scenes/input_shogun.tscn" id="1_1ipqt"]
 [ext_resource type="Resource" uid="uid://gffeoajo3f8w" path="res://resources/game_data/gunz_build.tres" id="2_k87us"]
 [ext_resource type="PackedScene" uid="uid://dfrd8l87tppc0" path="res://scenes/world/prototype_world_1.tscn" id="3_5k8ei"]
 [ext_resource type="PackedScene" uid="uid://burtf50c3c5a6" path="res://scenes/gameplay_state/game_state_gameplay.tscn" id="3_214vb"]
@@ -18,16 +17,12 @@
 
 [node name="MHNs" type="Node" parent="."]
 
-[node name="GameShogun" type="Node" parent="MHNs" node_paths=PackedStringArray("world_teikyou", "input_service", "game_state_gameplay")]
+[node name="GameShogun" type="Node" parent="MHNs" node_paths=PackedStringArray("world_teikyou", "game_state_gameplay")]
 unique_name_in_owner = true
 script = ExtResource("1_0efs4")
 world_teikyou = NodePath("../../TheWorld/TestingPolygon")
-input_service = NodePath("../InputService")
 game_state_gameplay = NodePath("../../GameStatesRoot/GameStateGameplay")
 testing_build = ExtResource("2_k87us")
-
-[node name="InputService" parent="MHNs" instance=ExtResource("1_1ipqt")]
-unique_name_in_owner = true
 
 [node name="GameEvents" type="Node" parent="MHNs"]
 unique_name_in_owner = true

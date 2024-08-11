@@ -17,13 +17,13 @@ var _player_camera : Camera3D
 #@onready var _ws_phantom_main_c : Node3D = $WSPhantomMainC
 
 
-func lock_n_load(player_camera : Camera3D, input_service : InputService):
+func lock_n_load(player_camera : Camera3D):
 	_player_camera = player_camera
 	var window_size = DisplayServer.window_get_size()
 	_main_crosshair.position = window_size / 2
 	_final_boundaries = Vector4(window_size.x * (1 - boundaries_rate_vector2.x), window_size.x * boundaries_rate_vector2.x, 
 	window_size.y * (1 - boundaries_rate_vector2.y), window_size.y * boundaries_rate_vector2.y)
-	input_service.mouse_position_changed.connect(deal_with_mouse)
+	G_InputService.mouse_position_changed.connect(deal_with_mouse)
 
 
 func deal_with_mouse(relative : Vector2):

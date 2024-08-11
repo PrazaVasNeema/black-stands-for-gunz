@@ -7,7 +7,7 @@ void vertex() {
 	// Called for every vertex the material is visible on.
 }
 
-//uniform vec3 = 
+//uniform vec3 =
 
 void fragment() {
 	//ALBEDO = vec3(1.0 ,0.0 ,0.0 );

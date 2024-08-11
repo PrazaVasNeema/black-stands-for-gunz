@@ -2,7 +2,7 @@ class_name GameStateKiso
 extends Node
 
 
-func init(world_teikyou : WorldTeikyou, input_service : InputService) -> void:
+func init(world_teikyou : WorldTeikyou) -> void:
 	pass
 
 
