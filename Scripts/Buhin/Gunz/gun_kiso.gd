@@ -2,6 +2,9 @@ class_name GunKiso
 extends Node3D
 
 
+signal  cur_aim_position_changed(Vector3, int)
+
+
 @export var set_configuration : SetConfigurationAsset
 
 var gun_targeting : Vector3
@@ -10,6 +13,19 @@ var gun_target_quat : Quaternion
 var is_rotating : bool = false
 
 var _tween : Tween
+var _this_gun_num : int
+
+
+func lock_n_load(this_gun_num : int):
+	_this_gun_num = this_gun_num
+
+	var timer = Timer.new()
+	timer.autostart = true
+	timer.wait_time = 0.1
+	add_child(timer)
+	timer.timeout.connect(func():
+		cur_aim_position_changed.emit(G_GameHelpers.get_raycast_results(position, quaternion), _this_gun_num)
+	)
 
 
 func update_targeting(new_targeting : Vector3):

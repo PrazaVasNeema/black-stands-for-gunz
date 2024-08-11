@@ -8,6 +8,7 @@ signal ws_aim_changed(ws_position : Vector3)
 
 
 @export var boundaries_rate_vector2 : Vector2 = Vector2(0.9, 0.9)
+@export var _sub_crosshairs : Array[Sprite2D]
 
 var _final_boundaries : Vector4
 var _player_camera : Camera3D
@@ -33,5 +34,11 @@ func deal_with_mouse(relative : Vector2):
 	_main_crosshair.position = new_position
 	ws_aim_changed.emit(G_GameHelpers.get_ws_position_from_mouse(_player_camera, new_position))
 
+
 func just_plainly_set_position(new_position_ws : Vector3):
 	_main_crosshair.position = _player_camera.unproject_position(new_position_ws)
+
+
+func update_sub_crosshair(new_position_ws : Vector3, crosshair_num : int):
+	print_rich(str(crosshair_num))
+	_sub_crosshairs[crosshair_num].position = _player_camera.unproject_position(new_position_ws)
