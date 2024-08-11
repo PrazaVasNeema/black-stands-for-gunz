@@ -5,7 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://dfrd8l87tppc0" path="res://scenes/world/prototype_world_1.tscn" id="3_5k8ei"]
 [ext_resource type="PackedScene" uid="uid://burtf50c3c5a6" path="res://scenes/gameplay_state/game_state_gameplay.tscn" id="3_214vb"]
 
-[node name="Game" type="Node3D"]
+[node name="Game" type="Node3D" node_paths=PackedStringArray("world_teikyou", "game_state_gameplay")]
+script = ExtResource("1_0efs4")
+world_teikyou = NodePath("TheWorld/TestingPolygon")
+game_state_gameplay = NodePath("GameStatesRoot/GameStateGameplay")
+testing_build = ExtResource("2_k87us")
 
 [node name="TheWorld" type="Node3D" parent="."]
 
@@ -16,13 +20,6 @@
 [node name="GameStateGameplay" parent="GameStatesRoot" instance=ExtResource("3_214vb")]
 
 [node name="MHNs" type="Node" parent="."]
-
-[node name="GameShogun" type="Node" parent="MHNs" node_paths=PackedStringArray("world_teikyou", "game_state_gameplay")]
-unique_name_in_owner = true
-script = ExtResource("1_0efs4")
-world_teikyou = NodePath("../../TheWorld/TestingPolygon")
-game_state_gameplay = NodePath("../../GameStatesRoot/GameStateGameplay")
-testing_build = ExtResource("2_k87us")
 
 [node name="GameEvents" type="Node" parent="MHNs"]
 unique_name_in_owner = true
