@@ -21,10 +21,10 @@ func lock_n_load(this_gun_num : int):
 
 	var timer = Timer.new()
 	timer.autostart = true
-	timer.wait_time = 0.1
+	timer.wait_time = 0.05
 	add_child(timer)
 	timer.timeout.connect(func():
-		cur_aim_position_changed.emit(G_GameHelpers.get_raycast_results(position, quaternion), _this_gun_num)
+		cur_aim_position_changed.emit(G_GameHelpers.get_raycast_results(global_position, quaternion), _this_gun_num)
 	)
 
 
@@ -37,5 +37,5 @@ func update_targeting(new_targeting : Vector3):
 	if (_tween):
 		_tween.stop()
 	_tween = get_tree().create_tween()
-	var required_time : float = gun_target_quat.angle_to(quaternion) / 1
+	var required_time : float = gun_target_quat.angle_to(quaternion) / set_configuration.max_turning_speed
 	_tween.tween_property(self, "quaternion", gun_target_quat, required_time)

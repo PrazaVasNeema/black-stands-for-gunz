@@ -4,7 +4,6 @@
 [ext_resource type="Resource" uid="uid://bqk63elsfu4sd" path="res://resources/game_data/gunz_set_conf_default.tres" id="2_fphis"]
 [ext_resource type="Shader" path="res://rendering/palka.gdshader" id="3_ljeli"]
 
-
 [sub_resource type="BoxMesh" id="BoxMesh_ucsdp"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_om0r5"]
@@ -19,11 +18,9 @@ render_priority = 0
 shader = ExtResource("3_ljeli")
 shader_parameter/color = Color(0.716862, 0, 0.206854, 1)
 
-[node name="GunTesting" type="Node3D" node_paths=PackedStringArray("palka1", "palka2")]
+[node name="GunTesting" type="Node3D"]
 script = ExtResource("1_oelp7")
 set_configuration = ExtResource("2_fphis")
-palka1 = NodePath("MeshInstance3D")
-palka2 = NodePath("MeshInstance3D2")
 
 [node name="CGs" type="Node3D" parent="."]
 

@@ -40,5 +40,4 @@ func just_plainly_set_position(new_position_ws : Vector3):
 
 
 func update_sub_crosshair(new_position_ws : Vector3, crosshair_num : int):
-	print_rich(str(crosshair_num))
 	_sub_crosshairs[crosshair_num].position = _player_camera.unproject_position(new_position_ws)

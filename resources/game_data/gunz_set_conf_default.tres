@@ -2,9 +2,8 @@
 
 [ext_resource type="Script" path="res://scripts/data/set_configuration_asset.gd" id="1_jirpp"]
 
-
 [resource]
 script = ExtResource("1_jirpp")
 max_horizontal_rotation = 60.0
 max_vertical_rotation = 30.0
-max_turning_speed = 1.0
+max_turning_speed = 0.2
