@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c1a7xxa0bqxmh"]
 
-[ext_resource type="Shader" path="res://Rendering/palka.gdshader" id="1_ost51"]
+[ext_resource type="Shader" path="res://rendering/palka.gdshader" id="1_ost51"]
 
 [resource]
 render_priority = 0

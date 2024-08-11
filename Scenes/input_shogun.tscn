@@ -1,6 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://crwyoydc8v8ir"]
 
-[ext_resource type="Script" path="res://Scripts/_MHNs/input_service.gd" id="1_r51ll"]
+[ext_resource type="Script" path="res://scripts/_MHNs/input_service.gd" id="1_r51ll"]
+
 
 [node name="InputShogun" type="Node"]
 script = ExtResource("1_r51ll")

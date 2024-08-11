@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c3cy58cow0rdg"]
 
-[ext_resource type="Script" path="res://Scripts/Teikyou/PlayerTeikyou.gd" id="1_fllvl"]
-[ext_resource type="Material" uid="uid://ctgv3igu21j6w" path="res://Materials/DevMats/gun_slot_visualizer.tres" id="2_3ehpc"]
+[ext_resource type="Script" path="res://scripts/teikyou/player_teikyou.gd" id="1_fllvl"]
+[ext_resource type="Material" uid="uid://ctgv3igu21j6w" path="res://materials/dev_mats/gun_slot_visualizer.tres" id="2_3ehpc"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_ergkj"]
 

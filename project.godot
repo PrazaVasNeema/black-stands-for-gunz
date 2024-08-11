@@ -10,14 +10,18 @@ config_version=5
 
 [application]
 
-config/name="Black Is For GUNS"
-run/main_scene="res://Scenes/game.tscn"
+config/name="BSFG"
+run/main_scene="res://scenes/game.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-G_GameHelpers="*res://Scripts/Globals/G_GameHelpers.gd"
+G_GameHelpers="*res://scripts/globals/g_game_helpers.gd"
+
+[display]
+
+window/size/always_on_top=true
 
 [input]
 

@@ -1,7 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://b8oxi1n8o1lta"]
 
-[ext_resource type="PackedScene" uid="uid://crwyoydc8v8ir" path="res://Scenes/input_shogun.tscn" id="1_u6qad"]
-[ext_resource type="PackedScene" uid="uid://dsfwn8vjoqwuv" path="res://Scenes/Depricated/player_depr.tscn" id="2_s7gia"]
+[ext_resource type="PackedScene" uid="uid://crwyoydc8v8ir" path="res://scenes/input_shogun.tscn" id="1_u6qad"]
+[ext_resource type="PackedScene" uid="uid://dsfwn8vjoqwuv" path="res://scenes/depricated/player_depr.tscn" id="2_s7gia"]
+
 
 [sub_resource type="BoxMesh" id="BoxMesh_vdxtb"]
 

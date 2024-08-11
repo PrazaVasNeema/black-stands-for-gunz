@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://ct0xeh43q8ku4"]
 
-[ext_resource type="Script" path="res://Scripts/Kanri/gunz_matrix_kanri.gd" id="1_q6q30"]
+[ext_resource type="Script" path="res://scripts/kanri/gunz_matrix_kanri.gd" id="1_q6q30"]
 [ext_resource type="Texture2D" uid="uid://pxd74ha8qwdd" path="res://toppng.com-crosshair-crosshair-338x338.png" id="2_nehvk"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_1oaon"]

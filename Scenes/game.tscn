@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://ne0jf6mreu8o"]
 
-[ext_resource type="Script" path="res://Scripts/_MHNs/game_shogun.gd" id="1_0efs4"]
-[ext_resource type="PackedScene" uid="uid://crwyoydc8v8ir" path="res://Scenes/input_shogun.tscn" id="1_1ipqt"]
-[ext_resource type="Resource" uid="uid://gffeoajo3f8w" path="res://Resources/GameData/gunz_build.tres" id="2_k87us"]
-[ext_resource type="PackedScene" uid="uid://dfrd8l87tppc0" path="res://Scenes/World/prototype_world_1.tscn" id="3_5k8ei"]
-[ext_resource type="PackedScene" uid="uid://burtf50c3c5a6" path="res://Scenes/GameplayState/game_state_gameplay.tscn" id="3_214vb"]
+[ext_resource type="Script" path="res://scripts/_MHNs/game_shogun.gd" id="1_0efs4"]
+[ext_resource type="PackedScene" uid="uid://crwyoydc8v8ir" path="res://scenes/input_shogun.tscn" id="1_1ipqt"]
+[ext_resource type="Resource" uid="uid://gffeoajo3f8w" path="res://resources/game_data/gunz_build.tres" id="2_k87us"]
+[ext_resource type="PackedScene" uid="uid://dfrd8l87tppc0" path="res://scenes/world/prototype_world_1.tscn" id="3_5k8ei"]
+[ext_resource type="PackedScene" uid="uid://burtf50c3c5a6" path="res://scenes/gameplay_state/game_state_gameplay.tscn" id="3_214vb"]
 
 [node name="Game" type="Node3D"]
 

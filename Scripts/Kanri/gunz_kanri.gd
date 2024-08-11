@@ -18,22 +18,14 @@ func lock_n_load(gun_slots_array : Array[GunSlotData]) -> void:
 		_gunz_sets_array.append(GunzSetData.new(gun_slots_array[i].gun, gun_slots_array[i + 1].gun, Vector3.ZERO))
 		i += 2
 	active_set = 0
-	#for gunz_set in _gunz_sets_array:
-		#print_debug((gunz_set as GunzSetData).gun_one)
-		#print_debug((gunz_set as GunzSetData).gun_two)
-	#print_debug(_gunz_sets_array)
 
 
 func update_targeting(target_ws_position : Vector3):
-	#print(target_ws_position)
 	_current_target = target_ws_position
 	(_gunz_sets_array[active_set] as GunzSetData).gun_one.update_targeting(_current_target)
 	(_gunz_sets_array[active_set] as GunzSetData).gun_two.update_targeting(_current_target)
 	(_gunz_sets_array[active_set] as GunzSetData).set_target_position = _current_target
-	print_debug(_current_target)
-	
-func print_text(ster):
-	print(ster)
+
 
 func set_current_set(set_ind : int):
 	active_set = set_ind - 1

@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://btl8fe0u8b1np"]
 
-[ext_resource type="Script" path="res://Scripts/Shogun/gameplay_player_shogun.gd" id="1_tww2m"]
-[ext_resource type="PackedScene" uid="uid://ct0xeh43q8ku4" path="res://Scenes/GameplayState/gunz_matrix_kanri.tscn" id="2_4wo3j"]
-[ext_resource type="Script" path="res://Scripts/Kanri/gunz_kanri.gd" id="3_ahj0n"]
+[ext_resource type="Script" path="res://scripts/shogun/gameplay_player_shogun.gd" id="1_tww2m"]
+[ext_resource type="PackedScene" uid="uid://ct0xeh43q8ku4" path="res://scenes/gameplay_state/gunz_matrix_kanri.tscn" id="2_4wo3j"]
+[ext_resource type="Script" path="res://scripts/kanri/gunz_kanri.gd" id="3_ahj0n"]
 
 [node name="GameplayPlayerShogun" type="Node" node_paths=PackedStringArray("_gunz_matrix_kanri", "_gunz_kanri")]
 script = ExtResource("1_tww2m")

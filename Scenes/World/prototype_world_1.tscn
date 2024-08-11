@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dfrd8l87tppc0"]
 
-[ext_resource type="Script" path="res://Scripts/Teikyou/WorldTeikyou.gd" id="1_ijihl"]
-[ext_resource type="PackedScene" uid="uid://c3cy58cow0rdg" path="res://Scenes/World/player.tscn" id="2_plawd"]
+[ext_resource type="Script" path="res://scripts/teikyou/world_teikyou.gd" id="1_ijihl"]
+[ext_resource type="PackedScene" uid="uid://c3cy58cow0rdg" path="res://scenes/world/player.tscn" id="2_plawd"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_vdxtb"]
 
