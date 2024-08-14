@@ -36,6 +36,7 @@ func deal_with_mouse(relative : Vector2):
 
 
 func just_plainly_set_position(new_position_ws : Vector3):
+	print("testing2")
 	_main_crosshair.position = _player_camera.unproject_position(new_position_ws)
 
 

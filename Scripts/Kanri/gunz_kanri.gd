@@ -38,8 +38,12 @@ func set_current_set(set_ind : int):
 		_gunz_sets_array[active_set].gun_two.cur_aim_position_changed.disconnect(_matrix_change_sub_c_callable)
 
 	active_set = set_ind - 1
-	if _gunz_sets_array[active_set].set_target_position != Vector3.ZERO:
-		loaded_old_position.emit(_gunz_sets_array[active_set].set_target_position)
+	_current_target = _gunz_sets_array[active_set].set_target_position
+
+	if _current_target!= Vector3.ZERO:
+		print("testing")
+		loaded_old_position.emit(_current_target)
+	
 	_gunz_sets_array[active_set].gun_one.cur_aim_position_changed.connect(_matrix_change_sub_c_callable)
 	_gunz_sets_array[active_set].gun_two.cur_aim_position_changed.connect(_matrix_change_sub_c_callable)
 
