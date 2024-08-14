@@ -1,15 +1,15 @@
 [gd_scene load_steps=5 format=3 uid="uid://ne0jf6mreu8o"]
 
-[ext_resource type="Script" path="res://scripts/_MHNs/game_shogun.gd" id="1_0efs4"]
+[ext_resource type="Script" path="res://scripts/_mhss/game_shogun.gd" id="1_0efs4"]
 [ext_resource type="Resource" uid="uid://gffeoajo3f8w" path="res://resources/game_data/gunz_build.tres" id="2_k87us"]
 [ext_resource type="PackedScene" uid="uid://dfrd8l87tppc0" path="res://scenes/world/prototype_world_1.tscn" id="3_5k8ei"]
 [ext_resource type="PackedScene" uid="uid://burtf50c3c5a6" path="res://scenes/gameplay_state/game_state_gameplay.tscn" id="3_214vb"]
 
 [node name="Game" type="Node3D" node_paths=PackedStringArray("world_teikyou", "game_state_gameplay")]
 script = ExtResource("1_0efs4")
+testing_build = ExtResource("2_k87us")
 world_teikyou = NodePath("TheWorld/TestingPolygon")
 game_state_gameplay = NodePath("GameStatesRoot/GameStateGameplay")
-testing_build = ExtResource("2_k87us")
 
 [node name="TheWorld" type="Node3D" parent="."]
 
