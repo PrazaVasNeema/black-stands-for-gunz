@@ -25,6 +25,7 @@ transform = Transform3D(1, 0, 0, 0, -1.21402e-07, -1, 0, 2.77735, -4.37114e-08, 
 mesh = SubResource("TubeTrailMesh_auoof")
 
 [node name="LaserBeam" parent="." instance=ExtResource("2_8bktw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.60631)
 
 [node name="ChangeELevelTimer" type="Timer" parent="."]
 autostart = true

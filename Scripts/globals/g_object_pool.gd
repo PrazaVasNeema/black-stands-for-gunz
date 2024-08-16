@@ -7,9 +7,8 @@ var instances : Dictionary
 func instantiate(scene : PackedScene):
 	var existing_instances = instances.get(scene, null)
 	if existing_instances:
-		var instance = existing_instances.pop_back()
-		if existing_instances.size() == 0:
-			instances.erase(scene)
+		var instance = existing_instances
+		instances.erase(scene)
 		instance.request_ready()
 		# why poolingHandle??
 		return instance

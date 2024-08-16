@@ -10,8 +10,10 @@ material = SubResource("StandardMaterial3D_bifm0")
 
 [node name="LaserBeam" type="Node3D" node_paths=PackedStringArray("testing_visualizer", "_tick_timer")]
 script = ExtResource("1_by1tf")
+ray_length = 10.0
 testing_visualizer = NodePath("TestingVisualizer")
 _tick_timer = NodePath("TickTimer")
+test_col = 2
 
 [node name="TickTimer" type="Timer" parent="."]
 wait_time = 0.1
