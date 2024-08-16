@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://dfcy6xm5qmv5"]
+
+[ext_resource type="Script" path="res://scripts/buhin/gunz/laser_g_buhin.gd" id="1_ruvdj"]
+[ext_resource type="PackedScene" uid="uid://bbnbhmnmhbkjt" path="res://scenes/gameplay_state/gunz/thing_they_fire/laser_beam.tscn" id="2_8bktw"]
+[ext_resource type="Resource" uid="uid://bqk63elsfu4sd" path="res://resources/game_data/gunz_set_conf_default.tres" id="2_r2di1"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_7ill2"]
+
+[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_auoof"]
+
+[node name="LaserGun" type="Node3D" node_paths=PackedStringArray("_laser_beam_buhin")]
+script = ExtResource("1_ruvdj")
+_laser_beam_buhin = NodePath("LaserBeam")
+set_configuration = ExtResource("2_r2di1")
+
+[node name="CGs" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CGs"]
+transform = Transform3D(2.48655, 0, 0, 0, 1, 0, 0, 0, 2.31108, 0, 0, 0)
+mesh = SubResource("CylinderMesh_7ill2")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="CGs"]
+transform = Transform3D(1, 0, 0, 0, -1.21402e-07, -1, 0, 2.77735, -4.37114e-08, 0, 0, -2.09235)
+mesh = SubResource("TubeTrailMesh_auoof")
+
+[node name="LaserBeam" parent="." instance=ExtResource("2_8bktw")]

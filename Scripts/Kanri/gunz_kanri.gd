@@ -48,7 +48,22 @@ func set_current_set(set_ind : int):
 	_gunz_sets_array[active_set].gun_two.cur_aim_position_changed.connect(_matrix_change_sub_c_callable)
 
 
-
-
 func get_current_set() -> GunzSetData:
 	return (_gunz_sets_array[active_set] as GunzSetData)
+
+
+func fire_start(gun_ind : int):
+	match gun_ind:
+		0:
+			_gunz_sets_array[active_set].gun_one.fuc_em_start()
+		1:
+			_gunz_sets_array[active_set].gun_two.fuc_em_start()
+
+
+func fire_stop(gun_ind : int):
+	match gun_ind:
+		0:
+			_gunz_sets_array[active_set].gun_one.fuc_em_stop()
+		1:
+			_gunz_sets_array[active_set].gun_two.fuc_em_stop()
+

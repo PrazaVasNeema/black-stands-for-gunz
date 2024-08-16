@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbnbhmnmhbkjt"]
+
+[ext_resource type="Script" path="res://scripts/buhin/gunz/projectiles/laser_beam_buhin.gd" id="1_by1tf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bifm0"]
+albedo_color = Color(0.744529, 0, 0.0903522, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_apulv"]
+material = SubResource("StandardMaterial3D_bifm0")
+
+[node name="LaserBeam" type="Node3D" node_paths=PackedStringArray("testing_visualizer", "_tick_timer")]
+script = ExtResource("1_by1tf")
+testing_visualizer = NodePath("TestingVisualizer")
+_tick_timer = NodePath("TickTimer")
+
+[node name="TickTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="TestingVisualizer" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.488, 0, 0, 0, -1.69382e-07, -0.41, 0, 3.875, -1.79217e-08, 0, 0, -3.86065)
+mesh = SubResource("CylinderMesh_apulv")

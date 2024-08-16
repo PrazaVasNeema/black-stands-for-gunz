@@ -44,8 +44,16 @@ func update_targeting(new_targeting : Vector3):
 # ATTACK ---
 
 
-func fuc_em():
-	pass
+var _fuc_in_progress : bool = false
+
+
+func fuc_em_start():
+	_fuc_in_progress = true
+
+
+func fuc_em_stop():
+	_fuc_in_progress = false
+
 
 func prepare_the_fuc():
 	pass
