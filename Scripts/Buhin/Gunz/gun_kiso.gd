@@ -5,6 +5,7 @@ extends Node3D
 signal  cur_aim_position_changed(Vector3, int)
 
 
+
 @export var set_configuration : SetConfigurationAsset
 
 var gun_targeting : Vector3
@@ -26,7 +27,9 @@ func lock_n_load(this_gun_num : int):
 	timer.timeout.connect(func():
 		cur_aim_position_changed.emit(G_GameHelpers.get_raycast_results(global_position, quaternion), _this_gun_num)
 	)
+	_current_state = States.RELOADING
 
+# --- TARGETING ---
 
 func update_targeting(new_targeting : Vector3):
 	gun_targeting = (new_targeting - global_transform.origin).normalized()
@@ -41,19 +44,13 @@ func update_targeting(new_targeting : Vector3):
 	_tween.tween_property(self, "quaternion", gun_target_quat, required_time)
 
 
-# ATTACK ---
+# --- FSM --- 
+
+enum States {READY, FIRING, RELOADING}
+
+var _firing_input_pressed : bool = false
+var _current_state : States
 
 
-var _fuc_in_progress : bool = false
-
-
-func fuc_em_start():
-	_fuc_in_progress = true
-
-
-func fuc_em_stop():
-	_fuc_in_progress = false
-
-
-func prepare_the_fuc():
-	pass
+func change_firing_input_status(new_status : bool):
+	_firing_input_pressed = new_status

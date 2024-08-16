@@ -8,9 +8,10 @@
 
 [sub_resource type="TubeTrailMesh" id="TubeTrailMesh_auoof"]
 
-[node name="LaserGun" type="Node3D" node_paths=PackedStringArray("_laser_beam_buhin")]
+[node name="LaserGun" type="Node3D" node_paths=PackedStringArray("_laser_beam_buhin", "_change_e_lvl_timer")]
 script = ExtResource("1_ruvdj")
 _laser_beam_buhin = NodePath("LaserBeam")
+_change_e_lvl_timer = NodePath("ChangeELevelTimer")
 set_configuration = ExtResource("2_r2di1")
 
 [node name="CGs" type="Node3D" parent="."]
@@ -24,3 +25,6 @@ transform = Transform3D(1, 0, 0, 0, -1.21402e-07, -1, 0, 2.77735, -4.37114e-08, 
 mesh = SubResource("TubeTrailMesh_auoof")
 
 [node name="LaserBeam" parent="." instance=ExtResource("2_8bktw")]
+
+[node name="ChangeELevelTimer" type="Timer" parent="."]
+autostart = true

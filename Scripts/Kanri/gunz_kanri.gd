@@ -55,15 +55,15 @@ func get_current_set() -> GunzSetData:
 func fire_start(gun_ind : int):
 	match gun_ind:
 		0:
-			_gunz_sets_array[active_set].gun_one.fuc_em_start()
+			_gunz_sets_array[active_set].gun_one.change_firing_input_status(true)
 		1:
-			_gunz_sets_array[active_set].gun_two.fuc_em_start()
+			_gunz_sets_array[active_set].gun_two.change_firing_input_status(true)
 
 
 func fire_stop(gun_ind : int):
 	match gun_ind:
 		0:
-			_gunz_sets_array[active_set].gun_one.fuc_em_stop()
+			_gunz_sets_array[active_set].gun_one.change_firing_input_status(false)
 		1:
-			_gunz_sets_array[active_set].gun_two.fuc_em_stop()
+			_gunz_sets_array[active_set].gun_two.change_firing_input_status(false)
 
