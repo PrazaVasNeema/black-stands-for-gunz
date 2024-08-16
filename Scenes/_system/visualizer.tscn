@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhemls21b3pcu"]
+
+[ext_resource type="Material" uid="uid://ctgv3igu21j6w" path="res://materials/dev_mats/gun_slot_visualizer.tres" id="1_434tk"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_boxhg"]
+material = ExtResource("1_434tk")
+
+[node name="visualizer" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_boxhg")

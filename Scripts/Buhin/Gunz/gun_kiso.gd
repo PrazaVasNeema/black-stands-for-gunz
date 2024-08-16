@@ -39,3 +39,13 @@ func update_targeting(new_targeting : Vector3):
 	_tween = get_tree().create_tween()
 	var required_time : float = gun_target_quat.angle_to(quaternion) / set_configuration.max_turning_speed
 	_tween.tween_property(self, "quaternion", gun_target_quat, required_time)
+
+
+# ATTACK ---
+
+
+func fuc_em():
+	pass
+
+func prepare_the_fuc():
+	pass

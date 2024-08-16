@@ -7,9 +7,9 @@
 
 [node name="Game" type="Node3D" node_paths=PackedStringArray("world_teikyou", "game_state_gameplay")]
 script = ExtResource("1_0efs4")
-testing_build = ExtResource("2_k87us")
 world_teikyou = NodePath("TheWorld/TestingPolygon")
 game_state_gameplay = NodePath("GameStatesRoot/GameStateGameplay")
+testing_build = ExtResource("2_k87us")
 
 [node name="TheWorld" type="Node3D" parent="."]
 
