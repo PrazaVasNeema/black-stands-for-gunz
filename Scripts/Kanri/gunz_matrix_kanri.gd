@@ -15,7 +15,7 @@ var _player_camera : Camera3D
 
 @onready var _matrix_canvas : CanvasLayer = $MatrixCanvas
 @onready var _main_crosshair : Sprite2D = $MatrixCanvas/MainCrosshair
-#@onready var _ws_phantom_main_c : Node3D = $WSPhantomMainC
+@onready var _ws_phantom_main_c : Node3D = $WSPhantomMainC
 
 
 func lock_n_load(player_camera : Camera3D):
@@ -33,6 +33,7 @@ func deal_with_mouse(relative : Vector2):
 	new_position.y = clamp(new_position.y, _final_boundaries.z, _final_boundaries.w)
 	_main_crosshair.position = new_position
 	ws_aim_changed.emit(G_GameHelpers.get_ws_position_from_mouse(_player_camera, new_position))
+	_ws_phantom_main_c.position = G_GameHelpers.get_ws_position_from_mouse(_player_camera, new_position)
 
 
 func just_plainly_set_position(new_position_ws : Vector3):

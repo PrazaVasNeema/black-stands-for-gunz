@@ -50,6 +50,5 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_nehvk")
 
 [node name="WSPhantomMainC" type="MeshInstance3D" parent="."]
-visible = false
 mesh = SubResource("SphereMesh_1oaon")
 surface_material_override/0 = SubResource("StandardMaterial3D_nhtma")

@@ -33,18 +33,19 @@ func lock_n_load():
 		var offset = Vector3(cos(angle), sin(angle), 0) * beam_radius
 		beam_points_array.append(offset)
 	_beam.polygon = beam_points_array
+	_beam.visible = false
 
 
 
 
 func turn_on_beam():
-	testing_visualizer.visible = true
+	_beam.visible = true
 	_tick_timer.timeout.connect(calculate_beam)
 	_tick_timer.start()
 
 
 func turn_off_beam():
-	testing_visualizer.visible = false
+	_beam.visible = false
 	_tick_timer.timeout.disconnect(calculate_beam)
 	_tick_timer.stop()
 
@@ -76,7 +77,10 @@ func calculate_beam():
 
 			var _end = start_position + ((get_parent() as Node3D).quaternion * Vector3(0, 0, -1)) * ray_length
 
-			var result = _space_state.intersect_ray(PhysicsRayQueryParameters3D.create(start_position, _end, test_col))
+			var prqp : PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(start_position, _end, test_col)
+			prqp.collide_with_areas = true
+
+			var result = _space_state.intersect_ray(prqp)
 			if i == 0:
 				# print(str(start_position) + " " + str(_end))
 				print(result)

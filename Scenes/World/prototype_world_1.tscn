@@ -53,5 +53,18 @@ collision_mask = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/Obstacle/AnimatableBody3D"]
 shape = SubResource("BoxShape3D_fmbi8")
 
+[node name="Obstacle2" type="Node3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.02383, -7.10409)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Obstacle2"]
+mesh = SubResource("BoxMesh_1bjoe")
+
+[node name="AnimatableBody3D" type="Area3D" parent="World/Obstacle2"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Obstacle2/AnimatableBody3D"]
+shape = SubResource("BoxShape3D_fmbi8")
+
 [node name="Player" parent="." instance=ExtResource("2_plawd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.71334, 0)
