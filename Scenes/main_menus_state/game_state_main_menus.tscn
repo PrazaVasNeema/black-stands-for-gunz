@@ -1,0 +1,325 @@
+[gd_scene load_steps=3 format=3 uid="uid://bijkfa26nk1k5"]
+
+[ext_resource type="PackedScene" uid="uid://b35c2yemt567w" path="res://scenes/ui/button_base.tscn" id="1_wuei4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f5x6x"]
+bg_color = Color(0.977937, 0.977937, 0.977937, 0.372549)
+
+[node name="GameStateMainMenus" type="Node3D"]
+
+[node name="UIRoot" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="OptionsView" type="Control" parent="UIRoot"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="UIRoot/OptionsView"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="UIRoot/OptionsView"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -200.0
+offset_right = 300.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="UIRoot/OptionsView/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="UIRoot/OptionsView/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -76.0
+offset_top = -11.5
+offset_right = 76.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 45
+text = "NOTHING HERE YET"
+
+[node name="Quit" parent="UIRoot/OptionsView/Panel" instance=ExtResource("1_wuei4")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -73.0
+offset_right = 242.65
+offset_bottom = -12.215
+grow_vertical = 0
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 35
+text = "QUIT"
+
+[node name="MainView" type="Control" parent="UIRoot"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/MainView"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 69.0
+offset_top = -150.0
+offset_right = 419.0
+offset_bottom = 150.0
+grow_vertical = 2
+
+[node name="Start" parent="UIRoot/MainView/VBoxContainer" instance=ExtResource("1_wuei4")]
+layout_mode = 2
+size_flags_vertical = 3
+text = "START"
+
+[node name="Options" parent="UIRoot/MainView/VBoxContainer" instance=ExtResource("1_wuei4")]
+layout_mode = 2
+size_flags_vertical = 3
+text = "OPTIONS"
+
+[node name="Armory" parent="UIRoot/MainView/VBoxContainer" instance=ExtResource("1_wuei4")]
+layout_mode = 2
+size_flags_vertical = 3
+text = "ARMORY"
+
+[node name="Quit" parent="UIRoot/MainView/VBoxContainer" instance=ExtResource("1_wuei4")]
+layout_mode = 2
+size_flags_vertical = 3
+text = "QUIT"
+
+[node name="ArsenalView" type="Control" parent="UIRoot"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Back" parent="UIRoot/ArsenalView" instance=ExtResource("1_wuei4")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -73.0
+offset_right = 242.65
+offset_bottom = -12.215
+grow_vertical = 0
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 35
+text = "BACK"
+
+[node name="Control" type="Control" parent="UIRoot/ArsenalView"]
+anchors_preset = 0
+offset_left = 358.0
+offset_top = 51.0
+offset_right = 956.0
+offset_bottom = 425.0
+
+[node name="SizeRef" type="Panel" parent="UIRoot/ArsenalView/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f5x6x")
+
+[node name="OptionButton" type="OptionButton" parent="UIRoot/ArsenalView/Control"]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 60.0
+offset_right = 136.0
+offset_bottom = 91.0
+item_count = 3
+popup/item_0/text = "gun1"
+popup/item_1/text = "gun2"
+popup/item_1/id = 1
+popup/item_2/text = "gun3"
+popup/item_2/id = 2
+
+[node name="OptionButton2" type="OptionButton" parent="UIRoot/ArsenalView/Control"]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 153.0
+offset_right = 136.0
+offset_bottom = 184.0
+item_count = 3
+popup/item_0/text = "gun1"
+popup/item_1/text = "gun2"
+popup/item_1/id = 1
+popup/item_2/text = "gun3"
+popup/item_2/id = 2
+
+[node name="OptionButton3" type="OptionButton" parent="UIRoot/ArsenalView/Control"]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 241.0
+offset_right = 136.0
+offset_bottom = 272.0
+item_count = 3
+popup/item_0/text = "gun1"
+popup/item_1/text = "gun2"
+popup/item_1/id = 1
+popup/item_2/text = "gun3"
+popup/item_2/id = 2
+
+[node name="OptionButton4" type="OptionButton" parent="UIRoot/ArsenalView/Control"]
+layout_mode = 0
+offset_left = 440.0
+offset_top = 60.0
+offset_right = 511.0
+offset_bottom = 91.0
+item_count = 3
+popup/item_0/text = "gun1"
+popup/item_1/text = "gun2"
+popup/item_1/id = 1
+popup/item_2/text = "gun3"
+popup/item_2/id = 2
+
+[node name="OptionButton5" type="OptionButton" parent="UIRoot/ArsenalView/Control"]
+layout_mode = 0
+offset_left = 440.0
+offset_top = 153.0
+offset_right = 511.0
+offset_bottom = 184.0
+item_count = 3
+popup/item_0/text = "gun1"
+popup/item_1/text = "gun2"
+popup/item_1/id = 1
+popup/item_2/text = "gun3"
+popup/item_2/id = 2
+
+[node name="OptionButton6" type="OptionButton" parent="UIRoot/ArsenalView/Control"]
+layout_mode = 0
+offset_left = 440.0
+offset_top = 241.0
+offset_right = 511.0
+offset_bottom = 272.0
+item_count = 3
+popup/item_0/text = "gun1"
+popup/item_1/text = "gun2"
+popup/item_1/id = 1
+popup/item_2/text = "gun3"
+popup/item_2/id = 2
+
+[node name="PostGameView" type="Control" parent="UIRoot"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="Panel" parent="UIRoot/PostGameView"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -333.0
+offset_top = -198.5
+offset_right = 333.0
+offset_bottom = 198.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameOver" type="Label" parent="UIRoot/PostGameView/Background"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -129.0
+offset_top = -136.0
+offset_right = 129.0
+offset_bottom = -73.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 45
+text = "GAME OVER"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIRoot/PostGameView/Background"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -149.5
+offset_top = -43.0
+offset_right = 149.5
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_group_ = true
+
+[node name="YourScrore" type="Label" parent="UIRoot/PostGameView/Background/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "YOUR SCORE: "
+
+[node name="ScroeItself" type="Label" parent="UIRoot/PostGameView/Background/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "999"
+
+[node name="Confirm" type="Button" parent="UIRoot/PostGameView/Background"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -41.0
+offset_top = 86.0
+offset_right = 41.0
+offset_bottom = 117.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 35
+text = "CONFIRM"

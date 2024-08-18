@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b35c2yemt567w"]
+
+[node name="ButtonBase" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "BUTTON BASE(D)"

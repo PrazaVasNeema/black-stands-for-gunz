@@ -9,7 +9,8 @@ signal mouse_position_changed(relative : Vector2)
 @export_range(0, 10) var mouse_sensitivity : float = 1
 
 func _init() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	# Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	pass
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
