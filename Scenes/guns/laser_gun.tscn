@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dfcy6xm5qmv5"]
 
 [ext_resource type="Script" path="res://scripts/buhin/gunz/laser_g_buhin.gd" id="1_ruvdj"]
-[ext_resource type="PackedScene" uid="uid://bbnbhmnmhbkjt" path="res://scenes/gameplay_state/gunz/thing_they_fire/laser_beam.tscn" id="2_8bktw"]
+[ext_resource type="PackedScene" uid="uid://bbnbhmnmhbkjt" path="res://scenes/guns/thing_they_fire/laser_beam.tscn" id="2_8bktw"]
 [ext_resource type="Resource" uid="uid://bqk63elsfu4sd" path="res://resources/game_data/gunz_set_conf_default.tres" id="2_r2di1"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_7ill2"]

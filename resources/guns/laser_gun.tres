@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="GunArmoryData" load_steps=3 format=3 uid="uid://cbmidifkr5str"]
+
+[ext_resource type="PackedScene" uid="uid://dfcy6xm5qmv5" path="res://scenes/guns/laser_gun.tscn" id="1_1w47w"]
+[ext_resource type="Script" path="res://scripts/data/gun_armory_data.gd" id="1_arqb2"]
+
+[resource]
+script = ExtResource("1_arqb2")
+gun_scene = ExtResource("1_1w47w")
+gun_name = "laser gun"
+gun_description = "this is a laser gun"

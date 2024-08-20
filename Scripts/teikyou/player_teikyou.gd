@@ -21,7 +21,10 @@ func _ready() -> void:
 func equip_gun(gun_scene : PackedScene, slot_num : int):
 	if gunz_slots_array[slot_num].gun:
 		gunz_slots_array[slot_num].gun.queue_free()
-	
+	gunz_slots_array[slot_num].gun = null
+	if gun_scene == null:
+		return
+
 	var gun_itself : GunKiso = gun_scene.instantiate() as GunKiso
 	gun_itself.lock_n_load(slot_num % 2)
 	gunz_slots_array[slot_num].slot_node_ref.add_child(gun_itself)

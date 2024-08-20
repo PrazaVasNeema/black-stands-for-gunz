@@ -143,8 +143,7 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "QUIT"
 
-[node name="ArmoryView" type="Control" parent="UIRoot"]
-visible = false
+[node name="ArmoryView" type="Control" parent="UIRoot" node_paths=PackedStringArray("option_buttons_root", "back_button")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -152,6 +151,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("6_xrvjt")
+option_buttons_root = NodePath("Control/OptionButtonsRoot")
+back_button = NodePath("Back")
 state_name = 2
 
 [node name="Back" parent="UIRoot/ArmoryView" instance=ExtResource("1_wuei4")]
@@ -167,6 +168,7 @@ grow_vertical = 0
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 35
 text = "BACK"
+script = ExtResource("4_y4yie")
 
 [node name="Control" type="Control" parent="UIRoot/ArmoryView"]
 anchors_preset = 0
@@ -184,8 +186,22 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_f5x6x")
 
-[node name="OptionButton" type="OptionButton" parent="UIRoot/ArmoryView/Control"]
-layout_mode = 0
+[node name="OptionButtonsRoot" type="Control" parent="UIRoot/ArmoryView/Control"]
+anchors_preset = 0
+
+[node name="OptionButton4" type="OptionButton" parent="UIRoot/ArmoryView/Control/OptionButtonsRoot"]
+offset_left = 440.0
+offset_top = 60.0
+offset_right = 511.0
+offset_bottom = 91.0
+item_count = 3
+popup/item_0/text = "gun1"
+popup/item_1/text = "gun2"
+popup/item_1/id = 1
+popup/item_2/text = "gun3"
+popup/item_2/id = 2
+
+[node name="OptionButton" type="OptionButton" parent="UIRoot/ArmoryView/Control/OptionButtonsRoot"]
 offset_left = 65.0
 offset_top = 60.0
 offset_right = 136.0
@@ -197,8 +213,19 @@ popup/item_1/id = 1
 popup/item_2/text = "gun3"
 popup/item_2/id = 2
 
-[node name="OptionButton2" type="OptionButton" parent="UIRoot/ArmoryView/Control"]
-layout_mode = 0
+[node name="OptionButton5" type="OptionButton" parent="UIRoot/ArmoryView/Control/OptionButtonsRoot"]
+offset_left = 440.0
+offset_top = 153.0
+offset_right = 511.0
+offset_bottom = 184.0
+item_count = 3
+popup/item_0/text = "gun1"
+popup/item_1/text = "gun2"
+popup/item_1/id = 1
+popup/item_2/text = "gun3"
+popup/item_2/id = 2
+
+[node name="OptionButton2" type="OptionButton" parent="UIRoot/ArmoryView/Control/OptionButtonsRoot"]
 offset_left = 65.0
 offset_top = 153.0
 offset_right = 136.0
@@ -210,11 +237,10 @@ popup/item_1/id = 1
 popup/item_2/text = "gun3"
 popup/item_2/id = 2
 
-[node name="OptionButton3" type="OptionButton" parent="UIRoot/ArmoryView/Control"]
-layout_mode = 0
-offset_left = 65.0
+[node name="OptionButton6" type="OptionButton" parent="UIRoot/ArmoryView/Control/OptionButtonsRoot"]
+offset_left = 440.0
 offset_top = 241.0
-offset_right = 136.0
+offset_right = 511.0
 offset_bottom = 272.0
 item_count = 3
 popup/item_0/text = "gun1"
@@ -223,37 +249,10 @@ popup/item_1/id = 1
 popup/item_2/text = "gun3"
 popup/item_2/id = 2
 
-[node name="OptionButton4" type="OptionButton" parent="UIRoot/ArmoryView/Control"]
-layout_mode = 0
-offset_left = 440.0
-offset_top = 60.0
-offset_right = 511.0
-offset_bottom = 91.0
-item_count = 3
-popup/item_0/text = "gun1"
-popup/item_1/text = "gun2"
-popup/item_1/id = 1
-popup/item_2/text = "gun3"
-popup/item_2/id = 2
-
-[node name="OptionButton5" type="OptionButton" parent="UIRoot/ArmoryView/Control"]
-layout_mode = 0
-offset_left = 440.0
-offset_top = 153.0
-offset_right = 511.0
-offset_bottom = 184.0
-item_count = 3
-popup/item_0/text = "gun1"
-popup/item_1/text = "gun2"
-popup/item_1/id = 1
-popup/item_2/text = "gun3"
-popup/item_2/id = 2
-
-[node name="OptionButton6" type="OptionButton" parent="UIRoot/ArmoryView/Control"]
-layout_mode = 0
-offset_left = 440.0
+[node name="OptionButton3" type="OptionButton" parent="UIRoot/ArmoryView/Control/OptionButtonsRoot"]
+offset_left = 65.0
 offset_top = 241.0
-offset_right = 511.0
+offset_right = 136.0
 offset_bottom = 272.0
 item_count = 3
 popup/item_0/text = "gun1"

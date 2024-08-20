@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://gffeoajo3f8w" path="res://resources/game_data/gunz_build.tres" id="2_k87us"]
 [ext_resource type="PackedScene" uid="uid://dfrd8l87tppc0" path="res://scenes/world/prototype_world_1.tscn" id="3_5k8ei"]
 [ext_resource type="PackedScene" uid="uid://burtf50c3c5a6" path="res://scenes/gameplay_state/game_state_gameplay.tscn" id="3_214vb"]
-[ext_resource type="PackedScene" uid="uid://bbnbhmnmhbkjt" path="res://scenes/gameplay_state/gunz/thing_they_fire/laser_beam.tscn" id="5_imqvp"]
+[ext_resource type="PackedScene" uid="uid://bbnbhmnmhbkjt" path="res://scenes/guns/thing_they_fire/laser_beam.tscn" id="5_imqvp"]
 [ext_resource type="PackedScene" uid="uid://bijkfa26nk1k5" path="res://scenes/main_menus_state/game_state_main_menus.tscn" id="6_3bmpm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_75wgb"]
@@ -22,12 +22,12 @@ adjustment_enabled = true
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_nddsu"]
 
-[node name="Game" type="Node3D" node_paths=PackedStringArray("world_teikyou", "game_state_gameplay", "main_menus_controller")]
+[node name="Game" type="Node3D" node_paths=PackedStringArray("world_teikyou", "main_menus_controller", "game_state_gameplay")]
 script = ExtResource("1_0efs4")
 world_teikyou = NodePath("TheWorld/TestingPolygon")
-game_state_gameplay = NodePath("GameStatesRoot/GameStateGameplay")
 testing_build = ExtResource("2_k87us")
 main_menus_controller = NodePath("GameStateMainMenus")
+game_state_gameplay = NodePath("GameStatesRoot/GameStateGameplay")
 
 [node name="TheWorld" type="Node3D" parent="."]
 

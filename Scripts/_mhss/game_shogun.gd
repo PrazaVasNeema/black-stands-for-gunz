@@ -21,9 +21,8 @@ func _ready() -> void:
 
 	G_Armory.player_teikyou = world_teikyou.player_teikou
 
-	if testing_build:
-		for i in testing_build.gunz_array.size():
-			G_Armory.player_teikyou.equip_gun(testing_build.gunz_array[i], i)
+	for i in testing_build.gunz_array.size():
+		G_Armory.equip_gun(0, i)
 	
 	game_state_gameplay.init(world_teikyou)
 
