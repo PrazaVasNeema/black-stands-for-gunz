@@ -13,7 +13,7 @@ signal ws_aim_changed(ws_position : Vector3)
 var _final_boundaries : Vector4
 var _player_camera : Camera3D
 
-@onready var _matrix_canvas : CanvasLayer = $MatrixCanvas
+@onready var matrix_canvas : CanvasLayer = $MatrixCanvas
 @onready var _main_crosshair : Sprite2D = $MatrixCanvas/MainCrosshair
 @onready var _ws_phantom_main_c : Node3D = $WSPhantomMainC
 
@@ -24,7 +24,6 @@ func lock_n_load(player_camera : Camera3D):
 	_main_crosshair.position = window_size / 2
 	_final_boundaries = Vector4(window_size.x * (1 - boundaries_rate_vector2.x), window_size.x * boundaries_rate_vector2.x, 
 	window_size.y * (1 - boundaries_rate_vector2.y), window_size.y * boundaries_rate_vector2.y)
-	G_InputService.mouse_position_changed.connect(deal_with_mouse)
 
 
 func deal_with_mouse(relative : Vector2):

@@ -1,5 +1,5 @@
 class_name MainMenusController
-extends hghgfh
+extends GameStateGlobal
 
 
 @export var initial_ui_state : GameConstants.UI_STATES

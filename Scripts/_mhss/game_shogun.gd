@@ -3,11 +3,12 @@ extends Node
 
 
 @export var world_teikyou : WorldTeikyou
-@export var game_state_gameplay : GameStateGameplay
 
 @export var testing_build : GunzBuildData
 
 @export var main_menus_controller : MainMenusController
+@export var game_state_gameplay : GameStateGameplay
+
 
 
 func _ready() -> void:
@@ -17,13 +18,25 @@ func _ready() -> void:
 	main_menus_controller.i_want_to_change.connect(on_i_want_to_change)
 	main_menus_controller.turn_on()
 
-	# if testing_build:
-	# 	for i in testing_build.gunz_array.size():
-	# 		world_teikyou.player_teikou.equip_gun(testing_build.gunz_array[i], i)
+
+	G_Armory.player_teikyou = world_teikyou.player_teikou
+
+	if testing_build:
+		for i in testing_build.gunz_array.size():
+			G_Armory.player_teikyou.equip_gun(testing_build.gunz_array[i], i)
+	
+	game_state_gameplay.init(world_teikyou)
+
 	# game_state_gameplay.init(world_teikyou)
 
 
 func on_i_want_to_change(me : Node):
 	match me:
 		main_menus_controller:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 			main_menus_controller.turn_off()
+			game_state_gameplay.turn_on()
+		game_state_gameplay:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			main_menus_controller.turn_on()
+			game_state_gameplay.turn_off()

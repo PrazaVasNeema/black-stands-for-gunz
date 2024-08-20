@@ -11,9 +11,22 @@ func lock_n_load(player_teikyou : PlayerTeikyou):
 	_gunz_matrix_kanri.ws_aim_changed.connect(_on_ws_main_position_changed)
 	_gunz_kanri.lock_n_load(player_teikyou.gunz_slots_array, _gunz_matrix_kanri.update_sub_crosshair)
 	_gunz_kanri.loaded_old_position.connect(_gunz_matrix_kanri.just_plainly_set_position)
+
+
+func turn_on():
+	_gunz_matrix_kanri.matrix_canvas.visible = true
 	G_InputService.choose_set_pressed.connect(_on_change_current_set)
 	G_InputService.fire_just_pressed.connect(_on_fire_pressed)
 	G_InputService.fire_just_released.connect(_on_fire_released)
+	G_InputService.mouse_position_changed.connect(_on_mouse_position_changed)
+
+
+func turn_off():
+	_gunz_matrix_kanri.matrix_canvas.visible = false
+	G_InputService.choose_set_pressed.disconnect(_on_change_current_set)
+	G_InputService.fire_just_pressed.disconnect(_on_fire_pressed)
+	G_InputService.fire_just_released.disconnect(_on_fire_released)
+	G_InputService.mouse_position_changed.disconnect(_on_mouse_position_changed)
 
 
 func _on_ws_main_position_changed(ws_position : Vector3):
@@ -31,3 +44,6 @@ func _on_fire_pressed(gun_ind : int):
 func _on_fire_released(gun_ind : int):
 	_gunz_kanri.fire_stop(gun_ind)
 
+
+func _on_mouse_position_changed(relative : Vector2):
+	_gunz_matrix_kanri.deal_with_mouse(relative)

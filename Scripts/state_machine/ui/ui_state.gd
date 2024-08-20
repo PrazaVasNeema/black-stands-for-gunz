@@ -6,10 +6,10 @@ signal transitioned(new_state : GameConstants.UI_STATES)
 
 @export var state_name : GameConstants.UI_STATES
 
-var _g_game_state_controller : hghgfh
+var _g_game_state_controller : GameStateGlobal
 
 
-func init(g_game_state_controller : hghgfh):
+func init(g_game_state_controller : GameStateGlobal):
 	_g_game_state_controller = g_game_state_controller
 
 

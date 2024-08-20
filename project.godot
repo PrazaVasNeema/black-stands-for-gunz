@@ -21,6 +21,7 @@ G_GameHelpers="*res://scripts/globals/g_game_helpers.gd"
 G_InputService="*res://scripts/globals/g_input_service.gd"
 G_ObjectPool="*res://scripts/globals/g_object_pool.gd"
 G_CamerasManager="*res://scripts/globals/g_cameras_manager.gd"
+G_Armory="*res://scripts/globals/g_armory.gd"
 
 [input]
 

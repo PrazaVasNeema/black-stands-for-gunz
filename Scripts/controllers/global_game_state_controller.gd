@@ -1,7 +1,7 @@
-class_name hghgfh
+class_name GameStateGlobal
 extends Node3D
 
-signal i_want_to_change(me : hghgfh)
+signal i_want_to_change(me : GameStateGlobal)
 
 
 func turn_on():
