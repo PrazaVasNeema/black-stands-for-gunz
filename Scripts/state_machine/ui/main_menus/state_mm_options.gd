@@ -1,11 +1,13 @@
 extends UIState
 
 
-# Called when the node enters the scene tree for the first time.
+@export var back_button : UIChangeStateButton
+
+
 func _ready() -> void:
-	pass # Replace with function body.
+	back_button.change_state.connect(call_transition)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func enter() -> void:
+	super()
+	G_CamerasManager.set_current(GameConstants.CAMERAS.OPTIONS_VIEW)

@@ -23,7 +23,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="OptionsView" type="Control" parent="UIRoot"]
+[node name="OptionsView" type="Control" parent="UIRoot" node_paths=PackedStringArray("back_button")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -32,6 +32,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_0bgr2")
+back_button = NodePath("Panel/Back")
 state_name = 1
 
 [node name="Panel" type="Panel" parent="UIRoot/OptionsView"]
@@ -78,7 +79,7 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 45
 text = "NOTHING HERE YET"
 
-[node name="Quit" parent="UIRoot/OptionsView/Panel" instance=ExtResource("1_wuei4")]
+[node name="Back" parent="UIRoot/OptionsView/Panel" instance=ExtResource("1_wuei4")]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -90,9 +91,10 @@ offset_bottom = -12.215
 grow_vertical = 0
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 35
-text = "QUIT"
+text = "BACK"
+script = ExtResource("4_y4yie")
 
-[node name="MainView" type="Control" parent="UIRoot" node_paths=PackedStringArray("options_button", "quit_button", "armory_button")]
+[node name="MainView" type="Control" parent="UIRoot" node_paths=PackedStringArray("start_button", "options_button", "quit_button", "armory_button")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -101,6 +103,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_cyhgh")
+start_button = NodePath("VBoxContainer/Start")
 options_button = NodePath("VBoxContainer/Options")
 quit_button = NodePath("VBoxContainer/Quit")
 armory_button = NodePath("VBoxContainer/Armory")

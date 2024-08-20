@@ -13,6 +13,7 @@ _gunz_slots_root = NodePath("GunzSlots")
 _player_main_camera = NodePath("PlayerMainCamera")
 
 [node name="PlayerMainCamera" type="Camera3D" parent="."]
+current = true
 
 [node name="GunzSlots" type="Node3D" parent="."]
 

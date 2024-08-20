@@ -14,9 +14,11 @@ albedo_color = Color(0.332881, 0.332881, 0.332881, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fmbi8"]
 
-[node name="TestingPolygon" type="Node3D" node_paths=PackedStringArray("player_teikou")]
+[node name="TestingPolygon" type="Node3D" node_paths=PackedStringArray("player_teikou", "camera_main_view", "camera_options")]
 script = ExtResource("1_ijihl")
 player_teikou = NodePath("Player")
+camera_main_view = NodePath("MainViewCamera")
+camera_options = NodePath("CameraOptionsView")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.546814, 0.537032, -0.642333, 0, 0.76719, 0.64142, 0.837254, -0.350738, 0.41951, -56.8411, 62.5737, 17.1509)
@@ -68,3 +70,11 @@ shape = SubResource("BoxShape3D_fmbi8")
 
 [node name="Player" parent="." instance=ExtResource("2_plawd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.71334, 0)
+
+[node name="MainViewCamera" type="Camera3D" parent="."]
+transform = Transform3D(-0.789598, -0.100199, 0.605388, 0, 0.986578, 0.16329, -0.613624, 0.128933, -0.779, 9.62589, 7.23256, -15.0037)
+current = true
+
+[node name="CameraOptionsView" type="Camera3D" parent="."]
+transform = Transform3D(-0.360779, -0.0105462, 0.932592, 0, 0.999936, 0.0113078, -0.932651, 0.00407961, -0.360756, 4.05972, 3.25487, -9.09165)
+current = true

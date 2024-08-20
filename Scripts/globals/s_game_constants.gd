@@ -12,4 +12,11 @@ enum UI_STATES
 	GP_GAME,
 }
 
+enum CAMERAS
+{
+	MAIN_VIEW,
+	CABIN_VIEW,
+	OPTIONS_VIEW,
+}
+
 static var test = 10
