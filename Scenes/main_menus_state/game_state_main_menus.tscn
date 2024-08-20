@@ -1,11 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://bijkfa26nk1k5"]
+[gd_scene load_steps=9 format=3 uid="uid://bijkfa26nk1k5"]
 
+[ext_resource type="Script" path="res://scripts/controllers/main_menus_controller.gd" id="1_aynbh"]
 [ext_resource type="PackedScene" uid="uid://b35c2yemt567w" path="res://scenes/ui/button_base.tscn" id="1_wuei4"]
+[ext_resource type="Script" path="res://scripts/state_machine/ui/main_menus/state_mm_options.gd" id="2_0bgr2"]
+[ext_resource type="Script" path="res://scripts/state_machine/ui/main_menus/state_main_view.gd" id="3_cyhgh"]
+[ext_resource type="Script" path="res://scripts/state_machine/ui/ui_change_state_button.gd" id="4_y4yie"]
+[ext_resource type="Script" path="res://scripts/state_machine/ui/main_menus/state_mm_armory.gd" id="6_xrvjt"]
+[ext_resource type="Script" path="res://scripts/state_machine/ui/main_menus/state_mm_post_game.gd" id="7_vgf31"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f5x6x"]
 bg_color = Color(0.977937, 0.977937, 0.977937, 0.372549)
 
-[node name="GameStateMainMenus" type="Node3D"]
+[node name="GameStateMainMenus" type="Node3D" node_paths=PackedStringArray("ui_root")]
+script = ExtResource("1_aynbh")
+ui_root = NodePath("UIRoot")
 
 [node name="UIRoot" type="Control" parent="."]
 layout_mode = 3
@@ -23,11 +31,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="ColorRect" type="ColorRect" parent="UIRoot/OptionsView"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+script = ExtResource("2_0bgr2")
+state_name = 1
 
 [node name="Panel" type="Panel" parent="UIRoot/OptionsView"]
 layout_mode = 1
@@ -87,7 +92,7 @@ size_flags_vertical = 3
 theme_override_font_sizes/font_size = 35
 text = "QUIT"
 
-[node name="MainView" type="Control" parent="UIRoot"]
+[node name="MainView" type="Control" parent="UIRoot" node_paths=PackedStringArray("options_button", "quit_button", "armory_button")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -95,6 +100,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("3_cyhgh")
+options_button = NodePath("VBoxContainer/Options")
+quit_button = NodePath("VBoxContainer/Quit")
+armory_button = NodePath("VBoxContainer/Armory")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/MainView"]
 layout_mode = 1
@@ -116,18 +125,22 @@ text = "START"
 layout_mode = 2
 size_flags_vertical = 3
 text = "OPTIONS"
+script = ExtResource("4_y4yie")
+new_state = 1
 
 [node name="Armory" parent="UIRoot/MainView/VBoxContainer" instance=ExtResource("1_wuei4")]
 layout_mode = 2
 size_flags_vertical = 3
 text = "ARMORY"
+script = ExtResource("4_y4yie")
+new_state = 2
 
 [node name="Quit" parent="UIRoot/MainView/VBoxContainer" instance=ExtResource("1_wuei4")]
 layout_mode = 2
 size_flags_vertical = 3
 text = "QUIT"
 
-[node name="ArsenalView" type="Control" parent="UIRoot"]
+[node name="ArmoryView" type="Control" parent="UIRoot"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -135,8 +148,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("6_xrvjt")
+state_name = 2
 
-[node name="Back" parent="UIRoot/ArsenalView" instance=ExtResource("1_wuei4")]
+[node name="Back" parent="UIRoot/ArmoryView" instance=ExtResource("1_wuei4")]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -150,14 +165,14 @@ size_flags_vertical = 3
 theme_override_font_sizes/font_size = 35
 text = "BACK"
 
-[node name="Control" type="Control" parent="UIRoot/ArsenalView"]
+[node name="Control" type="Control" parent="UIRoot/ArmoryView"]
 anchors_preset = 0
 offset_left = 358.0
 offset_top = 51.0
 offset_right = 956.0
 offset_bottom = 425.0
 
-[node name="SizeRef" type="Panel" parent="UIRoot/ArsenalView/Control"]
+[node name="SizeRef" type="Panel" parent="UIRoot/ArmoryView/Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -166,7 +181,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_f5x6x")
 
-[node name="OptionButton" type="OptionButton" parent="UIRoot/ArsenalView/Control"]
+[node name="OptionButton" type="OptionButton" parent="UIRoot/ArmoryView/Control"]
 layout_mode = 0
 offset_left = 65.0
 offset_top = 60.0
@@ -179,7 +194,7 @@ popup/item_1/id = 1
 popup/item_2/text = "gun3"
 popup/item_2/id = 2
 
-[node name="OptionButton2" type="OptionButton" parent="UIRoot/ArsenalView/Control"]
+[node name="OptionButton2" type="OptionButton" parent="UIRoot/ArmoryView/Control"]
 layout_mode = 0
 offset_left = 65.0
 offset_top = 153.0
@@ -192,7 +207,7 @@ popup/item_1/id = 1
 popup/item_2/text = "gun3"
 popup/item_2/id = 2
 
-[node name="OptionButton3" type="OptionButton" parent="UIRoot/ArsenalView/Control"]
+[node name="OptionButton3" type="OptionButton" parent="UIRoot/ArmoryView/Control"]
 layout_mode = 0
 offset_left = 65.0
 offset_top = 241.0
@@ -205,7 +220,7 @@ popup/item_1/id = 1
 popup/item_2/text = "gun3"
 popup/item_2/id = 2
 
-[node name="OptionButton4" type="OptionButton" parent="UIRoot/ArsenalView/Control"]
+[node name="OptionButton4" type="OptionButton" parent="UIRoot/ArmoryView/Control"]
 layout_mode = 0
 offset_left = 440.0
 offset_top = 60.0
@@ -218,7 +233,7 @@ popup/item_1/id = 1
 popup/item_2/text = "gun3"
 popup/item_2/id = 2
 
-[node name="OptionButton5" type="OptionButton" parent="UIRoot/ArsenalView/Control"]
+[node name="OptionButton5" type="OptionButton" parent="UIRoot/ArmoryView/Control"]
 layout_mode = 0
 offset_left = 440.0
 offset_top = 153.0
@@ -231,7 +246,7 @@ popup/item_1/id = 1
 popup/item_2/text = "gun3"
 popup/item_2/id = 2
 
-[node name="OptionButton6" type="OptionButton" parent="UIRoot/ArsenalView/Control"]
+[node name="OptionButton6" type="OptionButton" parent="UIRoot/ArmoryView/Control"]
 layout_mode = 0
 offset_left = 440.0
 offset_top = 241.0
@@ -252,6 +267,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("7_vgf31")
+state_name = 3
 
 [node name="Background" type="Panel" parent="UIRoot/PostGameView"]
 layout_mode = 1
