@@ -12,7 +12,7 @@ func _ready() -> void:
 		if child is OptionButton:
 			_option_buttons_array.append(child)
 			(child as OptionButton).item_selected.connect(on_selection_changed.bind(_option_buttons_array.size() - 1))
-	back_button.change_state.connect(call_transition.bind("testing"))
+	back_button.change_state.connect(call_transition)
 	# back_button.connect("pressed", self, "call_transition")3
 
 

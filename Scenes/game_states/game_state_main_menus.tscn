@@ -1,19 +1,22 @@
-[gd_scene load_steps=9 format=3 uid="uid://bijkfa26nk1k5"]
+[gd_scene load_steps=11 format=3 uid="uid://bijkfa26nk1k5"]
 
-[ext_resource type="Script" path="res://scripts/controllers/main_menus_controller.gd" id="1_aynbh"]
+[ext_resource type="Script" path="res://scripts/state_machine/reactive/game/this_game/mm_game_state.gd" id="1_ne4yi"]
 [ext_resource type="PackedScene" uid="uid://b35c2yemt567w" path="res://scenes/ui/button_base.tscn" id="1_wuei4"]
 [ext_resource type="Script" path="res://scripts/state_machine/reactive/sub_game/main_menus/state_mm_options.gd" id="2_0bgr2"]
 [ext_resource type="Script" path="res://scripts/state_machine/reactive/sub_game/main_menus/state_main_view.gd" id="3_cyhgh"]
 [ext_resource type="Script" path="res://scripts/state_machine/reactive/sub_game/sub_game_change_state_button.gd" id="4_y4yie"]
 [ext_resource type="Script" path="res://scripts/state_machine/reactive/sub_game/main_menus/state_mm_armory.gd" id="6_xrvjt"]
 [ext_resource type="Script" path="res://scripts/state_machine/reactive/sub_game/main_menus/state_mm_post_game.gd" id="7_vgf31"]
+[ext_resource type="Script" path="res://scripts/state_machine/reactive/sub_game/sub_game_state_machine.gd" id="8_6nivr"]
+[ext_resource type="Script" path="res://scripts/state_machine/reactive/sub_game/common/c_empty_state.gd" id="9_nu6vc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f5x6x"]
 bg_color = Color(0.977937, 0.977937, 0.977937, 0.372549)
 
-[node name="GameStateMainMenus" type="Node3D" node_paths=PackedStringArray("ui_root")]
-script = ExtResource("1_aynbh")
-ui_root = NodePath("UIRoot")
+[node name="GameStateMainMenus" type="Node" node_paths=PackedStringArray("sub_game_state_machine")]
+script = ExtResource("1_ne4yi")
+default_state = 1
+sub_game_state_machine = NodePath("SubGameStateMachine")
 
 [node name="UIRoot" type="Control" parent="."]
 layout_mode = 3
@@ -23,7 +26,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="OptionsView" type="Control" parent="UIRoot" node_paths=PackedStringArray("back_button")]
+[node name="OptionsView" type="Control" parent="UIRoot"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -31,8 +34,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("2_0bgr2")
-back_button = NodePath("Panel/Back")
 
 [node name="Panel" type="Panel" parent="UIRoot/OptionsView"]
 layout_mode = 1
@@ -92,8 +93,9 @@ size_flags_vertical = 3
 theme_override_font_sizes/font_size = 35
 text = "BACK"
 script = ExtResource("4_y4yie")
+new_state = 1
 
-[node name="MainView" type="Control" parent="UIRoot" node_paths=PackedStringArray("start_button", "options_button", "quit_button", "armory_button")]
+[node name="MainView" type="Control" parent="UIRoot"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -101,11 +103,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("3_cyhgh")
-start_button = NodePath("VBoxContainer/Start")
-options_button = NodePath("VBoxContainer/Options")
-quit_button = NodePath("VBoxContainer/Quit")
-armory_button = NodePath("VBoxContainer/Armory")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/MainView"]
 layout_mode = 1
@@ -128,30 +125,28 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "OPTIONS"
 script = ExtResource("4_y4yie")
-new_state = 1
+new_state = 2
 
 [node name="Armory" parent="UIRoot/MainView/VBoxContainer" instance=ExtResource("1_wuei4")]
 layout_mode = 2
 size_flags_vertical = 3
 text = "ARMORY"
 script = ExtResource("4_y4yie")
-new_state = 2
+new_state = 3
 
 [node name="Quit" parent="UIRoot/MainView/VBoxContainer" instance=ExtResource("1_wuei4")]
 layout_mode = 2
 size_flags_vertical = 3
 text = "QUIT"
 
-[node name="ArmoryView" type="Control" parent="UIRoot" node_paths=PackedStringArray("option_buttons_root", "back_button")]
+[node name="ArmoryView" type="Control" parent="UIRoot"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("6_xrvjt")
-option_buttons_root = NodePath("Control/OptionButtonsRoot")
-back_button = NodePath("Back")
 
 [node name="Back" parent="UIRoot/ArmoryView" instance=ExtResource("1_wuei4")]
 layout_mode = 1
@@ -167,6 +162,7 @@ size_flags_vertical = 3
 theme_override_font_sizes/font_size = 35
 text = "BACK"
 script = ExtResource("4_y4yie")
+new_state = 1
 
 [node name="Control" type="Control" parent="UIRoot/ArmoryView"]
 anchors_preset = 0
@@ -273,7 +269,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("7_vgf31")
 
 [node name="Background" type="Panel" parent="UIRoot/PostGameView"]
 layout_mode = 1
@@ -345,3 +340,36 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 35
 text = "CONFIRM"
+
+[node name="SubGameStateMachine" type="Node" parent="."]
+script = ExtResource("8_6nivr")
+
+[node name="MM_MainView" type="Node" parent="SubGameStateMachine" node_paths=PackedStringArray("start_button", "options_button", "quit_button", "armory_button", "views_array")]
+script = ExtResource("3_cyhgh")
+start_button = NodePath("../../UIRoot/MainView/VBoxContainer/Start")
+options_button = NodePath("../../UIRoot/MainView/VBoxContainer/Options")
+quit_button = NodePath("../../UIRoot/MainView/VBoxContainer/Quit")
+armory_button = NodePath("../../UIRoot/MainView/VBoxContainer/Armory")
+state_type = 1
+views_array = [NodePath("../../UIRoot/MainView")]
+
+[node name="MM_Options" type="Node" parent="SubGameStateMachine" node_paths=PackedStringArray("back_button", "views_array")]
+script = ExtResource("2_0bgr2")
+back_button = NodePath("../../UIRoot/OptionsView/Panel/Back")
+state_type = 2
+views_array = [NodePath("../../UIRoot/OptionsView")]
+
+[node name="MM_Armory" type="Node" parent="SubGameStateMachine" node_paths=PackedStringArray("option_buttons_root", "back_button", "views_array")]
+script = ExtResource("6_xrvjt")
+option_buttons_root = NodePath("../../UIRoot/ArmoryView/Control/OptionButtonsRoot")
+back_button = NodePath("../../UIRoot/ArmoryView/Back")
+state_type = 3
+views_array = [NodePath("../../UIRoot/ArmoryView")]
+
+[node name="MM_PostGame" type="Node" parent="SubGameStateMachine" node_paths=PackedStringArray("views_array")]
+script = ExtResource("7_vgf31")
+state_type = 4
+views_array = [NodePath("../../UIRoot/PostGameView")]
+
+[node name="C_Empty" type="Node" parent="SubGameStateMachine"]
+script = ExtResource("9_nu6vc")

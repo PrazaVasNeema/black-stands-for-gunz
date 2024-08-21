@@ -1,7 +1,7 @@
 class_name GameState
 extends R_State
 
-@export var state_type : GameConstants.SUB_GAME_STATES
+@export var state_type : GameConstants.GAME_STATES
 @export var sub_game_state_machine : SubGameStateMachine
 
 

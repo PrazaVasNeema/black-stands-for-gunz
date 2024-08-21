@@ -6,6 +6,7 @@ func init(core) -> void:
 	super(core)
 	for child in get_children():
 		child.init()
+	on_change_state(GameConstants.GAME_STATES.MAIN_MENUS)
 
 
 func on_change_state(new_state: GameConstants.GAME_STATES) -> void:
