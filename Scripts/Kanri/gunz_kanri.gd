@@ -17,6 +17,7 @@ func lock_n_load(gun_slots_array : Array[GunSlotData], matrix_callable : Callabl
 	
 	var i = 0
 	while i < gun_slots_array.size():
+		print(str(gun_slots_array[i].gun) + " " + str(gun_slots_array[i+1].gun))
 		_gunz_sets_array.append(GunzSetData.new(gun_slots_array[i].gun, gun_slots_array[i + 1].gun, Vector3.ZERO))
 		i += 2
 	active_set = 0

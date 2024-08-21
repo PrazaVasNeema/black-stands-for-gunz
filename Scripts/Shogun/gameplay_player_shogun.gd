@@ -1,16 +1,18 @@
 class_name GameplayPlayerShogun
 extends Node
 
-
 @export var _gunz_matrix_kanri : GunzMatrixKanri
 @export var _gunz_kanri : GunzKanri
 
 
-func lock_n_load(player_teikyou : PlayerTeikyou):
-	_gunz_matrix_kanri.lock_n_load(player_teikyou.player_main_camera)
+func init():
+	_gunz_matrix_kanri.lock_n_load(G_CamerasManager.get_camera(GameConstants.CAMERAS.CABIN_VIEW))
 	_gunz_matrix_kanri.ws_aim_changed.connect(_on_ws_main_position_changed)
-	_gunz_kanri.lock_n_load(player_teikyou.gunz_slots_array, _gunz_matrix_kanri.update_sub_crosshair)
 	_gunz_kanri.loaded_old_position.connect(_gunz_matrix_kanri.just_plainly_set_position)
+
+
+func lock_n_load():
+	_gunz_kanri.lock_n_load(G_Armory.player_teikyou.gunz_slots_array, _gunz_matrix_kanri.update_sub_crosshair)
 
 
 func turn_on():

@@ -13,10 +13,11 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f5x6x"]
 bg_color = Color(0.977937, 0.977937, 0.977937, 0.372549)
 
-[node name="GameStateMainMenus" type="Node" node_paths=PackedStringArray("sub_game_state_machine")]
+[node name="GameStateMainMenus" type="Node" node_paths=PackedStringArray("sub_game_state_machine", "ui_root")]
 script = ExtResource("1_ne4yi")
 default_state = 1
 sub_game_state_machine = NodePath("SubGameStateMachine")
+ui_root = NodePath("UIRoot")
 
 [node name="UIRoot" type="Control" parent="."]
 layout_mode = 3

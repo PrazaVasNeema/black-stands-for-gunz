@@ -10,6 +10,10 @@ func add_camera(camera_name : GameConstants.CAMERAS, camera : Camera3D):
 	_cameras_dicrionary[camera_name] = camera
 
 
+func get_camera(camera_name : GameConstants.CAMERAS) -> Camera3D:
+	return _cameras_dicrionary.get(camera_name, null)
+
+
 func set_current(camera_name : GameConstants.CAMERAS):
 	var camera = _cameras_dicrionary.get(camera_name, null)
 	if !camera:

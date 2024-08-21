@@ -5,6 +5,7 @@ signal fire_just_released(gun_num : int)
 signal reload_pressed
 signal choose_set_pressed(set_num : int)
 signal mouse_position_changed(relative : Vector2)
+signal pause_pressed
 
 @export_range(0, 10) var mouse_sensitivity : float = 1
 
@@ -13,6 +14,9 @@ func _init() -> void:
 	pass
 
 func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("pause"):
+		pause_pressed.emit()
+
 	if event is InputEventMouseMotion:
 		mouse_position_changed.emit(event.relative * mouse_sensitivity)
 	
@@ -38,3 +42,4 @@ func _input(event: InputEvent) -> void:
 		emit_choose_set_num = 3
 	if (emit_choose_set_num != -1):
 		choose_set_pressed.emit(emit_choose_set_num)
+	
