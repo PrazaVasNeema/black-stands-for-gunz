@@ -23,9 +23,6 @@ func lock_n_load(gun_slots_array : Array[GunSlotData], matrix_callable : Callabl
 	_matrix_change_sub_c_callable = matrix_callable
 
 
-	
-
-
 func update_targeting(target_ws_position : Vector3):
 	_current_target = target_ws_position
 	(_gunz_sets_array[active_set] as GunzSetData).gun_one.update_targeting(_current_target)
@@ -69,4 +66,3 @@ func fire_stop(gun_ind : int):
 			_gunz_sets_array[active_set].gun_one.change_firing_input_status(false)
 		1:
 			_gunz_sets_array[active_set].gun_two.change_firing_input_status(false)
-

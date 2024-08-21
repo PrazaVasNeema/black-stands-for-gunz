@@ -1,5 +1,5 @@
-class_name GameStateGameplay
-extends GameStateGlobal
+class_name IngameController
+extends GameStateController
 
 
 @export var gameplaye_player_shogun : GameplayPlayerShogun

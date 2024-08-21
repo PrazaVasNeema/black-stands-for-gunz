@@ -1,9 +1,16 @@
 class_name GameConstants
 extends Node
 
-
-enum UI_STATES
+enum GAME_STATES
 {
+	MAIN_MENUS,
+	INGAME,
+}
+
+enum SUB_GAME_STATES
+{
+	EMPTY,
+
 	MM_MAIN_VIEW,
 	MM_OPTIONS_VIEW,
 	MM_ARMORY_VIEW,

@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://scripts/controllers/main_menus_controller.gd" id="1_aynbh"]
 [ext_resource type="PackedScene" uid="uid://b35c2yemt567w" path="res://scenes/ui/button_base.tscn" id="1_wuei4"]
-[ext_resource type="Script" path="res://scripts/state_machine/ui/main_menus/state_mm_options.gd" id="2_0bgr2"]
-[ext_resource type="Script" path="res://scripts/state_machine/ui/main_menus/state_main_view.gd" id="3_cyhgh"]
-[ext_resource type="Script" path="res://scripts/state_machine/ui/ui_change_state_button.gd" id="4_y4yie"]
-[ext_resource type="Script" path="res://scripts/state_machine/ui/main_menus/state_mm_armory.gd" id="6_xrvjt"]
-[ext_resource type="Script" path="res://scripts/state_machine/ui/main_menus/state_mm_post_game.gd" id="7_vgf31"]
+[ext_resource type="Script" path="res://scripts/state_machine/reactive/sub_game/main_menus/state_mm_options.gd" id="2_0bgr2"]
+[ext_resource type="Script" path="res://scripts/state_machine/reactive/sub_game/main_menus/state_main_view.gd" id="3_cyhgh"]
+[ext_resource type="Script" path="res://scripts/state_machine/reactive/sub_game/sub_game_change_state_button.gd" id="4_y4yie"]
+[ext_resource type="Script" path="res://scripts/state_machine/reactive/sub_game/main_menus/state_mm_armory.gd" id="6_xrvjt"]
+[ext_resource type="Script" path="res://scripts/state_machine/reactive/sub_game/main_menus/state_mm_post_game.gd" id="7_vgf31"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f5x6x"]
 bg_color = Color(0.977937, 0.977937, 0.977937, 0.372549)
@@ -33,7 +33,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_0bgr2")
 back_button = NodePath("Panel/Back")
-state_name = 1
 
 [node name="Panel" type="Panel" parent="UIRoot/OptionsView"]
 layout_mode = 1
@@ -153,7 +152,6 @@ grow_vertical = 2
 script = ExtResource("6_xrvjt")
 option_buttons_root = NodePath("Control/OptionButtonsRoot")
 back_button = NodePath("Back")
-state_name = 2
 
 [node name="Back" parent="UIRoot/ArmoryView" instance=ExtResource("1_wuei4")]
 layout_mode = 1
@@ -190,6 +188,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_f5x6x")
 anchors_preset = 0
 
 [node name="OptionButton4" type="OptionButton" parent="UIRoot/ArmoryView/Control/OptionButtonsRoot"]
+layout_mode = 0
 offset_left = 440.0
 offset_top = 60.0
 offset_right = 511.0
@@ -202,6 +201,7 @@ popup/item_2/text = "gun3"
 popup/item_2/id = 2
 
 [node name="OptionButton" type="OptionButton" parent="UIRoot/ArmoryView/Control/OptionButtonsRoot"]
+layout_mode = 0
 offset_left = 65.0
 offset_top = 60.0
 offset_right = 136.0
@@ -214,6 +214,7 @@ popup/item_2/text = "gun3"
 popup/item_2/id = 2
 
 [node name="OptionButton5" type="OptionButton" parent="UIRoot/ArmoryView/Control/OptionButtonsRoot"]
+layout_mode = 0
 offset_left = 440.0
 offset_top = 153.0
 offset_right = 511.0
@@ -226,6 +227,7 @@ popup/item_2/text = "gun3"
 popup/item_2/id = 2
 
 [node name="OptionButton2" type="OptionButton" parent="UIRoot/ArmoryView/Control/OptionButtonsRoot"]
+layout_mode = 0
 offset_left = 65.0
 offset_top = 153.0
 offset_right = 136.0
@@ -238,6 +240,7 @@ popup/item_2/text = "gun3"
 popup/item_2/id = 2
 
 [node name="OptionButton6" type="OptionButton" parent="UIRoot/ArmoryView/Control/OptionButtonsRoot"]
+layout_mode = 0
 offset_left = 440.0
 offset_top = 241.0
 offset_right = 511.0
@@ -250,6 +253,7 @@ popup/item_2/text = "gun3"
 popup/item_2/id = 2
 
 [node name="OptionButton3" type="OptionButton" parent="UIRoot/ArmoryView/Control/OptionButtonsRoot"]
+layout_mode = 0
 offset_left = 65.0
 offset_top = 241.0
 offset_right = 136.0
@@ -270,7 +274,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("7_vgf31")
-state_name = 3
 
 [node name="Background" type="Panel" parent="UIRoot/PostGameView"]
 layout_mode = 1

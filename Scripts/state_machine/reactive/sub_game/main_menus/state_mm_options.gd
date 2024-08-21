@@ -1,7 +1,7 @@
-extends UIState
+extends SubGameState
 
 
-@export var back_button : UIChangeStateButton
+@export var back_button : UI_ChangeStateButton
 
 
 func _ready() -> void:

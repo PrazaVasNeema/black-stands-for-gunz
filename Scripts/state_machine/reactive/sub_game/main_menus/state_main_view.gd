@@ -1,10 +1,10 @@
-extends UIState
+extends SubGameState
 
 
 @export var start_button : BaseButton
-@export var options_button : UIChangeStateButton
+@export var options_button : UI_ChangeStateButton
 @export var quit_button : BaseButton
-@export var armory_button : UIChangeStateButton
+@export var armory_button : UI_ChangeStateButton
 
 
 func _ready() -> void:
@@ -20,7 +20,8 @@ func enter() -> void:
 
 
 func _start_game():
-	_g_game_state_controller.i_want_to_change.emit(_g_game_state_controller)
+	(core as MM_GameState).call_transition(GameConstants.GAME_STATES.INGAME)
+
 
 func _quit_game():
 	get_tree().quit()

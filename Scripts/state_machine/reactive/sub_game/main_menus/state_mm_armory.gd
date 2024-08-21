@@ -1,8 +1,8 @@
-extends UIState
+extends SubGameState
 
 
 @export var option_buttons_root : Control
-@export var back_button : UIChangeStateButton
+@export var back_button : UI_ChangeStateButton
 
 var _option_buttons_array : Array[OptionButton]
 
