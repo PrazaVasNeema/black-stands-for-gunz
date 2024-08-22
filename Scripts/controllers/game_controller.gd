@@ -6,6 +6,8 @@ extends Node
 @export var game_state_machine : GameStateMachine
 
 
+    
+
 func _ready() -> void:
 
 	G_CamerasManager.add_camera(GameConstants.CAMERAS.MAIN_VIEW, world_teikyou.camera_main_view)
@@ -19,6 +21,9 @@ func _ready() -> void:
 	
 	game_state_machine.init(self)
 	
+
+
+
 	# main_menus_controller.i_want_to_change.connect(on_i_want_to_change)
 	# main_menus_controller.turn_on()
 
