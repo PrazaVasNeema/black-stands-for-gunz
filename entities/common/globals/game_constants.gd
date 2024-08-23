@@ -25,6 +25,7 @@ enum CAMERAS
 	MAIN_VIEW,
 	CABIN_VIEW,
 	OPTIONS_VIEW,
+	HOW_TO_PLAY_VIEW,
 }
 
 static var test = 10

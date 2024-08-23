@@ -1,0 +1,413 @@
+[gd_scene load_steps=3 format=3 uid="uid://dy07y0diixd3u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_in70k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_enr8i"]
+bg_color = Color(0.165656, 0.165656, 0.165656, 1)
+
+[node name="MainMenus" type="Node"]
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+offset_bottom = 648.0
+
+[node name="CenterContainer2" type="CenterContainer" parent="."]
+offset_left = 12.0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="UIRoot" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIRoot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainView" type="Control" parent="UIRoot/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.7
+
+[node name="PanelContainer" type="PanelContainer" parent="UIRoot/HBoxContainer/MainView"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.182203
+anchor_top = 0.276235
+anchor_right = 0.817797
+anchor_bottom = 0.723765
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_in70k")
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/HBoxContainer/MainView/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Start" type="Button" parent="UIRoot/HBoxContainer/MainView/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "START"
+
+[node name="HowToPlay" type="Button" parent="UIRoot/HBoxContainer/MainView/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "HOW TO PLAY"
+
+[node name="Options" type="Button" parent="UIRoot/HBoxContainer/MainView/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "OPTIONS"
+
+[node name="RightSide" type="Control" parent="UIRoot/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Start" type="Button" parent="UIRoot/HBoxContainer/RightSide"]
+visible = false
+layout_mode = 2
+offset_left = 310.0
+offset_top = 308.0
+offset_right = 366.0
+offset_bottom = 339.0
+size_flags_vertical = 3
+text = "START"
+
+[node name="Settings" type="Control" parent="UIRoot/HBoxContainer/RightSide"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="UIRoot/HBoxContainer/RightSide/Settings"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UIRoot/HBoxContainer/RightSide/Settings/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="PanelContainer" type="PanelContainer" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+metadata/_edit_use_anchors_ = true
+
+[node name="Title" type="MarginContainer" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Title"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_enr8i")
+
+[node name="Label" type="Label" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Title/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.5
+offset_top = -11.5
+offset_right = 35.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 25
+text = "OPTIONS"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Title"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="Start" type="Button" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Title/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "START"
+
+[node name="HowToPlay" type="Button" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Title/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "HOW TO PLAY"
+
+[node name="Options" type="Button" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Title/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "OPTIONS"
+
+[node name="Locals" type="VBoxContainer" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 10
+metadata/_edit_use_anchors_ = true
+
+[node name="SFXContainer" type="HBoxContainer" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Locals"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_constants/separation = 20
+
+[node name="MarginContainer" type="MarginContainer" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Locals/SFXContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="Label" type="Label" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Locals/SFXContainer/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "LANGUAGE:"
+horizontal_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Locals/SFXContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_right = 20
+
+[node name="Button" type="Button" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Locals/SFXContainer/MarginContainer2"]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "ENGLISH
+"
+
+[node name="Audio" type="VBoxContainer" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Audio"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Audio/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "AUDIO"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Audio/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "(NOT YET IMPLEMENTED)"
+horizontal_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Audio"]
+layout_mode = 2
+
+[node name="AudioVBox" type="VBoxContainer" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Audio/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 30
+metadata/_edit_use_anchors_ = true
+
+[node name="SFXContainer" type="HBoxContainer" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Audio/MarginContainer2/AudioVBox"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="MarginContainer" type="MarginContainer" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Audio/MarginContainer2/AudioVBox/SFXContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="Label" type="Label" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Audio/MarginContainer2/AudioVBox/SFXContainer/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "SFX:
+"
+horizontal_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Audio/MarginContainer2/AudioVBox/SFXContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_right = 20
+
+[node name="HSlider" type="HSlider" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Audio/MarginContainer2/AudioVBox/SFXContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+tick_count = 10
+
+[node name="MusicContainer" type="HBoxContainer" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Audio/MarginContainer2/AudioVBox"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="MarginContainer" type="MarginContainer" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Audio/MarginContainer2/AudioVBox/MusicContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="Label" type="Label" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Audio/MarginContainer2/AudioVBox/MusicContainer/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "MUSIC:"
+horizontal_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Audio/MarginContainer2/AudioVBox/MusicContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_right = 20
+
+[node name="HSlider" type="HSlider" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Audio/MarginContainer2/AudioVBox/MusicContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+tick_count = 10
+
+[node name="Other" type="VBoxContainer" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Other"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Other/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "OTHER"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Other/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "SOME FANCY SETTINGS HERE (NOT YET IMPLEMENTED)"
+horizontal_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Other"]
+layout_mode = 2
+theme_override_constants/margin_top = 5
+
+[node name="AudioVBox" type="VBoxContainer" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Other/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 30
+metadata/_edit_use_anchors_ = true
+
+[node name="SFXContainer" type="HBoxContainer" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Other/MarginContainer2/AudioVBox"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="MarginContainer3" type="MarginContainer" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Other/MarginContainer2/AudioVBox/SFXContainer"]
+layout_mode = 2
+
+[node name="SFXContainer" type="HBoxContainer" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Other/MarginContainer2/AudioVBox/SFXContainer/MarginContainer3"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="MarginContainer" type="MarginContainer" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Other/MarginContainer2/AudioVBox/SFXContainer/MarginContainer3/SFXContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 5
+
+[node name="Label" type="Label" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Other/MarginContainer2/AudioVBox/SFXContainer/MarginContainer3/SFXContainer/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "FANCY 1"
+horizontal_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Other/MarginContainer2/AudioVBox/SFXContainer/MarginContainer3/SFXContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 0
+
+[node name="CheckButton" type="CheckButton" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Other/MarginContainer2/AudioVBox/SFXContainer/MarginContainer3/SFXContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MarginContainer4" type="MarginContainer" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Other/MarginContainer2/AudioVBox/SFXContainer"]
+layout_mode = 2
+
+[node name="SFXContainer" type="HBoxContainer" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Other/MarginContainer2/AudioVBox/SFXContainer/MarginContainer4"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="MarginContainer" type="MarginContainer" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Other/MarginContainer2/AudioVBox/SFXContainer/MarginContainer4/SFXContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 5
+
+[node name="Label" type="Label" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Other/MarginContainer2/AudioVBox/SFXContainer/MarginContainer4/SFXContainer/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "FANCY 2"
+horizontal_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Other/MarginContainer2/AudioVBox/SFXContainer/MarginContainer4/SFXContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 0
+
+[node name="CheckButton" type="CheckButton" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Other/MarginContainer2/AudioVBox/SFXContainer/MarginContainer4/SFXContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+button_pressed = true
+
+[node name="CenterContainer" type="MarginContainer" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_bottom = 10
+
+[node name="Button" type="Button" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/CenterContainer"]
+custom_minimum_size = Vector2(130, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
+text = "CLOSE"
+
+[node name="SizeRef" type="Panel" parent="UIRoot/HBoxContainer/RightSide/Settings"]
+visible = false
+layout_mode = 2
+offset_right = 676.0
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
