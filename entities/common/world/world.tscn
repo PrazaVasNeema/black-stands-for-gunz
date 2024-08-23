@@ -32,7 +32,6 @@ transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 1, -6, 5.12355, -19)
 mesh = SubResource("BoxMesh_c20xy")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Wall"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.398068, 0.215275, 4.15937)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Wall/StaticBody3D"]
 shape = SubResource("BoxShape3D_3wxbd")

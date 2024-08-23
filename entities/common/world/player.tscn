@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dlt0nwg5c3wrd"]
+[gd_scene load_steps=6 format=3 uid="uid://dlt0nwg5c3wrd"]
 
 [ext_resource type="Script" path="res://entities/common/world/player_provider.gd" id="1_yh2o6"]
 
@@ -15,6 +15,8 @@ radius = 2.0
 top_radius = 1.5
 bottom_radius = 1.5
 height = 1.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_ismdh"]
 
 [node name="Player" type="Node3D" node_paths=PackedStringArray("player_main_camera")]
 script = ExtResource("1_yh2o6")
@@ -55,3 +57,10 @@ shape = SubResource("CylinderShape3D_6lpyi")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5381, 0)
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.23612, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Marker3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8654, 0, 0)
+mesh = SubResource("BoxMesh_ismdh")
