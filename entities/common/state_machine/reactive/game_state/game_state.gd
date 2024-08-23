@@ -13,7 +13,6 @@ var core : Game
 func init() -> void :
 	ui_root.visible = false
 	sub_game_state_machine.init(self)
-	core.test()
 
 
 func enter():

@@ -6,9 +6,9 @@ extends GameState
 
 func enter() -> void:
 	super()
-	sub_game_state_machine.on_change_state(default_state)
+	sub_game_state_machine.change_state(default_state)
 
 
 func exit() -> void:
 	super()
-	sub_game_state_machine.on_change_state(GameConstants.SUB_GAME_STATES.EMPTY)
+	sub_game_state_machine.change_state(GameConstants.SUB_GAME_STATES.EMPTY)

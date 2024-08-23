@@ -1,3 +1,21 @@
-[gd_scene format=3 uid="uid://bg4vrn12w1kgx"]
+[gd_scene load_steps=6 format=3 uid="uid://bg4vrn12w1kgx"]
 
-[node name="Game" type="Node"]
+[ext_resource type="Script" path="res://entities/_game_itself/game.gd" id="1_kobut"]
+[ext_resource type="Script" path="res://entities/common/state_machine/reactive/game_state/game_state_machine.gd" id="2_ned6v"]
+[ext_resource type="PackedScene" uid="uid://dy07y0diixd3u" path="res://entities/main_menus/main_menus.tscn" id="3_akei1"]
+[ext_resource type="PackedScene" uid="uid://dkx177vx5ddus" path="res://entities/in_game/in_game.tscn" id="4_ncnl1"]
+[ext_resource type="PackedScene" uid="uid://uc265cnfk3e0" path="res://entities/common/world/world.tscn" id="5_wh3il"]
+
+[node name="Game" type="Node" node_paths=PackedStringArray("game_state_machine", "world_provider")]
+script = ExtResource("1_kobut")
+game_state_machine = NodePath("GameStateMachine")
+world_provider = NodePath("World")
+
+[node name="GameStateMachine" type="Node" parent="."]
+script = ExtResource("2_ned6v")
+
+[node name="MainMenus" parent="GameStateMachine" instance=ExtResource("3_akei1")]
+
+[node name="InGame" parent="GameStateMachine" instance=ExtResource("4_ncnl1")]
+
+[node name="World" parent="." instance=ExtResource("5_wh3il")]

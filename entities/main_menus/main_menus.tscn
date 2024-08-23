@@ -1,22 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://dy07y0diixd3u"]
+[gd_scene load_steps=11 format=3 uid="uid://dy07y0diixd3u"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t1x46"]
-bg_color = Color(0.152941, 0.152941, 0.152941, 0.623529)
+[ext_resource type="Script" path="res://entities/main_menus/main_menus.gd" id="1_g33sd"]
+[ext_resource type="Script" path="res://entities/common/state_machine/reactive/sub_game_state/sub_game_state_machine.gd" id="1_gbg6g"]
+[ext_resource type="Script" path="res://entities/common/ui/ui_sub_game_transition_button.gd" id="1_xbe7n"]
+[ext_resource type="Script" path="res://entities/main_menus/states/mm_main_view.gd" id="2_lh8y5"]
+[ext_resource type="Script" path="res://entities/main_menus/states/mm_how_to_play.gd" id="4_f7itt"]
+[ext_resource type="Script" path="res://entities/main_menus/states/mm_options.gd" id="5_54727"]
+[ext_resource type="Script" path="res://entities/main_menus/states/mm_options_language.gd" id="6_0umos"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_in70k"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_enr8i"]
 bg_color = Color(0.165656, 0.165656, 0.165656, 1)
 
-[node name="MainMenus" type="Node"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t1x46"]
+bg_color = Color(0.152941, 0.152941, 0.152941, 0.623529)
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
-offset_bottom = 648.0
-
-[node name="CenterContainer2" type="CenterContainer" parent="."]
-offset_left = 12.0
-offset_right = 1152.0
-offset_bottom = 648.0
+[node name="MainMenus" type="Node" node_paths=PackedStringArray("sub_game_state_machine", "ui_root")]
+script = ExtResource("1_g33sd")
+default_state = 1
+sub_game_state_machine = NodePath("SubGameStateMachine")
+ui_root = NodePath("UIRoot")
 
 [node name="UIRoot" type="Control" parent="."]
 layout_mode = 3
@@ -25,85 +29,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="SettingsLanguage" type="Control" parent="UIRoot"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Control" type="Control" parent="UIRoot/SettingsLanguage"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="UIRoot/SettingsLanguage/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 50
-
-[node name="PanelContainer" type="PanelContainer" parent="UIRoot/SettingsLanguage/Control/MarginContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_t1x46")
-
-[node name="MarginContainer" type="MarginContainer" parent="UIRoot/SettingsLanguage/Control/MarginContainer/PanelContainer"]
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="UIRoot/SettingsLanguage/Control/MarginContainer/PanelContainer/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 145
-
-[node name="GridContainer" type="GridContainer" parent="UIRoot/SettingsLanguage/Control/MarginContainer/PanelContainer/MarginContainer/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/h_separation = 40
-columns = 3
-
-[node name="English" type="Button" parent="UIRoot/SettingsLanguage/Control/MarginContainer/PanelContainer/MarginContainer/MarginContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 40
-text = "ENGLISH
-"
-
-[node name="Russian" type="Button" parent="UIRoot/SettingsLanguage/Control/MarginContainer/PanelContainer/MarginContainer/MarginContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 40
-text = "РУССКИЙ"
-
-[node name="CenterContainer" type="MarginContainer" parent="UIRoot/SettingsLanguage/Control/MarginContainer/PanelContainer/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_constants/margin_bottom = 10
-
-[node name="Button" type="Button" parent="UIRoot/SettingsLanguage/Control/MarginContainer/PanelContainer/MarginContainer/CenterContainer"]
-custom_minimum_size = Vector2(130, 40)
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 20
-text = "CLOSE"
+metadata/_edit_use_anchors_ = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UIRoot"]
 layout_mode = 1
@@ -145,16 +71,136 @@ text = "START"
 layout_mode = 2
 size_flags_vertical = 3
 text = "HOW TO PLAY"
+script = ExtResource("1_xbe7n")
+new_state = 3
 
 [node name="Options" type="Button" parent="UIRoot/HBoxContainer/MainView/PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "OPTIONS"
+script = ExtResource("1_xbe7n")
+new_state = 2
 
 [node name="RightSide" type="Control" parent="UIRoot/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HowToPlay" type="Control" parent="UIRoot/HBoxContainer/RightSide"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="UIRoot/HBoxContainer/RightSide/HowToPlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UIRoot/HBoxContainer/RightSide/HowToPlay/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="PanelContainer" type="PanelContainer" parent="UIRoot/HBoxContainer/RightSide/HowToPlay/Control/MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UIRoot/HBoxContainer/RightSide/HowToPlay/Control/MarginContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/HBoxContainer/RightSide/HowToPlay/Control/MarginContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+metadata/_edit_use_anchors_ = true
+
+[node name="Title" type="MarginContainer" parent="UIRoot/HBoxContainer/RightSide/HowToPlay/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="UIRoot/HBoxContainer/RightSide/HowToPlay/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Title"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_enr8i")
+
+[node name="Label" type="Label" parent="UIRoot/HBoxContainer/RightSide/HowToPlay/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Title/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.5
+offset_top = -11.5
+offset_right = 35.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 25
+text = "OPTIONS"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/HBoxContainer/RightSide/HowToPlay/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Title"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="Start" type="Button" parent="UIRoot/HBoxContainer/RightSide/HowToPlay/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Title/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "START"
+
+[node name="HowToPlay" type="Button" parent="UIRoot/HBoxContainer/RightSide/HowToPlay/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Title/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "HOW TO PLAY"
+
+[node name="Options" type="Button" parent="UIRoot/HBoxContainer/RightSide/HowToPlay/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Title/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "OPTIONS"
+
+[node name="MarginContainer" type="MarginContainer" parent="UIRoot/HBoxContainer/RightSide/HowToPlay/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="Label" type="Label" parent="UIRoot/HBoxContainer/RightSide/HowToPlay/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 20
+text = "- SHOOT
+- GUNS RECHARGE
+- YOU SHOOT AGAIN"
+
+[node name="CenterContainer" type="MarginContainer" parent="UIRoot/HBoxContainer/RightSide/HowToPlay/Control/MarginContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_bottom = 10
+
+[node name="Close" type="Button" parent="UIRoot/HBoxContainer/RightSide/HowToPlay/Control/MarginContainer/PanelContainer/MarginContainer/CenterContainer"]
+custom_minimum_size = Vector2(130, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
+text = "CLOSE"
+script = ExtResource("1_xbe7n")
+new_state = 1
 
 [node name="Settings" type="Control" parent="UIRoot/HBoxContainer/RightSide"]
 visible = false
@@ -276,13 +322,15 @@ size_flags_horizontal = 3
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_right = 20
 
-[node name="Button" type="Button" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Locals/SFXContainer/MarginContainer2"]
+[node name="Language" type="Button" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Locals/SFXContainer/MarginContainer2"]
 custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "ENGLISH
 "
+script = ExtResource("1_xbe7n")
+new_state = 4
 
 [node name="Audio" type="VBoxContainer" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 180)
@@ -472,12 +520,14 @@ layout_mode = 2
 size_flags_vertical = 8
 theme_override_constants/margin_bottom = 10
 
-[node name="Button" type="Button" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/CenterContainer"]
+[node name="Close" type="Button" parent="UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/CenterContainer"]
 custom_minimum_size = Vector2(130, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 20
 text = "CLOSE"
+script = ExtResource("1_xbe7n")
+new_state = 1
 
 [node name="SizeRef" type="Panel" parent="UIRoot/HBoxContainer/RightSide/Settings"]
 visible = false
@@ -486,3 +536,114 @@ offset_right = 676.0
 offset_bottom = 648.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="SettingsLanguage" type="Control" parent="UIRoot"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="UIRoot/SettingsLanguage"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UIRoot/SettingsLanguage/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="PanelContainer" type="PanelContainer" parent="UIRoot/SettingsLanguage/Control/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_t1x46")
+
+[node name="MarginContainer" type="MarginContainer" parent="UIRoot/SettingsLanguage/Control/MarginContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UIRoot/SettingsLanguage/Control/MarginContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 145
+
+[node name="GridContainer" type="GridContainer" parent="UIRoot/SettingsLanguage/Control/MarginContainer/PanelContainer/MarginContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 40
+columns = 3
+
+[node name="English" type="Button" parent="UIRoot/SettingsLanguage/Control/MarginContainer/PanelContainer/MarginContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 40
+text = "ENGLISH
+"
+
+[node name="Russian" type="Button" parent="UIRoot/SettingsLanguage/Control/MarginContainer/PanelContainer/MarginContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 40
+text = "РУССКИЙ"
+
+[node name="CenterContainer" type="MarginContainer" parent="UIRoot/SettingsLanguage/Control/MarginContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/margin_bottom = 10
+
+[node name="Close" type="Button" parent="UIRoot/SettingsLanguage/Control/MarginContainer/PanelContainer/MarginContainer/CenterContainer"]
+custom_minimum_size = Vector2(130, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
+text = "CLOSE"
+script = ExtResource("1_xbe7n")
+new_state = 2
+
+[node name="SubGameStateMachine" type="Node" parent="."]
+script = ExtResource("1_gbg6g")
+
+[node name="MainView" type="Node" parent="SubGameStateMachine" node_paths=PackedStringArray("start_button", "how_to_play_button", "options_button", "views_array")]
+script = ExtResource("2_lh8y5")
+start_button = NodePath("../../UIRoot/HBoxContainer/MainView/PanelContainer/VBoxContainer/Start")
+how_to_play_button = NodePath("../../UIRoot/HBoxContainer/MainView/PanelContainer/VBoxContainer/HowToPlay")
+options_button = NodePath("../../UIRoot/HBoxContainer/MainView/PanelContainer/VBoxContainer/Options")
+state_type = 1
+views_array = [NodePath("../../UIRoot/HBoxContainer/MainView")]
+
+[node name="HowToPlay" type="Node" parent="SubGameStateMachine" node_paths=PackedStringArray("back_button", "views_array")]
+script = ExtResource("4_f7itt")
+back_button = NodePath("../../UIRoot/HBoxContainer/RightSide/HowToPlay/Control/MarginContainer/PanelContainer/MarginContainer/CenterContainer/Close")
+state_type = 3
+views_array = [NodePath("../../UIRoot/HBoxContainer/MainView"), NodePath("../../UIRoot/HBoxContainer/RightSide/HowToPlay")]
+
+[node name="Options" type="Node" parent="SubGameStateMachine" node_paths=PackedStringArray("back_button", "language_button", "views_array")]
+script = ExtResource("5_54727")
+back_button = NodePath("../../UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/CenterContainer/Close")
+language_button = NodePath("../../UIRoot/HBoxContainer/RightSide/Settings/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Locals/SFXContainer/MarginContainer2/Language")
+state_type = 2
+views_array = [NodePath("../../UIRoot/HBoxContainer/MainView"), NodePath("../../UIRoot/HBoxContainer/RightSide/Settings")]
+
+[node name="OptionsLanguage" type="Node" parent="SubGameStateMachine" node_paths=PackedStringArray("back_button", "views_array")]
+script = ExtResource("6_0umos")
+back_button = NodePath("../../UIRoot/SettingsLanguage/Control/MarginContainer/PanelContainer/MarginContainer/CenterContainer/Close")
+state_type = 4
+views_array = [NodePath("../../UIRoot/SettingsLanguage")]

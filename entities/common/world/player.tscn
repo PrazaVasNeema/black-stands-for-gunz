@@ -1,0 +1,57 @@
+[gd_scene load_steps=5 format=3 uid="uid://dlt0nwg5c3wrd"]
+
+[ext_resource type="Script" path="res://entities/common/world/player_provider.gd" id="1_yh2o6"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ccmha"]
+top_radius = 2.0
+bottom_radius = 2.0
+height = 3.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_6lpyi"]
+height = 3.0
+radius = 2.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_uycsn"]
+top_radius = 1.5
+bottom_radius = 1.5
+height = 1.0
+
+[node name="Player" type="Node3D" node_paths=PackedStringArray("player_main_camera")]
+script = ExtResource("1_yh2o6")
+player_main_camera = NodePath("Camera3D")
+
+[node name="Ground" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.69, 0, 1.55387, 0)
+
+[node name="CGs" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("CylinderMesh_ccmha")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D"]
+shape = SubResource("CylinderShape3D_6lpyi")
+
+[node name="DrumLeft" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 2.583, 1.619, -1.214)
+
+[node name="CGs" type="MeshInstance3D" parent="DrumLeft"]
+mesh = SubResource("CylinderMesh_uycsn")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="DrumLeft"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DrumLeft/StaticBody3D"]
+shape = SubResource("CylinderShape3D_6lpyi")
+
+[node name="DrumRight" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -2.583, 1.619, -1.216)
+
+[node name="CGs" type="MeshInstance3D" parent="DrumRight"]
+mesh = SubResource("CylinderMesh_uycsn")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="DrumRight"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DrumRight/StaticBody3D"]
+shape = SubResource("CylinderShape3D_6lpyi")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5381, 0)

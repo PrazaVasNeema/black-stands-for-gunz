@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkx177vx5ddus"]
+
+[ext_resource type="Script" path="res://entities/in_game/in_game.gd" id="1_i6oog"]
+[ext_resource type="Script" path="res://entities/common/state_machine/reactive/sub_game_state/sub_game_state_machine.gd" id="2_y5cqx"]
+
+[node name="InGame" type="Node" node_paths=PackedStringArray("sub_game_state_machine", "ui_root")]
+script = ExtResource("1_i6oog")
+state_type = 1
+sub_game_state_machine = NodePath("SubGameStateMachine")
+ui_root = NodePath("UIRoot")
+
+[node name="UIRoot" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="SubGameStateMachine" type="Node" parent="."]
+script = ExtResource("2_y5cqx")
