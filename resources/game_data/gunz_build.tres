@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="GunzBuildData" load_steps=4 format=3 uid="uid://gffeoajo3f8w"]
-
-[ext_resource type="PackedScene" uid="uid://dfcy6xm5qmv5" path="res://scenes/guns/laser_gun.tscn" id="1_6pmnx"]
-[ext_resource type="Script" path="res://scripts/data/gunz__build_data.gd" id="1_ig8uq"]
-[ext_resource type="PackedScene" uid="uid://6najt77i4v2r" path="res://scenes/guns/gun_testing.tscn" id="1_pnd8t"]
-
-[resource]
-script = ExtResource("1_ig8uq")
-gunz_array = Array[PackedScene]([ExtResource("1_6pmnx"), ExtResource("1_6pmnx"), ExtResource("1_pnd8t"), ExtResource("1_pnd8t"), ExtResource("1_pnd8t"), ExtResource("1_pnd8t")])
