@@ -11,4 +11,3 @@ func enter() -> void:
 
 func exit() -> void:
 	super()
-	sub_game_state_machine.change_state(GameConstants.SUB_GAME_STATES.EMPTY)
