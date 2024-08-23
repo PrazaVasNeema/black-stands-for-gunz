@@ -1,7 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://dkx177vx5ddus"]
+[gd_scene load_steps=8 format=3 uid="uid://dkx177vx5ddus"]
 
 [ext_resource type="Script" path="res://entities/in_game/in_game.gd" id="1_i6oog"]
+[ext_resource type="StyleBox" uid="uid://dgm3jk7b1354o" path="res://entities/common/ui/panel_brighter.tres" id="2_kggt1"]
 [ext_resource type="Script" path="res://entities/common/state_machine/reactive/sub_game_state/sub_game_state_machine.gd" id="2_y5cqx"]
+[ext_resource type="Script" path="res://entities/common/ui/ui_sub_game_transition_button.gd" id="3_guong"]
+[ext_resource type="Script" path="res://entities/in_game/states/ig_action.gd" id="5_xo2pn"]
+[ext_resource type="Script" path="res://entities/in_game/states/ig_pause.gd" id="6_a0w3b"]
+[ext_resource type="Script" path="res://entities/in_game/states/ig_post_game.gd" id="7_14a4l"]
 
 [node name="InGame" type="Node" node_paths=PackedStringArray("sub_game_state_machine", "ui_root")]
 script = ExtResource("1_i6oog")
@@ -18,5 +23,202 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
+[node name="PauseMenu" type="Control" parent="UIRoot"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="UIRoot/PauseMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("2_kggt1")
+
+[node name="MarginContainer" type="MarginContainer" parent="UIRoot/PauseMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 140
+theme_override_constants/margin_top = 70
+theme_override_constants/margin_right = 140
+theme_override_constants/margin_bottom = 70
+
+[node name="PanelContainer" type="PanelContainer" parent="UIRoot/PauseMenu/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_kggt1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/PauseMenu/MarginContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="GamePausedLabel" type="MarginContainer" parent="UIRoot/PauseMenu/MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 60
+
+[node name="Label" type="Label" parent="UIRoot/PauseMenu/MarginContainer/PanelContainer/VBoxContainer/GamePausedLabel"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 70
+text = "GAME IS PAUSED
+"
+horizontal_alignment = 1
+
+[node name="CurrentScore" type="MarginContainer" parent="UIRoot/PauseMenu/MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 30
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIRoot/PauseMenu/MarginContainer/PanelContainer/VBoxContainer/CurrentScore"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="UIRoot/PauseMenu/MarginContainer/PanelContainer/VBoxContainer/CurrentScore/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "YOUR CURRENT SCORE: "
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="UIRoot/PauseMenu/MarginContainer/PanelContainer/VBoxContainer/CurrentScore/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "999"
+horizontal_alignment = 1
+
+[node name="Buttons" type="MarginContainer" parent="UIRoot/PauseMenu/MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/PauseMenu/MarginContainer/PanelContainer/VBoxContainer/Buttons"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Continue" type="Button" parent="UIRoot/PauseMenu/MarginContainer/PanelContainer/VBoxContainer/Buttons/VBoxContainer"]
+custom_minimum_size = Vector2(300, 70)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 45
+text = "CONTINUE"
+script = ExtResource("3_guong")
+new_state = 5
+
+[node name="Exit" type="Button" parent="UIRoot/PauseMenu/MarginContainer/PanelContainer/VBoxContainer/Buttons/VBoxContainer"]
+custom_minimum_size = Vector2(300, 70)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 45
+text = "EXIT
+"
+script = ExtResource("3_guong")
+new_state = 7
+
+[node name="PostGame" type="Control" parent="UIRoot"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="UIRoot/PostGame"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("2_kggt1")
+
+[node name="MarginContainer" type="MarginContainer" parent="UIRoot/PostGame"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 140
+theme_override_constants/margin_top = 70
+theme_override_constants/margin_right = 140
+theme_override_constants/margin_bottom = 70
+
+[node name="PanelContainer" type="PanelContainer" parent="UIRoot/PostGame/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_kggt1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/PostGame/MarginContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="GamePausedLabel" type="MarginContainer" parent="UIRoot/PostGame/MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 60
+
+[node name="Label" type="Label" parent="UIRoot/PostGame/MarginContainer/PanelContainer/VBoxContainer/GamePausedLabel"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 70
+text = "GAME OVER"
+horizontal_alignment = 1
+
+[node name="CurrentScore" type="MarginContainer" parent="UIRoot/PostGame/MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 30
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIRoot/PostGame/MarginContainer/PanelContainer/VBoxContainer/CurrentScore"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="UIRoot/PostGame/MarginContainer/PanelContainer/VBoxContainer/CurrentScore/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "YOUR SCORE: "
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="UIRoot/PostGame/MarginContainer/PanelContainer/VBoxContainer/CurrentScore/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "999"
+horizontal_alignment = 1
+
+[node name="Continue" type="MarginContainer" parent="UIRoot/PostGame/MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 90
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/PostGame/MarginContainer/PanelContainer/VBoxContainer/Continue"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Exit" type="Button" parent="UIRoot/PostGame/MarginContainer/PanelContainer/VBoxContainer/Continue/VBoxContainer"]
+custom_minimum_size = Vector2(300, 70)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 45
+text = "EXIT
+"
+
 [node name="SubGameStateMachine" type="Node" parent="."]
 script = ExtResource("2_y5cqx")
+
+[node name="Action" type="Node" parent="SubGameStateMachine"]
+script = ExtResource("5_xo2pn")
+state_type = 5
+
+[node name="Pause" type="Node" parent="SubGameStateMachine" node_paths=PackedStringArray("continue_button", "exit_button", "views_array")]
+script = ExtResource("6_a0w3b")
+continue_button = NodePath("../../UIRoot/PauseMenu/MarginContainer/PanelContainer/VBoxContainer/Buttons/VBoxContainer/Continue")
+exit_button = NodePath("../../UIRoot/PauseMenu/MarginContainer/PanelContainer/VBoxContainer/Buttons/VBoxContainer/Exit")
+state_type = 6
+views_array = [NodePath("../../UIRoot/PauseMenu")]
+
+[node name="PostGame" type="Node" parent="SubGameStateMachine" node_paths=PackedStringArray("exit_button", "views_array")]
+script = ExtResource("7_14a4l")
+exit_button = NodePath("../../UIRoot/PostGame/MarginContainer/PanelContainer/VBoxContainer/Continue/VBoxContainer/Exit")
+state_type = 7
+views_array = [NodePath("../../UIRoot/PostGame")]
