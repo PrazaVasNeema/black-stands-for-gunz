@@ -10,5 +10,7 @@ func _ready() -> void:
 	G_CamerasManager.add_camera(GameConstants.CAMERAS.OPTIONS_VIEW, world_provider.camera_options)
 	G_CamerasManager.add_camera(GameConstants.CAMERAS.CABIN_VIEW, world_provider.player_provider.player_main_camera)
 	G_CamerasManager.add_camera(GameConstants.CAMERAS.HOW_TO_PLAY_VIEW, world_provider.camera_how_to_play)
+	
+	G_ArmoryManager.gun_drums_array = world_provider.player_provider.drums_array
 
 	game_state_machine.init(self)

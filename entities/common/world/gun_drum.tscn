@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://cplc3ca77gyr1"]
+
+[ext_resource type="Script" path="res://entities/common/world/gun_drum.gd" id="1_2ultm"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_wvltj"]
+top_radius = 1.5
+bottom_radius = 1.5
+height = 1.0
+
+[node name="GunDrum" type="Node3D"]
+script = ExtResource("1_2ultm")
+rotation_time = 0.25
+rotation_angle = 45.0
+
+[node name="CGs" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.0232644, -0.999729, 0, 0.999729, -0.0232644, 0, 0, 0)
+rotation_edit_mode = 1
+mesh = SubResource("CylinderMesh_wvltj")
