@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dyycr0v0fmkm8"]
+
+[ext_resource type="Script" path="res://entities/in_game/player_entity/matrix_component.gd" id="1_hsn3b"]
+[ext_resource type="Texture2D" uid="uid://cqmu40lalbbxe" path="res://entities/in_game/player_entity/toppng.com-crosshair-crosshair-338x338.png" id="2_y1e2y"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bkvhn"]
+albedo_color = Color(0.705374, 0, 0.252748, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_nu5em"]
+material = SubResource("StandardMaterial3D_bkvhn")
+
+[node name="MatrixComponent" type="Node"]
+script = ExtResource("1_hsn3b")
+
+[node name="MatrixCanvas" type="CanvasLayer" parent="."]
+
+[node name="MainCrosshair" type="Sprite2D" parent="MatrixCanvas"]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_y1e2y")
+
+[node name="WSPhantomMainC" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_nu5em")

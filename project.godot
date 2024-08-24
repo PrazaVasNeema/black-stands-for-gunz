@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 G_CamerasManager="*res://entities/common/globals/g_cameras_manager.gd"
 G_InputService="*res://entities/common/globals/g_input_service.gd"
 G_ArmoryManager="*res://entities/common/globals/g_armory_manager.gd"
+G_GameHelpers="*res://entities/common/globals/g_game_helpers.gd"
 
 [debug]
 

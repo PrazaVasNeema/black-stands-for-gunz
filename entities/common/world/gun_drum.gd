@@ -4,6 +4,8 @@ extends Node3D
 #@export var slot_pos_ref : Marker3D
 @export var rotate_clockwise : bool
 @export var slots_side : int = -1
+@export var current_slot_index : int = 2
+
 
 @export_range(0.1, 3) var drum_radius : float = 1.5
 @export_range(0.1 , 2) var rotation_time : float
@@ -20,10 +22,10 @@ var _initial_quat : Quaternion
 
 func _ready() -> void:
 	_initial_quat = quaternion
-	for i in range(3):
+	for i in range(5):
 		var new_slot = SlotProvider.new()
 		
-		var angle = deg_to_rad(i * rotation_angle)
+		var angle = deg_to_rad((i - 2) * rotation_angle)
 		var new_slot_position = Vector3(cos(angle) * slots_side * drum_radius, sin(angle) *\
 		 -1.0 * slots_side * drum_radius, 0)
 		new_slot.position = new_slot_position
@@ -43,6 +45,9 @@ func roll(new_gun : GunEntity):
 	if _tween:
 		_tween.pause()
 		_tween.custom_step(rotation_time)
+	if slots_array[current_slot_index].gun_entity:
+		slots_array[current_slot_index].gun_entity.ready_drum_wise = false
+		
 	slots_array[slots_array.size() - 1].gun_entity = new_gun
 	
 	_tween = get_tree().create_tween()
@@ -60,3 +65,4 @@ func _on_rotation_over():
 	slots_array[0].clear_gun_entity()
 	for i in range(0, slots_array.size() - 1, 1):
 		slots_array[i].gun_entity = slots_array[i + 1].gun_entity
+	slots_array[current_slot_index].gun_entity.ready_drum_wise = true
