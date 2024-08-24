@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dkx177vx5ddus"]
+[gd_scene load_steps=9 format=3 uid="uid://dkx177vx5ddus"]
 
 [ext_resource type="Script" path="res://entities/in_game/in_game.gd" id="1_i6oog"]
 [ext_resource type="StyleBox" uid="uid://dgm3jk7b1354o" path="res://entities/common/ui/panel_brighter.tres" id="2_kggt1"]
@@ -7,9 +7,11 @@
 [ext_resource type="Script" path="res://entities/in_game/states/ig_action.gd" id="5_xo2pn"]
 [ext_resource type="Script" path="res://entities/in_game/states/ig_pause.gd" id="6_a0w3b"]
 [ext_resource type="Script" path="res://entities/in_game/states/ig_post_game.gd" id="7_14a4l"]
+[ext_resource type="PackedScene" uid="uid://ciqaql6fd52co" path="res://entities/in_game/player_entity/player_entity.tscn" id="8_rntqs"]
 
-[node name="InGame" type="Node" node_paths=PackedStringArray("sub_game_state_machine", "ui_root")]
+[node name="InGame" type="Node" node_paths=PackedStringArray("player_entity", "sub_game_state_machine", "ui_root")]
 script = ExtResource("1_i6oog")
+player_entity = NodePath("PlayerEntity")
 state_type = 1
 sub_game_state_machine = NodePath("SubGameStateMachine")
 ui_root = NodePath("UIRoot")
@@ -222,3 +224,5 @@ script = ExtResource("7_14a4l")
 exit_button = NodePath("../../UIRoot/PostGame/MarginContainer/PanelContainer/VBoxContainer/Continue/VBoxContainer/Exit")
 state_type = 7
 views_array = [NodePath("../../UIRoot/PostGame")]
+
+[node name="PlayerEntity" parent="." instance=ExtResource("8_rntqs")]
