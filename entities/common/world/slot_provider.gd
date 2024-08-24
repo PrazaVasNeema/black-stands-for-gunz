@@ -15,3 +15,14 @@ var gun_entity : GunEntity :
 func clear_gun_entity():
 	if gun_entity:
 		gun_entity.queue_free()
+
+
+func set_ready_drum_wise(flag : bool):
+	if !gun_entity:
+		return
+	
+	if flag:
+		gun_entity.conditions |= GameConstants.GUN_CHECKS.DRUM_WISE
+	else:
+		gun_entity.conditions &= ~GameConstants.GUN_CHECKS.DRUM_WISE
+	

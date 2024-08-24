@@ -13,7 +13,7 @@ var _player_camera : Camera3D
 
 
 func init():
-	_player_camera = G_CamerasManager.get_camera(GameConstants.CAMERAS.MAIN_VIEW)
+	_player_camera = G_CamerasManager.get_camera(GameConstants.CAMERAS.CABIN_VIEW)
 	var window_size = DisplayServer.window_get_size()
 	_main_crosshair.position = window_size / 2
 	_final_boundaries = Vector4(window_size.x * (1 - boundaries_rate_vector2.x), window_size.x * boundaries_rate_vector2.x, 
@@ -25,6 +25,7 @@ func deal_with_mouse(relative : Vector2):
 	new_position.x = clamp(new_position.x, _final_boundaries.x, _final_boundaries.y)
 	new_position.y = clamp(new_position.y, _final_boundaries.z, _final_boundaries.w)
 	_main_crosshair.position = new_position
-	ws_aim_changed.emit(G_GameHelpers.get_ws_position_from_mouse(_player_camera, new_position))
-	_ws_phantom_main_c.position = G_GameHelpers.get_ws_position_from_mouse(_player_camera, new_position)
+	var new_ws_position = G_GameHelpers.get_ws_position_from_mouse(_player_camera, new_position)
+	ws_aim_changed.emit(new_ws_position)
+	_ws_phantom_main_c.position = new_ws_position
 	

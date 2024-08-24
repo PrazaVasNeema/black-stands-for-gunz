@@ -30,3 +30,9 @@ enum CAMERAS
 }
 
 static var test = 10
+
+enum GUN_CHECKS {
+	DRUM_WISE = 0b001,
+	GAME_WISE = 0b010,
+	GUN_WISE = 0b010,
+}

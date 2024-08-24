@@ -9,7 +9,7 @@ height = 1.0
 
 [node name="GunDrum" type="Node3D"]
 script = ExtResource("1_2ultm")
-rotation_time = 0.25
+rotation_time = 2.0
 rotation_angle = 45.0
 
 [node name="CGs" type="MeshInstance3D" parent="."]

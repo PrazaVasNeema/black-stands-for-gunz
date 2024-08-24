@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://c47u0n64rq6yv"]
+[gd_scene load_steps=6 format=3 uid="uid://c47u0n64rq6yv"]
 
 [ext_resource type="Script" path="res://entities/common/guns/gun_entity.gd" id="1_b1y4x"]
+[ext_resource type="Script" path="res://entities/common/guns/targeting_component.gd" id="2_d6xdb"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_3jdhx"]
 
@@ -14,8 +15,9 @@ top_radius = 0.3
 bottom_radius = 0.3
 radial_segments = 20
 
-[node name="TestingGunRed" type="Node3D"]
+[node name="TestingGunRed" type="Node3D" node_paths=PackedStringArray("targeting_component")]
 script = ExtResource("1_b1y4x")
+targeting_component = NodePath("TargetingComponent")
 
 [node name="CGs" type="Node3D" parent="."]
 
@@ -26,3 +28,6 @@ mesh = SubResource("SphereMesh_3jdhx")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.980342)
 mesh = SubResource("CylinderMesh_x1sg8")
 skeleton = NodePath("../MeshInstance3D")
+
+[node name="TargetingComponent" type="Node" parent="."]
+script = ExtResource("2_d6xdb")
