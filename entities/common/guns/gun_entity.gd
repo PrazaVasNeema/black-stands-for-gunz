@@ -1,23 +1,36 @@
 class_name GunEntity
 extends Node3D
 
-const ALL_CONDITIONS_MASK = 0b111
+signal gun_finished
+
+const ALL_CONDITIONS_MASK = 0b1111
 
 @export var targeting_component : TargetingComponent
+@export var battery_component : BatteryComponent
+@export var power_module : PowerModule
 
-var conditions = 0b110 :
+
+var conditions = 0b0010 :
 	set(value):
-		print(str(conditions))
 		conditions = value
-		print(str(conditions))
-		print("bbb" + str(is_ready))
 		targeting_component._update_tween_activity(is_ready)
 
 var is_ready : bool :
 	get:
-		print("aaa" + str(conditions))
-		print("ccc" + str(conditions & ALL_CONDITIONS_MASK))
 		return (conditions & ALL_CONDITIONS_MASK) == ALL_CONDITIONS_MASK
+
+
+func init():
+	battery_component.cur_energy = battery_component.max_energy
+	conditions |= GameConstants.GUN_CHECKS.ENERGY_WISE
+	battery_component.depleted.connect(func() :
+		conditions &= ~GameConstants.GUN_CHECKS.ENERGY_WISE
+		gun_finished.emit()
+		)
+	power_module.module_changed_ready_status.connect(func(new_status) :
+		conditions
+		)
+	power_module.init(battery_component)
 
 
 func update_targeting(new_ws_position : Vector3):

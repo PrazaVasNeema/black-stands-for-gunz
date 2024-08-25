@@ -1,11 +1,18 @@
 class_name AttackComponent
 extends Node
 
-var gun_drums_array : Array[GunDrum]
+var guns_array : Array[GunEntity]
 
 
 func init() -> void:
-	gun_drums_array = G_ArmoryManager.gun_drums_array
+	guns_array = [null, null]
+	for i in range(2):
+		G_ArmoryManager.gun_drums_array[i].changed_current.connect(update_gun_ref.bind(i))
+
+
+func deinit() -> void:
+	for i in range(2):
+		G_ArmoryManager.gun_drums_array[i].changed_current.disconnect(update_gun_ref.bind(i))
 
 
 func roll_drum(drum_num : int):
@@ -14,6 +21,14 @@ func roll_drum(drum_num : int):
 
 
 func update_targeting(target_ws_position : Vector3):
-	for drum in gun_drums_array:
-		if drum.current_gun:
-			drum.current_gun.update_targeting(target_ws_position)
+	for gun in guns_array:
+		if gun:
+			gun.update_targeting(target_ws_position)
+
+
+func update_gun_ref(new_gun_entity : GunEntity, drum_num : int):
+	if guns_array[drum_num]:
+		guns_array[drum_num].gun_finished.disconnect(roll_drum.bind(drum_num))
+	
+	guns_array[drum_num] = new_gun_entity
+	guns_array[drum_num].gun_finished.connect(roll_drum.bind(drum_num))

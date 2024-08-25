@@ -1,6 +1,8 @@
 class_name GunDrum
 extends Node3D
 
+signal changed_current(new_gun : GunEntity)
+
 #@export var slot_pos_ref : Marker3D
 @export var rotate_clockwise : bool
 @export var slots_side : int = -1
@@ -70,3 +72,5 @@ func _on_rotation_over():
 		slots_array[i].gun_entity = slots_array[i + 1].gun_entity
 	
 	slots_array[current_slot_index].set_ready_drum_wise(true)
+	if slots_array[current_slot_index].gun_entity:
+		changed_current.emit(slots_array[current_slot_index].gun_entity)
