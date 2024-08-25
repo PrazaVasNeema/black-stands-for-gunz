@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://ubg7e3lydiqj"]
+
+[ext_resource type="Script" path="res://entities/common/guns/gun_entity.gd" id="1_gyau1"]
+[ext_resource type="Script" path="res://entities/common/guns/targeting_component.gd" id="2_t7xld"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_7jxgk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8d1as"]
+albedo_color = Color(0.563963, 0, 0.168328, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_x1sg8"]
+lightmap_size_hint = Vector2i(11, 17)
+material = SubResource("StandardMaterial3D_8d1as")
+top_radius = 0.3
+bottom_radius = 0.3
+radial_segments = 20
+
+[node name="TestingGunRed" type="Node3D" node_paths=PackedStringArray("targeting_component")]
+script = ExtResource("1_gyau1")
+targeting_component = NodePath("TargetingComponent")
+
+[node name="CGs" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CGs"]
+mesh = SubResource("BoxMesh_7jxgk")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="CGs"]
+transform = Transform3D(0.390877, 0, 0, 0, 0.449974, 0, 0, 0, 0.412722, 0, 0.537993, 0)
+mesh = SubResource("BoxMesh_7jxgk")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="CGs"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.980342)
+mesh = SubResource("CylinderMesh_x1sg8")
+skeleton = NodePath("../MeshInstance3D")
+
+[node name="TargetingComponent" type="Node" parent="."]
+script = ExtResource("2_t7xld")
+max_turning_speed = 2.0

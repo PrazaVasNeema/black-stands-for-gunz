@@ -5,6 +5,7 @@ var gun_drums_array : Array[GunDrum]
 var guns_armory_data_array = [
 	preload("res://entities/common/guns/power_modules/gun_scenes/testing_gun_green.tscn"),
 	preload("res://entities/common/guns/power_modules/gun_scenes/testing_gun_red.tscn"),
+	preload("res://entities/common/guns/power_modules/gun_scenes/testing_gun_cube.tscn"),
 ]
 
 
