@@ -19,6 +19,7 @@ var _beam_mesh : CylinderMesh :
 var _tick_damage : float
 var _visualizer : Node3D
 var _beam_tween : Tween
+var material_instance : BaseMaterial3D
 
 func init():
 	_visualizer = MeshInstance3D.new()
@@ -27,7 +28,7 @@ func init():
 	_beam_mesh.top_radius = beam_radius
 	_beam_mesh.bottom_radius = beam_radius
 	original_scale = beam_cgs.scale
-
+	material_instance = _beam_mesh.material
 
 var original_scale : Vector3
 var target_scale : Vector3  # The scale you want to reach
@@ -44,6 +45,9 @@ func _process(delta: float) -> void:
 				beam_cgs.visible = false
 	#_beam.visible = true
 	#_beam_path.curve.set_point_position(1, -Vector3(0, 0, randf_range(1, 10)))
+	if !tick_timer.is_stopped():
+		var new_emission_energy = 8 + sin(Time.get_ticks_msec() * 0.003) * 2.0  # Example dynamic value
+		material_instance.emission_energy_multiplier = new_emission_energy
 	
 
 

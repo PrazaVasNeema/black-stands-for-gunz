@@ -1,10 +1,26 @@
-[gd_scene load_steps=6 format=3 uid="uid://bg4vrn12w1kgx"]
+[gd_scene load_steps=10 format=3 uid="uid://bg4vrn12w1kgx"]
 
 [ext_resource type="Script" path="res://entities/_game_itself/game.gd" id="1_kobut"]
 [ext_resource type="Script" path="res://entities/common/state_machine/reactive/game_state/game_state_machine.gd" id="2_ned6v"]
 [ext_resource type="PackedScene" uid="uid://dy07y0diixd3u" path="res://entities/main_menus/main_menus.tscn" id="3_akei1"]
 [ext_resource type="PackedScene" uid="uid://dkx177vx5ddus" path="res://entities/in_game/in_game.tscn" id="4_ncnl1"]
 [ext_resource type="PackedScene" uid="uid://uc265cnfk3e0" path="res://entities/common/world/world.tscn" id="5_wh3il"]
+[ext_resource type="Material" uid="uid://doc35las278mu" path="res://entities/common/guns/materials/laser.tres" id="6_ph74l"]
+
+[sub_resource type="Sky" id="Sky_ageq4"]
+
+[sub_resource type="Environment" id="Environment_5qxen"]
+background_mode = 2
+sky = SubResource("Sky_ageq4")
+ambient_light_source = 2
+ambient_light_color = Color(0.0564891, 2.33675e-05, 0.235024, 1)
+tonemap_mode = 2
+tonemap_exposure = 2.5
+glow_enabled = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3y3m6"]
+resource_local_to_scene = true
+radial_segments = 16
 
 [node name="Game" type="Node" node_paths=PackedStringArray("game_state_machine", "world_provider")]
 script = ExtResource("1_kobut")
@@ -19,3 +35,12 @@ script = ExtResource("2_ned6v")
 [node name="InGame" parent="GameStateMachine" instance=ExtResource("4_ncnl1")]
 
 [node name="World" parent="." instance=ExtResource("5_wh3il")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5qxen")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 17.5417, 0)
+rotation_edit_mode = 1
+material_override = ExtResource("6_ph74l")
+mesh = SubResource("CylinderMesh_3y3m6")
