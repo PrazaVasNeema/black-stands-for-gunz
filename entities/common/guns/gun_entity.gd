@@ -3,17 +3,18 @@ extends Node3D
 
 signal gun_finished
 
-const ALL_CONDITIONS_MASK = 0b1111
+const ALL_CONDITIONS_MASK = 0b11111
 
 @export var targeting_component : TargetingComponent
 @export var battery_component : BatteryComponent
 @export var power_module : PowerModule
 
 
-var conditions = 0b0010 :
+var conditions = 0b00010 :
 	set(value):
 		conditions = value
 		targeting_component._update_tween_activity(is_ready)
+		power_module.should_fire = is_ready
 
 var is_ready : bool :
 	get:

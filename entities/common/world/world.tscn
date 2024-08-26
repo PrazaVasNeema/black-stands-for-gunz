@@ -21,6 +21,8 @@ transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, 0, 0)
 mesh = SubResource("BoxMesh_c20xy")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Ground"]
+collision_layer = 2
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D"]
 shape = SubResource("BoxShape3D_3wxbd")
@@ -32,8 +34,23 @@ transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 1, -6, 5.12355, -19)
 mesh = SubResource("BoxMesh_c20xy")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Wall"]
+collision_layer = 4
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Wall/StaticBody3D"]
+shape = SubResource("BoxShape3D_3wxbd")
+
+[node name="Wall2" type="Node3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 1, 4.98353, 5.12355, -19)
+
+[node name="CGs" type="MeshInstance3D" parent="Wall2"]
+mesh = SubResource("BoxMesh_c20xy")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Wall2"]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall2/StaticBody3D"]
 shape = SubResource("BoxShape3D_3wxbd")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]

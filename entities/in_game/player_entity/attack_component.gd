@@ -2,10 +2,11 @@ class_name AttackComponent
 extends Node
 
 var guns_array : Array[GunEntity]
-
+var firing_state_array : Array[bool]
 
 func init() -> void:
 	guns_array = [null, null]
+	firing_state_array = [false, false]
 	for i in range(2):
 		G_ArmoryManager.gun_drums_array[i].changed_current.connect(update_gun_ref.bind(i))
 
@@ -32,3 +33,17 @@ func update_gun_ref(new_gun_entity : GunEntity, drum_num : int):
 	
 	guns_array[drum_num] = new_gun_entity
 	guns_array[drum_num].gun_finished.connect(roll_drum.bind(drum_num))
+	update_gun_firing_condition(drum_num, firing_state_array[drum_num])
+
+
+func set_firing_state(gun_ind : int, state : bool):
+	firing_state_array[gun_ind] = state
+	update_gun_firing_condition(gun_ind, state)
+
+
+func update_gun_firing_condition(gun_ind : int, state : bool):
+	if guns_array[gun_ind]:
+		if state:
+			guns_array[gun_ind].conditions |= GameConstants.GUN_CHECKS.PLAYER_WISE
+		else:
+			guns_array[gun_ind].conditions &= ~GameConstants.GUN_CHECKS.PLAYER_WISE

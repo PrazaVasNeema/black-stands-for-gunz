@@ -11,6 +11,7 @@ material = SubResource("StandardMaterial3D_bkvhn")
 
 [node name="MatrixComponent" type="Node"]
 script = ExtResource("1_hsn3b")
+hit_layer_mask = 14
 
 [node name="MatrixCanvas" type="CanvasLayer" parent="."]
 

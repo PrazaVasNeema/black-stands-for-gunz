@@ -1,7 +1,6 @@
 extends Node
 
-signal fire_just_pressed(gun_num : int)
-signal fire_just_released(gun_num : int)
+signal new_fire_status(gun_num : int, status : bool)
 signal roll_just_pressed(drum_num : int)
 signal use_slot_just_pressed(drum_num : int)
 signal mouse_position_changed(relative : Vector2)
@@ -23,14 +22,14 @@ func _input(event: InputEvent) -> void:
 		mouse_position_changed.emit(event.relative * mouse_sensitivity)
 
 	if (Input.is_action_just_pressed("fire_one")):
-		fire_just_pressed.emit(0)
+		new_fire_status.emit(0, true)
 	if (Input.is_action_just_released("fire_one")):
-		fire_just_released.emit(0)
+		new_fire_status.emit(0, false)
 
 	if (Input.is_action_just_pressed("fire_two")):
-		fire_just_pressed.emit(1)
+		new_fire_status.emit(1, true)
 	if (Input.is_action_just_released("fire_two")):
-		fire_just_released.emit(1)
+		new_fire_status.emit(1, false)
 
 	if (Input.is_action_just_pressed("roll_drum_one")):
 		roll_just_pressed.emit(0)

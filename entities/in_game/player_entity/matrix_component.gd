@@ -4,6 +4,8 @@ extends Node
 signal ws_aim_changed(ws_position : Vector3)
 
 @export var boundaries_rate_vector2 : Vector2 = Vector2(0.9, 0.9)
+@export_flags_3d_physics var hit_layer_mask : int
+
 @onready var _main_crosshair : Sprite2D = $MatrixCanvas/MainCrosshair
 @onready var _ws_phantom_main_c : Node3D = $WSPhantomMainC
 @onready var matrix_canvas : CanvasLayer = $MatrixCanvas
@@ -25,7 +27,7 @@ func deal_with_mouse(relative : Vector2):
 	new_position.x = clamp(new_position.x, _final_boundaries.x, _final_boundaries.y)
 	new_position.y = clamp(new_position.y, _final_boundaries.z, _final_boundaries.w)
 	_main_crosshair.position = new_position
-	var new_ws_position = G_GameHelpers.get_ws_position_from_mouse(_player_camera, new_position)
+	var new_ws_position = G_GameHelpers.get_ws_position_from_mouse(_player_camera, new_position, hit_layer_mask)
 	ws_aim_changed.emit(new_ws_position)
 	_ws_phantom_main_c.position = new_ws_position
 	
