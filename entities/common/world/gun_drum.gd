@@ -52,7 +52,6 @@ func roll(new_gun : GunEntity):
 		_tween.pause()
 		_tween.custom_step(rotation_time)
 	slots_array[current_slot_index].set_ready_drum_wise(false)
-	
 	slots_array[slots_array.size() - 1].gun_entity = new_gun
 	
 	_tween = get_tree().create_tween()
@@ -70,6 +69,10 @@ func _on_rotation_over():
 	slots_array[0].clear_gun_entity()
 	for i in range(0, slots_array.size() - 1, 1):
 		slots_array[i].gun_entity = slots_array[i + 1].gun_entity
+	
+	if slots_array[current_slot_index + 1].gun_entity:
+		print ("dfggg")
+		slots_array[current_slot_index + 1].gun_entity.init()
 	
 	slots_array[current_slot_index].set_ready_drum_wise(true)
 	if slots_array[current_slot_index].gun_entity:

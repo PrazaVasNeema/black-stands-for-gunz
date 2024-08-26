@@ -9,5 +9,6 @@ var should_retract : bool
 var gun_entity_ref : GunEntity
 
 
-func init(battery_component : BatteryComponent):
+func init(battery_component : BatteryComponent, gun_entity : GunEntity):
 	battery_component_ref = battery_component
+	gun_entity_ref = gun_entity

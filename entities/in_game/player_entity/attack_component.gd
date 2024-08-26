@@ -42,8 +42,7 @@ func set_firing_state(gun_ind : int, state : bool):
 
 
 func update_gun_firing_condition(gun_ind : int, state : bool):
+	print(str(gun_ind) + " " + str(state))
 	if guns_array[gun_ind]:
-		if state:
-			guns_array[gun_ind].conditions |= GameConstants.GUN_CHECKS.PLAYER_WISE
-		else:
-			guns_array[gun_ind].conditions &= ~GameConstants.GUN_CHECKS.PLAYER_WISE
+		guns_array[gun_ind].set_should_fire(state)
+		

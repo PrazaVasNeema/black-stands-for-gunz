@@ -10,13 +10,15 @@ enum States {SLEEPING, DEPLOY, RETRACT, READY, FIRING}
 @export var beam : LaserBeam
 
 var current_state : States
+var is_deployed : bool
 
-func init(battery_component : BatteryComponent):
-	super(battery_component)
+func init(battery_component : BatteryComponent, gun_entity : GunEntity):
+	super(battery_component, gun_entity)
 	current_state = States.DEPLOY
 	activation_timer.start()
 	activation_timer.timeout.connect(func():
-			module_changed_ready_status.emit(GameConstants.GUN_CHECKS.GUN_WISE)
+			module_changed_ready_status.emit(true)
+			is_deployed = true
 )
 	beam.change_damage_properties(time_between_ticks, damage_per_tick)
 	beam.init()
@@ -25,7 +27,7 @@ func init(battery_component : BatteryComponent):
 func _process(delta: float) -> void:
 	match current_state:
 		States.DEPLOY:
-			if activation_timer.time_left == 0.0:
+			if is_deployed:
 				_set_state(States.READY)
 		States.READY:
 			if should_retract:

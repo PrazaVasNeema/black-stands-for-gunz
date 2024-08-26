@@ -6,7 +6,9 @@ var gun_entity : GunEntity :
 		gun_entity = value
 		if gun_entity is GunEntity:
 			if gun_entity.get_parent():
-				gun_entity.reparent(self)
+				print("ыыы")
+				#gun_entity.reparent(self)
+				#gun_entity.p
 			else:
 				add_child(gun_entity)
 			gun_entity.position = Vector3.ZERO
@@ -24,5 +26,5 @@ func set_ready_drum_wise(flag : bool):
 	if flag:
 		gun_entity.conditions |= GameConstants.GUN_CHECKS.DRUM_WISE
 	else:
-		gun_entity.conditions &= ~GameConstants.GUN_CHECKS.DRUM_WISE
+		gun_entity.deinit()
 	
