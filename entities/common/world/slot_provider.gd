@@ -6,12 +6,12 @@ var gun_entity : GunEntity :
 		gun_entity = value
 		if gun_entity is GunEntity:
 			if gun_entity.get_parent():
-				print("ыыы")
-				#gun_entity.reparent(self)
+				gun_entity.reparent(self, false)
 				#gun_entity.p
 			else:
 				add_child(gun_entity)
-			gun_entity.position = Vector3.ZERO
+			#gun_entity.position = Vector3.ZERO
+			#gun_entity.position += Vector3(0, 0, -2)
 
 
 func clear_gun_entity():

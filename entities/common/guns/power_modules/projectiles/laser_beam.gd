@@ -49,14 +49,14 @@ func init():
 	_beam.polygon = beam_points_array
 	_beam.visible = false
 	
-	print("fdgdsdfdfsdfsfd")
+	#print("fdgdsdfdfsdfsfd")
 	
 	
 
 
-func _process(delta: float) -> void:
-	_beam.visible = true
-	_beam_path.curve.set_point_position(1, -Vector3(0, 0, randf_range(1, 10)))
+#func _process(delta: float) -> void:
+	#_beam.visible = true
+	#_beam_path.curve.set_point_position(1, -Vector3(0, 0, randf_range(1, 10)))
 	
 
 
@@ -103,7 +103,7 @@ func calculate_beam():
 	print("min: " + str(min_length_2x))
 	print("max: " + str(max_length_2x))
 	
-	_beam_path.curve.set_point_position(1, -Vector3(0, 0, -10))
+	#_beam_path.curve.set_point_position(1, -Vector3(0, 0, -10))
 	
 
 
