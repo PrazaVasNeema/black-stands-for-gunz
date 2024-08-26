@@ -20,10 +20,9 @@ func get_ws_position_from_mouse(camera : Camera3D, mouse_position : Vector2, hit
 
 
 func get_raycast_results(origin_position : Vector3, end_position : Vector3, hit_layer_mask : int) -> Dictionary:
-	var prqp : PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(origin_position, _end, hit_layer_mask)
+	var prqp : PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(origin_position, end_position, hit_layer_mask)
 	prqp.collide_with_areas = true
 	_result_raw = _world_space.intersect_ray(prqp)
-
 	return _result_raw
 #
 #

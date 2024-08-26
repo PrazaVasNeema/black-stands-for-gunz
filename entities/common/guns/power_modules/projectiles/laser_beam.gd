@@ -2,59 +2,46 @@ class_name LaserBeam
 extends Node3D
 
 @export_category("Physical properties")
-@export var max_ray_count : int = 12  # Max rays in outermost layer
-@export var layer_count : int = 3  # Number of concentric layers
 @export var beam_radius : float = 0.5
 @export var ray_length : float = 30.0
 @export_flags_3d_physics var hit_layer_mask
 @export var tick_timer : Timer
 
-@export_category("Beam visuals")
-@export var _beam : CSGPolygon3D
-@export var _beam_path : Path3D
-@export var laser_vertices_count : int = 10
 
-var _start_positions_array : Array[Vector3]
+@export_category("Graphics properties")
+@export var beam_cgs : MeshInstance3D
+var _beam_mesh : CylinderMesh :
+	get:
+		return beam_cgs.mesh
+	set(value):
+		beam_cgs.mesh = _beam_mesh
+
 var _tick_damage : float
-
-var _visualizers_array : Array[Node3D]
-
+var _visualizer : Node3D
+var _beam_tween : Tween
 
 func init():
-	for i in range(100):
-		var visuals = MeshInstance3D.new()
-		visuals.mesh = SphereMesh.new()
-		visuals.scale /= 5.0
-		add_child(visuals)
-		_visualizers_array.append(visuals)
-	
-	var iters_count : int = 0
-	for layer in range(layer_count):
-		var current_radius = beam_radius * (layer + 1) / float(layer_count)
-		var ray_count = int(max_ray_count * current_radius / beam_radius)
-		ray_count = max(ray_count, 	1)
-		for i in range(ray_count):
-			var angle = (i / float(ray_count)) * TAU  # TAU is 2 * PI
-			var offset = Vector3(cos(angle), sin(angle), 0) * current_radius
-			_start_positions_array.append(position + offset)
-			print(_start_positions_array[iters_count])
-			_visualizers_array[iters_count].position = position + offset + Vector3.FORWARD * 2
-			iters_count += 1
-	
-	var beam_points_array : Array
-	for i in range(laser_vertices_count):
-		var angle = (i / float(10)) * TAU  # TAU is 2 * PI
-		var offset = Vector3(cos(angle), sin(angle), 0) * beam_radius
-		beam_points_array.append(offset)
-	_beam.polygon = beam_points_array
-	_beam.visible = false
-	
-	#print("fdgdsdfdfsdfsfd")
-	
-	
+	_visualizer = MeshInstance3D.new()
+	_visualizer.mesh = SphereMesh.new()
+	add_child(_visualizer)
+	_beam_mesh.top_radius = beam_radius
+	_beam_mesh.bottom_radius = beam_radius
+	original_scale = beam_cgs.scale
 
 
-#func _process(delta: float) -> void:
+var original_scale : Vector3
+var target_scale : Vector3  # The scale you want to reach
+var speed : float = 10  # How fast the interpolation should happen
+var scaling_in_progress : bool
+
+func _process(delta: float) -> void:
+	if scaling_in_progress:
+		if (beam_cgs.scale - target_scale).length_squared() >= 0.0001:
+			beam_cgs.scale = beam_cgs.scale.lerp(target_scale, speed * delta)
+		else:
+			scaling_in_progress = false
+			if tick_timer.is_stopped():
+				beam_cgs.visible = false
 	#_beam.visible = true
 	#_beam_path.curve.set_point_position(1, -Vector3(0, 0, randf_range(1, 10)))
 	
@@ -66,46 +53,36 @@ func change_damage_properties(tick_time : float, tick_damage : float):
 
 
 func turn_on_beam():
-	print("dfgfdfgfg")
-	_beam.visible = true
+	beam_cgs.visible = true
 	tick_timer.timeout.connect(calculate_beam)
 	tick_timer.start()
+	target_scale = original_scale
+	scaling_in_progress = true
 
 
 func turn_off_beam():
-	_beam.visible = false
 	tick_timer.timeout.disconnect(calculate_beam)
 	tick_timer.stop()
+	target_scale = Vector3(0.00001, original_scale.y, 0.00001)
+	scaling_in_progress = true
 
 
 func calculate_beam():
-	var min_length_2x : float = INF
-	var max_length_2x : float = -INF
-	var iters_count : int = 0
-	for s_position in _start_positions_array:
-		var g_position = to_global(s_position)
-		var e_position = g_position + ((get_parent() as LaserPower).gun_entity_ref.quaternion * Vector3.FORWARD) * ray_length
-		var results = G_GameHelpers.get_raycast_results(g_position, e_position, hit_layer_mask)
-		
-		var length_2x : float
-		if results.size():
-			length_2x = (results.get("position") - s_position).length_squared()
-			_draw_laser_segment(results.get("position"), iters_count)
-		else:
-			length_2x = (e_position - s_position).length_squared()
-			_draw_laser_segment(e_position, iters_count)
-		
-		min_length_2x = length_2x if (min_length_2x > length_2x) else min_length_2x
-		max_length_2x = length_2x if (max_length_2x < length_2x) else max_length_2x
-		
-		iters_count += 1
-		
-	print("min: " + str(min_length_2x))
-	print("max: " + str(max_length_2x))
-	
-	#_beam_path.curve.set_point_position(1, -Vector3(0, 0, -10))
-	
+	var s_g_position : Vector3 = to_global(position)
+	var e_g_position : Vector3 = s_g_position + Quaternion(global_transform.basis) * quaternion * Vector3.FORWARD * ray_length
+	#var e_g_position = Vector3(100, 0, 0)
+	var results = G_GameHelpers.get_raycast_results(s_g_position, e_g_position, hit_layer_mask)
+	#print(str(results))
+	var length_2x : float
+	if results.size():
+		_visualizer.global_position = results.get("position")
+		length_2x = (s_g_position - results.get("position")).length_squared()
+	else:
+		length_2x = (s_g_position - e_g_position).length_squared()
+		_visualizer.global_position = e_g_position
+	update_beam_visuals(length_2x)
 
 
-func _draw_laser_segment(end, index):
-	_visualizers_array[index].global_position = end
+func update_beam_visuals(length : float):
+	_beam_mesh.height = length
+	beam_cgs.position = Vector3(0, 0, -length / 2)
