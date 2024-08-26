@@ -5,8 +5,9 @@ enum States {SLEEPING, DEPLOY, RETRACT, READY, FIRING}
 
 @export var lazer_depl_per_tick : float = 0.1
 @export var time_between_ticks : float = 0.1
-@export var tick_timer : Timer
+@export var damage_per_tick : float
 @export var activation_timer : Timer
+@export var beam : LaserBeam
 
 var current_state : States
 
@@ -17,6 +18,8 @@ func init(battery_component : BatteryComponent):
 	activation_timer.timeout.connect(func():
 			module_changed_ready_status.emit(GameConstants.GUN_CHECKS.GUN_WISE)
 )
+	beam.change_damage_properties(time_between_ticks, damage_per_tick)
+	beam.init()
 
 
 func _process(delta: float) -> void:
@@ -39,13 +42,11 @@ func _process(delta: float) -> void:
 func _set_state(new_state : States):
 	match new_state:
 		States.READY:
-			print("READY")
+			if current_state == States.FIRING:
+				beam.turn_off_beam()
 		States.FIRING:
-			_laser_beam_buhin.turn_on_beam()
-			_is_able_to_regen_energy = false
-		States.RELOADING:
-			_laser_beam_buhin.turn_off_beam()
-			get_tree().create_timer(lazer_start_rec_delay).timeout.connect(func():
-				_is_able_to_regen_energy = true
-			)
-	_current_state = new_state
+			beam.turn_on_beam()
+		States.RETRACT:
+			if current_state == States.FIRING:
+				beam.turn_off_beam()
+	current_state = new_state

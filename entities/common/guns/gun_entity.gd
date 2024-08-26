@@ -34,6 +34,10 @@ func init():
 	power_module.init(battery_component)
 
 
+func deinit():
+	power_module.should_retract = true
+
+
 func update_targeting(new_ws_position : Vector3):
 	if is_ready:
 		targeting_component.update_targeting(new_ws_position, self)

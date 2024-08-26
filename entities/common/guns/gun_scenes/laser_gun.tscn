@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://rc16kaxueugx"]
+
+[ext_resource type="Script" path="res://entities/common/guns/gun_entity.gd" id="1_adl6q"]
+[ext_resource type="Script" path="res://entities/common/guns/targeting_component.gd" id="2_66qcu"]
+[ext_resource type="PackedScene" uid="uid://ce4par63hi2tb" path="res://entities/common/guns/power_modules/power_scenes/laser_power.tscn" id="3_goc6p"]
+[ext_resource type="Script" path="res://entities/common/components/battery_component.gd" id="4_th7q5"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_3jdhx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8d1as"]
+albedo_color = Color(0.563963, 0, 0.168328, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_x1sg8"]
+lightmap_size_hint = Vector2i(11, 17)
+material = SubResource("StandardMaterial3D_8d1as")
+top_radius = 0.3
+bottom_radius = 0.3
+radial_segments = 20
+
+[node name="TestingGunRed" type="Node3D" node_paths=PackedStringArray("targeting_component", "battery_component", "power_module")]
+script = ExtResource("1_adl6q")
+targeting_component = NodePath("TargetingComponent")
+battery_component = NodePath("BatteryComponent")
+power_module = NodePath("LaserPower")
+
+[node name="CGs" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CGs"]
+mesh = SubResource("SphereMesh_3jdhx")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="CGs"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.980342)
+mesh = SubResource("CylinderMesh_x1sg8")
+skeleton = NodePath("../MeshInstance3D")
+
+[node name="TargetingComponent" type="Node" parent="."]
+script = ExtResource("2_66qcu")
+max_turning_speed = 2.0
+
+[node name="LaserPower" parent="." instance=ExtResource("3_goc6p")]
+
+[node name="BatteryComponent" type="Node" parent="."]
+script = ExtResource("4_th7q5")

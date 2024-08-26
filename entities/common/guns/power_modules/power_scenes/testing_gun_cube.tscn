@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://ubg7e3lydiqj"]
 
-[ext_resource type="Script" path="res://entities/common/guns/gun_entity.gd" id="1_gyau1"]
-[ext_resource type="Script" path="res://entities/common/guns/targeting_component.gd" id="2_t7xld"]
+[ext_resource type="Script" path="res://entities/common/guns/gun_entity.gd" id="1_s85x1"]
+[ext_resource type="Script" path="res://entities/common/guns/targeting_component.gd" id="2_8sqx6"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_7jxgk"]
 
@@ -16,7 +16,7 @@ bottom_radius = 0.3
 radial_segments = 20
 
 [node name="TestingGunRed" type="Node3D" node_paths=PackedStringArray("targeting_component")]
-script = ExtResource("1_gyau1")
+script = ExtResource("1_s85x1")
 targeting_component = NodePath("TargetingComponent")
 
 [node name="CGs" type="Node3D" parent="."]
@@ -34,5 +34,5 @@ mesh = SubResource("CylinderMesh_x1sg8")
 skeleton = NodePath("../MeshInstance3D")
 
 [node name="TargetingComponent" type="Node" parent="."]
-script = ExtResource("2_t7xld")
+script = ExtResource("2_8sqx6")
 max_turning_speed = 2.0
