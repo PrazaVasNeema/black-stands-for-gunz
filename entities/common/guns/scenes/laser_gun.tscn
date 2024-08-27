@@ -1,10 +1,10 @@
 [gd_scene load_steps=13 format=3 uid="uid://rc16kaxueugx"]
 
-[ext_resource type="Script" path="res://entities/common/guns/gun_entity.gd" id="1_adl6q"]
-[ext_resource type="Script" path="res://entities/common/guns/targeting_component.gd" id="2_66qcu"]
-[ext_resource type="Script" path="res://entities/common/guns/power_modules/laser_power.gd" id="2_tr067"]
-[ext_resource type="Script" path="res://entities/common/guns/power_modules/projectiles/laser_beam.gd" id="3_lvn73"]
-[ext_resource type="Script" path="res://entities/common/components/battery_component.gd" id="4_th7q5"]
+[ext_resource type="Script" path="res://entities/common/guns/gun_entity.gd" id="1_rq03p"]
+[ext_resource type="Script" path="res://entities/common/guns/power_modules/laser_power.gd" id="2_m7bpc"]
+[ext_resource type="Script" path="res://entities/common/guns/power_modules/projectiles/laser_beam.gd" id="3_58moj"]
+[ext_resource type="Script" path="res://entities/common/guns/targeting_component.gd" id="4_ag330"]
+[ext_resource type="Script" path="res://entities/common/components/battery_component.gd" id="5_mwnmp"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_3jdhx"]
 
@@ -44,7 +44,7 @@ material = SubResource("StandardMaterial3D_pohsn")
 radial_segments = 16
 
 [node name="LaserGun" type="Node3D" node_paths=PackedStringArray("targeting_component", "battery_component", "power_module")]
-script = ExtResource("1_adl6q")
+script = ExtResource("1_rq03p")
 targeting_component = NodePath("TargetingComponent")
 battery_component = NodePath("BatteryComponent")
 power_module = NodePath("LaserPower")
@@ -60,16 +60,16 @@ mesh = SubResource("CylinderMesh_x1sg8")
 skeleton = NodePath("../MeshInstance3D")
 
 [node name="LaserPower" type="Node3D" parent="." node_paths=PackedStringArray("activation_timer", "beam")]
-script = ExtResource("2_tr067")
+script = ExtResource("2_m7bpc")
 damage_per_tick = 10.0
 activation_timer = NodePath("ActivationTimer")
 beam = NodePath("LaserBeam")
 
 [node name="LaserBeam" type="Node3D" parent="LaserPower" node_paths=PackedStringArray("tick_timer", "beam_cgs")]
-script = ExtResource("3_lvn73")
+script = ExtResource("3_58moj")
 beam_radius = 0.2
 ray_length = 300.0
-hit_layer_mask = 6
+hit_layer_mask = 201326598
 tick_timer = NodePath("BeamTickTimer")
 beam_cgs = NodePath("CGs/BeamCGs")
 
@@ -103,8 +103,8 @@ mesh = SubResource("CylinderMesh_w4j31")
 [node name="ActivationTimer" type="Timer" parent="LaserPower"]
 
 [node name="TargetingComponent" type="Node" parent="."]
-script = ExtResource("2_66qcu")
+script = ExtResource("4_ag330")
 max_turning_speed = 2.0
 
 [node name="BatteryComponent" type="Node" parent="."]
-script = ExtResource("4_th7q5")
+script = ExtResource("5_mwnmp")

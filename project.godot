@@ -90,7 +90,11 @@ pause={
 3d_physics/layer_2="world_static"
 3d_physics/layer_3="world_destructable"
 3d_physics/layer_4="enemy"
-3d_physics/layer_5="projectile"
+3d_physics/layer_27="world_hurtbox"
+3d_physics/layer_28="enemy_hurtbox"
+3d_physics/layer_29="player_hurtbox"
+3d_physics/layer_31="enemy_hitbox"
+3d_physics/layer_32="player_hitbox"
 
 [rendering]
 

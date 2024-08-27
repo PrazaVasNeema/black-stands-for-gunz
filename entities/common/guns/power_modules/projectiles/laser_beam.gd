@@ -81,6 +81,11 @@ func calculate_beam():
 	if results.size():
 		_visualizer.global_position = results.get("position")
 		length_2x = (s_g_position - results.get("position")).length_squared()
+		var collision = results.get("collider", null)
+		
+		if (collision && collision is HurtboxComponent):
+			
+			(collision as HurtboxComponent).deal_damage(_tick_damage)
 	else:
 		length_2x = (s_g_position - e_g_position).length_squared()
 		_visualizer.global_position = e_g_position

@@ -6,7 +6,7 @@ var guns_armory_data_array = [
 	#preload("res://entities/common/guns/power_modules/gun_scenes/testing_gun_green.tscn"),
 	#preload("res://entities/common/guns/power_modules/gun_scenes/testing_gun_red.tscn"),
 	#preload("res://entities/common/guns/power_modules/gun_scenes/testing_gun_cube.tscn"),
-	preload("res://entities/common/guns/gun_scenes/laser_gun.tscn"),
+	preload("res://entities/common/guns/scenes/laser_gun.tscn"),
 ]
 
 
