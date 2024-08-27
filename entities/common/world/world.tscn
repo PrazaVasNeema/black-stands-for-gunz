@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://uc265cnfk3e0"]
+[gd_scene load_steps=7 format=3 uid="uid://uc265cnfk3e0"]
 
 [ext_resource type="Script" path="res://entities/common/world/world_provider.gd" id="1_fj45i"]
 [ext_resource type="PackedScene" uid="uid://dlt0nwg5c3wrd" path="res://entities/common/world/player.tscn" id="1_ocwlt"]
@@ -6,6 +6,13 @@
 [sub_resource type="BoxMesh" id="BoxMesh_c20xy"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3wxbd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wvg3y"]
+transparency = 1
+albedo_color = Color(0.432889, 0.1562, 0.940543, 0.47451)
+
+[sub_resource type="BoxMesh" id="BoxMesh_146hn"]
+material = SubResource("StandardMaterial3D_wvg3y")
 
 [node name="World" type="Node3D" node_paths=PackedStringArray("player_provider", "camera_main_view", "camera_options", "camera_how_to_play")]
 script = ExtResource("1_fj45i")
@@ -25,6 +32,20 @@ collision_layer = 2
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D"]
+shape = SubResource("BoxShape3D_3wxbd")
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 0.5, -0.980317, 3.12355, -10.1655)
+
+[node name="CGs2" type="MeshInstance3D" parent="Node3D"]
+mesh = SubResource("BoxMesh_146hn")
+skeleton = NodePath("../../Wall")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D"]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/StaticBody3D"]
 shape = SubResource("BoxShape3D_3wxbd")
 
 [node name="Wall" type="Node3D" parent="."]

@@ -84,7 +84,7 @@ func calculate_beam():
 	else:
 		length_2x = (s_g_position - e_g_position).length_squared()
 		_visualizer.global_position = e_g_position
-	update_beam_visuals(length_2x)
+	update_beam_visuals(sqrt(length_2x))
 
 
 func update_beam_visuals(length : float):

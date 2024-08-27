@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://rc16kaxueugx"]
+[gd_scene load_steps=13 format=3 uid="uid://rc16kaxueugx"]
 
 [ext_resource type="Script" path="res://entities/common/guns/gun_entity.gd" id="1_adl6q"]
 [ext_resource type="Script" path="res://entities/common/guns/targeting_component.gd" id="2_66qcu"]
-[ext_resource type="PackedScene" uid="uid://ce4par63hi2tb" path="res://entities/common/guns/power_modules/power_scenes/laser_power.tscn" id="3_goc6p"]
+[ext_resource type="Script" path="res://entities/common/guns/power_modules/laser_power.gd" id="2_tr067"]
+[ext_resource type="Script" path="res://entities/common/guns/power_modules/projectiles/laser_beam.gd" id="3_lvn73"]
 [ext_resource type="Script" path="res://entities/common/components/battery_component.gd" id="4_th7q5"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_3jdhx"]
@@ -16,6 +17,31 @@ material = SubResource("StandardMaterial3D_8d1as")
 top_radius = 0.3
 bottom_radius = 0.3
 radial_segments = 20
+
+[sub_resource type="Curve3D" id="Curve3D_7nowi"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -100),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_absy5"]
+transparency = 1
+albedo_color = Color(0.847059, 0, 0.309804, 0.623529)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pohsn"]
+resource_local_to_scene = true
+albedo_color = Color(0.454902, 0.313726, 0.917647, 0.705882)
+emission_enabled = true
+emission = Color(0.0922522, 0.0280383, 0.246842, 1)
+emission_energy_multiplier = 8.0
+disable_receive_shadows = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_w4j31"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_pohsn")
+radial_segments = 16
 
 [node name="LaserGun" type="Node3D" node_paths=PackedStringArray("targeting_component", "battery_component", "power_module")]
 script = ExtResource("1_adl6q")
@@ -33,11 +59,52 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 
 mesh = SubResource("CylinderMesh_x1sg8")
 skeleton = NodePath("../MeshInstance3D")
 
+[node name="LaserPower" type="Node3D" parent="." node_paths=PackedStringArray("activation_timer", "beam")]
+script = ExtResource("2_tr067")
+damage_per_tick = 10.0
+activation_timer = NodePath("ActivationTimer")
+beam = NodePath("LaserBeam")
+
+[node name="LaserBeam" type="Node3D" parent="LaserPower" node_paths=PackedStringArray("tick_timer", "beam_cgs")]
+script = ExtResource("3_lvn73")
+beam_radius = 0.2
+ray_length = 300.0
+hit_layer_mask = 6
+tick_timer = NodePath("BeamTickTimer")
+beam_cgs = NodePath("CGs/BeamCGs")
+
+[node name="CGs" type="Node3D" parent="LaserPower/LaserBeam"]
+
+[node name="Path3D" type="Path3D" parent="LaserPower/LaserBeam/CGs"]
+visible = false
+curve = SubResource("Curve3D_7nowi")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="LaserPower/LaserBeam/CGs/Path3D"]
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = true
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+material = SubResource("StandardMaterial3D_absy5")
+
+[node name="BeamCGs" type="MeshInstance3D" parent="LaserPower/LaserBeam/CGs"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+rotation_edit_mode = 1
+visible = false
+mesh = SubResource("CylinderMesh_w4j31")
+
+[node name="BeamTickTimer" type="Timer" parent="LaserPower/LaserBeam"]
+
+[node name="ActivationTimer" type="Timer" parent="LaserPower"]
+
 [node name="TargetingComponent" type="Node" parent="."]
 script = ExtResource("2_66qcu")
 max_turning_speed = 2.0
-
-[node name="LaserPower" parent="." instance=ExtResource("3_goc6p")]
 
 [node name="BatteryComponent" type="Node" parent="."]
 script = ExtResource("4_th7q5")
