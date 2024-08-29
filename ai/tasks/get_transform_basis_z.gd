@@ -19,15 +19,24 @@ func _process(delta : float) -> void:
 	#print ("target ws pos: " + str(global_transform * ls_pos))
 	
 	var target_os = target.global_position * global_transform
+	print(str(target_os))
 	#target_os = Vector3(0, target_os.y, target_os.z)
 	var target_ws_correct = global_transform * target_os
-	var target_dir = (target_ws_correct - global_position).normalized()
+	var target_dir = ((target.global_position - global_position)).normalized()
+	
+	var target_dir_ls = (target_os - position).normalized()
+	
+	target_dir_ls = target_os.normalized()
+	print(str(target_dir_ls))
 	
 	#print(str(target_ws_correct))
 	
 	var quat_v = Quaternion(Vector3.BACK, target_dir)
 	
-	quaternion = rotate_towards2(quaternion, quat_v, delta)
+	#quaternion = rotate_towards2(quaternion, quat_v, delta)
+	global_transform.basis = Basis(rotate_towards2(global_transform.basis.get_rotation_quaternion(), quat_v, delta))
+	print(str(quaternion))
+	#global
 
 
 func rotate_towards(a: Quaternion, b: Quaternion, angle: float) -> Quaternion:
@@ -43,7 +52,7 @@ func rotate_towards2(a: Quaternion, b: Quaternion, delta: float) -> Quaternion:
 	var step = speed_rad * delta
 	if angle_to > step:
 		stopwatch += delta
-		print(stopwatch)
+		#print(stopwatch)
 		return a.slerp(b, step / angle_to)
 	else:
 		return b

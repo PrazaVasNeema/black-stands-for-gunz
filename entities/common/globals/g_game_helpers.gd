@@ -37,3 +37,12 @@ func get_raycast_results(origin_position : Vector3, end_position : Vector3, hit_
 		#return _end
 	#else:
 		#return result_raw.get("position")
+
+
+func rotate_quat_towards(a: Quaternion, b: Quaternion, speed_rad : float, delta: float) -> Quaternion:
+	var angle_to: float = a.angle_to(b)
+	var step = speed_rad * delta
+	if angle_to > step:
+		return a.slerp(b, step / angle_to)
+	else:
+		return b

@@ -20,28 +20,29 @@ func _tick(delta: float) -> Status:
 	
 	# Horizontal
 	var target_os : Vector3 = target.global_position * handle.global_transform
-	print("----")
-	print (str(handle.global_position))
-	print (str(target_os))
+	#print("----")
+	#print (str(handle.global_position))
+	#print (str(target_os))
 	target_os = Vector3(target_os.x, 0, target_os.z)
 	var target_ws_correct : Vector3 = handle.global_transform * target_os
-	print (str(target_ws_correct))
+	#print (str(target_ws_correct))
 	
-	var target_dir : Vector3 = target_ws_correct.normalized()
+	var target_dir : Vector3 = (target_ws_correct - handle.global_position).normalized()
 	
-	print (str(target_dir))
+	#print (str(target_dir))
 	
-	quat_h = Quaternion(Vector3.FORWARD, target_dir)
+	quat_h = Quaternion(Vector3.BACK, target_dir)
 	
-	print_debug("dfgfggf" + str(quat_h))
+	#print_debug("dfgfggf" + str(quat_h))
 	
 	# Vertical
 	target_os = target.global_position * gun.global_transform
-	target_os = Vector3(0, target_os.y, target_os.z)
+	#target_os = Vector3(0, target_os.y, target_os.z)
 	target_ws_correct = gun.global_transform * target_os
-	target_dir = target_ws_correct.normalized()
+	print (str(target_ws_correct))
+	target_dir = (target_ws_correct - gun.global_position).normalized()
 	
-	quat_v = Quaternion(Vector3.FORWARD, target_dir)
+	quat_v = Quaternion(Vector3.BACK, target_dir)
 	
 	blackboard.set_var(target_quat_h, quat_h)
 	blackboard.set_var(target_quat_v, quat_v)

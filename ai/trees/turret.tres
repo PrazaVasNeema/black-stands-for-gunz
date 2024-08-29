@@ -75,7 +75,7 @@ gun_var = &"gun_root"
 
 [sub_resource type="BTAction" id="BTAction_7stwa"]
 script = ExtResource("5_kxd1f")
-rotation_speed = 5.0
+rotation_speed = 50.0
 
 [sub_resource type="BTSequence" id="BTSequence_gtxnr"]
 custom_name = "Aim"

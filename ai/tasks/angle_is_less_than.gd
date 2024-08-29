@@ -15,12 +15,12 @@ func _generate_name() -> String:
 
 
 func _tick(delta: float) -> Status:
-
+	
 	var target: Node3D = blackboard.get_var(target_var, null)
 	var gun: Node3D = blackboard.get_var(gun_var, null)
+
 	
 	if not is_instance_valid(target) || not is_instance_valid(gun):
-		
 		return FAILURE
 
 	var dir_to_target = (target.global_position - gun.global_position).normalized()

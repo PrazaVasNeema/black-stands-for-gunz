@@ -18,34 +18,22 @@ func _tick(delta: float) -> Status:
 	var handle : Node3D = blackboard.get_var(GameConstants.HANDLE_ROOT)
 	var gun : Node3D = blackboard.get_var(GameConstants.GUN_ROOT)
 	
+	var global_quat_handle = handle.global_transform.basis.get_rotation_quaternion()
+	var global_quat_gun = gun.global_transform.basis.get_rotation_quaternion()
 	
+	var should_rotate_h = blackboard.get_var(GameConstants.ONLY_STARTS_ROTATING)
 	
-	if blackboard.get_var(GameConstants.ONLY_STARTS_ROTATING):
-		
-		
-		duration = angle_between_quats(handle.quaternion, quat_h) / rot_speed_rad
-		lerp_factor = 0
-		start_quat = handle.quaternion
-		end_quat = quat_h
+	if quat_h.angle_to(global_quat_handle) > 0.1 && should_rotate_h:
+		handle.global_transform.basis = Basis(G_GameHelpers.rotate_quat_towards(handle.global_transform.basis.get_rotation_quaternion(),\
+		quat_h, rot_speed_rad, delta))
+	elif quat_v.angle_to(global_quat_gun) > 0.1:
 		blackboard.set_var(GameConstants.ONLY_STARTS_ROTATING, false)
-		should_rotate_v = false
-		
-	
-	
-	if !should_rotate_v:
-		if rotate(delta, quat_h, handle):
-			duration = angle_between_quats(gun.quaternion, quat_v) / rot_speed_rad
-			start_quat = gun.quaternion
-			end_quat = quat_v
-			should_rotate_v = true
-			
+		gun.global_transform.basis = Basis(G_GameHelpers.rotate_quat_towards(gun.global_transform.basis.get_rotation_quaternion(),\
+		quat_v, rot_speed_rad, delta))
 	else:
-		
-		if rotate(delta, quat_v, gun):
-			return SUCCESS
-	
-	
+		return SUCCESS
 	return RUNNING
+	
 
 
 func rotate(delta : float, target_quat : Quaternion, node3d : Node3D) -> bool:

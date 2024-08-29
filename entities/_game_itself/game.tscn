@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bg4vrn12w1kgx"]
+[gd_scene load_steps=17 format=3 uid="uid://bg4vrn12w1kgx"]
 
 [ext_resource type="Script" path="res://entities/_game_itself/game.gd" id="1_kobut"]
 [ext_resource type="Script" path="res://entities/common/state_machine/reactive/game_state/game_state_machine.gd" id="2_ned6v"]
@@ -8,6 +8,7 @@
 [ext_resource type="Material" uid="uid://doc35las278mu" path="res://entities/common/guns/materials/laser.tres" id="6_ph74l"]
 [ext_resource type="Texture2D" uid="uid://cdijxjinyqd3g" path="res://entities/common/world/textures/tron_tex_1.png" id="8_27dp4"]
 [ext_resource type="Script" path="res://ai/tasks/get_transform_basis_z.gd" id="8_dlvk8"]
+[ext_resource type="PackedScene" uid="uid://frtrt2nfty4f" path="res://entities/in_game/enemies/scenes/turret.tscn" id="9_caf7h"]
 
 [sub_resource type="Sky" id="Sky_ageq4"]
 
@@ -64,17 +65,23 @@ mesh = SubResource("CylinderMesh_3y3m6")
 transform = Transform3D(1, 0, 0, 0, 0.196117, -0.98058, 0, 0.98058, 0.196117, 0, 20.205, 0)
 mesh = SubResource("PlaneMesh_bgr3m")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="." groups=["player"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.94446, 3.43411, 10.573)
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="." groups=["player"]]
+transform = Transform3D(1, 3.55271e-15, -2.98023e-08, 0, 1, 0, 2.98023e-08, -3.55271e-15, 1, -12.5852, 4.54009, 7.18486)
 mesh = SubResource("BoxMesh_k0y1t")
 
-[node name="Node3D" type="Node3D" parent="." node_paths=PackedStringArray("target")]
-transform = Transform3D(-0.908099, 0, 0.418755, 0, 1, 0, -0.418755, 0, -0.908099, 4.38464, 3.63458, -2.50093)
+[node name="Node3D2" type="Node3D" parent="."]
+transform = Transform3D(0.336343, 0.941403, -0.0251847, -0.623949, 0.202733, -0.754709, -0.70538, 0.269555, 0.655575, 0, 0, 0)
+
+[node name="Node3D" type="Node3D" parent="Node3D2" node_paths=PackedStringArray("target")]
+transform = Transform3D(-0.908099, 0, 0.418755, 0, 1, 0, -0.418755, 0, -0.908099, -0.925351, 3.63458, -5.0399)
 script = ExtResource("8_dlvk8")
-target = NodePath("../MeshInstance3D3")
+target = NodePath("../../MeshInstance3D5")
 speed = 180.0
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="Node3D"]
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Node3D2/Node3D"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 mesh = SubResource("CylinderMesh_qcbyc")
-skeleton = NodePath("../..")
+skeleton = NodePath("../../..")
+
+[node name="Turret" parent="." instance=ExtResource("9_caf7h")]
+transform = Transform3D(0.643309, 0, -0.765607, 0, 1, 0, 0.765607, 0, 0.643309, 3.09203, 1.9232, -4.19525)
