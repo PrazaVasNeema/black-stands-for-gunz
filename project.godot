@@ -41,6 +41,10 @@ folder_colors={
 "res://entities/main_menus/": "orange"
 }
 
+[global_group]
+
+player=""
+
 [input]
 
 fire_one={

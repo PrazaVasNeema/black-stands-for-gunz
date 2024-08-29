@@ -1,0 +1,95 @@
+[gd_resource type="BehaviorTree" load_steps=19 format=3 uid="uid://n5hmsmd172pv"]
+
+[ext_resource type="Script" path="res://ai/tasks/setup_turret.gd" id="1_08amq"]
+[ext_resource type="Script" path="res://ai/tasks/get_first_node_in_group.gd" id="1_hirrq"]
+[ext_resource type="Script" path="res://ai/tasks/get_target_quat.gd" id="1_ltqqd"]
+[ext_resource type="Script" path="res://ai/tasks/angle_is_less_than.gd" id="3_vnlm8"]
+[ext_resource type="Script" path="res://ai/tasks/rotate_turret.gd" id="5_kxd1f"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_0f0c0"]
+var/target/name = &"target"
+var/target/type = 24
+var/target/hint = 0
+var/target/hint_string = ""
+var/target_quat_h/name = &"target_quat_h"
+var/target_quat_h/type = 15
+var/target_quat_h/value = Quaternion(0, 0, 0, 1)
+var/target_quat_h/hint = 0
+var/target_quat_h/hint_string = ""
+var/target_quat_v/name = &"target_quat_v"
+var/target_quat_v/type = 15
+var/target_quat_v/value = Quaternion(0, 0, 0, 1)
+var/target_quat_v/hint = 0
+var/target_quat_v/hint_string = ""
+var/target_quat/name = &"target_quat"
+var/target_quat/type = 15
+var/target_quat/value = Quaternion(0, 0, 0, 1)
+var/target_quat/hint = 0
+var/target_quat/hint_string = ""
+var/gun_root/name = &"gun_root"
+var/gun_root/type = 24
+var/gun_root/hint = 0
+var/gun_root/hint_string = ""
+var/handle_root/name = &"handle_root"
+var/handle_root/type = 24
+var/handle_root/hint = 0
+var/handle_root/hint_string = ""
+
+[sub_resource type="BBNode" id="BBNode_saxsj"]
+saved_value = NodePath("Handle/Gun")
+resource_name = "Handle/Gun"
+
+[sub_resource type="BBNode" id="BBNode_16qh2"]
+saved_value = NodePath("Handle")
+resource_name = "Handle"
+
+[sub_resource type="BTAction" id="BTAction_spq84"]
+script = ExtResource("1_08amq")
+gun_root_bb = &"gun_root"
+handle_root_bb = &"handle_root"
+gun_root = SubResource("BBNode_saxsj")
+handle_root = SubResource("BBNode_16qh2")
+
+[sub_resource type="BTRunLimit" id="BTRunLimit_pw4x0"]
+children = [SubResource("BTAction_spq84")]
+
+[sub_resource type="BTAction" id="BTAction_315mo"]
+script = ExtResource("1_hirrq")
+group = &"player"
+output_var = &"target"
+
+[sub_resource type="BTAction" id="BTAction_oel72"]
+script = ExtResource("3_vnlm8")
+should_be_more = true
+angle_threshold = 10.0
+target_var = &"target"
+gun_var = &"gun_root"
+
+[sub_resource type="BTAction" id="BTAction_hvgru"]
+script = ExtResource("1_ltqqd")
+target_quat_h = &"target_quat_h"
+target_quat_v = &"target_quat_v"
+target_var = &"target"
+handle_var = &"handle_root"
+gun_var = &"gun_root"
+
+[sub_resource type="BTAction" id="BTAction_7stwa"]
+script = ExtResource("5_kxd1f")
+rotation_speed = 5.0
+
+[sub_resource type="BTSequence" id="BTSequence_gtxnr"]
+custom_name = "Aim"
+children = [SubResource("BTAction_oel72"), SubResource("BTAction_hvgru"), SubResource("BTAction_7stwa")]
+
+[sub_resource type="BTSelector" id="BTSelector_oeekw"]
+children = [SubResource("BTSequence_gtxnr")]
+
+[sub_resource type="BTSequence" id="BTSequence_qekku"]
+children = [SubResource("BTAction_315mo"), SubResource("BTSelector_oeekw")]
+
+[sub_resource type="BTSelector" id="BTSelector_q3pjg"]
+children = [SubResource("BTRunLimit_pw4x0"), SubResource("BTSequence_qekku")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_0f0c0")
+root_task = SubResource("BTSelector_q3pjg")

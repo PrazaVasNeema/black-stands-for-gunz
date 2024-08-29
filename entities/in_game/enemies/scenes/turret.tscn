@@ -1,0 +1,154 @@
+[gd_scene load_steps=14 format=3 uid="uid://frtrt2nfty4f"]
+
+[ext_resource type="BehaviorTree" uid="uid://n5hmsmd172pv" path="res://ai/trees/turret.tres" id="1_8j8e7"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_25j22"]
+top_radius = 0.3
+bottom_radius = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wep0c"]
+albedo_color = Color(0.686342, 0, 0.236893, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_thxex"]
+material = SubResource("StandardMaterial3D_wep0c")
+top_radius = 0.1
+bottom_radius = 0.1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_mxue7"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_05ykp"]
+
+[sub_resource type="Animation" id="Animation_lcfpy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_gxgf6"]
+resource_name = "box"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_c0j8g"]
+resource_name = "capsule"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D2:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7mfuc"]
+_data = {
+"RESET": SubResource("Animation_lcfpy"),
+"box": SubResource("Animation_gxgf6"),
+"capsule": SubResource("Animation_c0j8g")
+}
+
+[sub_resource type="BoxMesh" id="BoxMesh_ef5t3"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_3452y"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_a0ln8"]
+
+[node name="Turret" type="Node3D"]
+
+[node name="Handle" type="Node3D" parent="."]
+
+[node name="Gun" type="Node3D" parent="Handle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1593, 0)
+
+[node name="CGs" type="MeshInstance3D" parent="Handle/Gun"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_25j22")
+
+[node name="CGs2" type="MeshInstance3D" parent="Handle/Gun"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.763384)
+mesh = SubResource("CylinderMesh_thxex")
+
+[node name="CGs" type="MeshInstance3D" parent="Handle"]
+mesh = SubResource("CylinderMesh_mxue7")
+
+[node name="BTPlayer" type="BTPlayer" parent="."]
+behavior_tree = ExtResource("1_8j8e7")
+blackboard_plan = SubResource("BlackboardPlan_05ykp")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7mfuc")
+}
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_ef5t3")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("CapsuleMesh_3452y")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("TorusMesh_a0ln8")
+
+[node name="Node3D" type="Node3D" parent="."]

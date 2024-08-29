@@ -45,3 +45,12 @@ enum IMPACT_TYPE {
 	HEAL,
 	ACTIVATE,
 }
+
+
+# Turret AI
+const TURRET_TARGET = &"target"
+const HANDLE_ROOT = &"handle_root"
+const GUN_ROOT = &"gun_root"
+const TARGET_QUAT_H = &"target_quat_h"
+const TARGET_QUAT_V = &"target_quat_v"
+const ONLY_STARTS_ROTATING = &"starts_rotating"

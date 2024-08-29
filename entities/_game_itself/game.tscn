@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bg4vrn12w1kgx"]
+[gd_scene load_steps=16 format=3 uid="uid://bg4vrn12w1kgx"]
 
 [ext_resource type="Script" path="res://entities/_game_itself/game.gd" id="1_kobut"]
 [ext_resource type="Script" path="res://entities/common/state_machine/reactive/game_state/game_state_machine.gd" id="2_ned6v"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://dkx177vx5ddus" path="res://entities/in_game/in_game.tscn" id="4_ncnl1"]
 [ext_resource type="PackedScene" uid="uid://uc265cnfk3e0" path="res://entities/common/world/world.tscn" id="5_wh3il"]
 [ext_resource type="Material" uid="uid://doc35las278mu" path="res://entities/common/guns/materials/laser.tres" id="6_ph74l"]
+[ext_resource type="Texture2D" uid="uid://cdijxjinyqd3g" path="res://entities/common/world/textures/tron_tex_1.png" id="8_27dp4"]
+[ext_resource type="Script" path="res://ai/tasks/get_transform_basis_z.gd" id="8_dlvk8"]
 
 [sub_resource type="Sky" id="Sky_ageq4"]
 
@@ -21,6 +23,19 @@ glow_enabled = true
 [sub_resource type="CylinderMesh" id="CylinderMesh_3y3m6"]
 resource_local_to_scene = true
 radial_segments = 16
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n78jq"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission_texture = ExtResource("8_27dp4")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_bgr3m"]
+material = SubResource("StandardMaterial3D_n78jq")
+
+[sub_resource type="BoxMesh" id="BoxMesh_k0y1t"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_qcbyc"]
+top_radius = 0.2
 
 [node name="Game" type="Node" node_paths=PackedStringArray("game_state_machine", "world_provider")]
 script = ExtResource("1_kobut")
@@ -44,3 +59,22 @@ transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 17.5417, 0)
 rotation_edit_mode = 1
 material_override = ExtResource("6_ph74l")
 mesh = SubResource("CylinderMesh_3y3m6")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.196117, -0.98058, 0, 0.98058, 0.196117, 0, 20.205, 0)
+mesh = SubResource("PlaneMesh_bgr3m")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." groups=["player"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.94446, 3.43411, 10.573)
+mesh = SubResource("BoxMesh_k0y1t")
+
+[node name="Node3D" type="Node3D" parent="." node_paths=PackedStringArray("target")]
+transform = Transform3D(-0.908099, 0, 0.418755, 0, 1, 0, -0.418755, 0, -0.908099, 4.38464, 3.63458, -2.50093)
+script = ExtResource("8_dlvk8")
+target = NodePath("../MeshInstance3D3")
+speed = 180.0
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_qcbyc")
+skeleton = NodePath("../..")
