@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://d4mu6ag00g208"]
+
+[ext_resource type="Script" path="res://entities/common/guns/power_modules/projectiles/plasma_ball.gd" id="1_1r5ml"]
+[ext_resource type="Script" path="res://entities/common/components/hitbox_component.gd" id="1_tpros"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_32rog"]
+radius = 0.2
+height = 0.4
+radial_segments = 8
+rings = 4
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_u6srd"]
+radius = 0.2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ftcy5"]
+radius = 0.2
+
+[node name="PlasmaBall" type="Node3D" node_paths=PackedStringArray("lifetime_timer", "hitbox", "impact_detector")]
+script = ExtResource("1_1r5ml")
+speed = 30.0
+lifetime_timer = NodePath("LifetimeTimer")
+hitbox = NodePath("HitboxComponent")
+impact_detector = NodePath("ImpactDetector")
+
+[node name="CGs" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CGs"]
+mesh = SubResource("SphereMesh_32rog")
+
+[node name="HitboxComponent" type="Area3D" parent="."]
+collision_layer = 1073741824
+collision_mask = 0
+script = ExtResource("1_tpros")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitboxComponent"]
+shape = SubResource("SphereShape3D_u6srd")
+
+[node name="ImpactDetector" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2147483655
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ImpactDetector"]
+shape = SubResource("SphereShape3D_ftcy5")
+
+[node name="LifetimeTimer" type="Timer" parent="."]

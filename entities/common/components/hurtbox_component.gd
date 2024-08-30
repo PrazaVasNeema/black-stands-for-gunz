@@ -1,9 +1,10 @@
 class_name HurtboxComponent
 extends Area3D
 
+signal got_damage(damage : float)
 
-func _init() -> void:
-	monitorable = false
+# func _init() -> void:
+# 	monitorable = false
 
 
 func _ready() -> void:
@@ -11,12 +12,10 @@ func _ready() -> void:
 
 
 ## For handling hitboxes
-func _on_area_entered(hitbox) -> void:
-	print("HIT")
-	if owner.has_method("take_damage"):
-		owner.take_damage(hitbox.damage)
+func _on_area_entered(hitbox : HitboxComponent) -> void:
+	got_damage.emit(hitbox.damage)
 
 
 ## For direct input from raycasts
 func deal_damage(value : float):
-	print(str(value))
+	got_damage.emit(value)

@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://frtrt2nfty4f"]
+[gd_scene load_steps=15 format=3 uid="uid://frtrt2nfty4f"]
 
 [ext_resource type="BehaviorTree" uid="uid://n5hmsmd172pv" path="res://ai/trees/turret.tres" id="1_8j8e7"]
+[ext_resource type="PackedScene" uid="uid://c4f3gvy03luc" path="res://entities/common/guns/e_guns/plasma_gun.tscn" id="1_xvloh"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_25j22"]
 top_radius = 0.3
@@ -116,8 +117,13 @@ _data = {
 
 [node name="Handle" type="Node3D" parent="."]
 
+[node name="PlasmaGun" parent="Handle" instance=ExtResource("1_xvloh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.08024, 0)
+fire_rate = 6.0
+
 [node name="Gun" type="Node3D" parent="Handle"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1593, 0)
+visible = false
 
 [node name="CGs" type="MeshInstance3D" parent="Handle/Gun"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)

@@ -1,5 +1,10 @@
 extends BTAction
 
+@export var rotation_threshold : float = 1
+var _rotation_threshold_rad : float :
+	get:
+		return deg_to_rad(rotation_threshold)
+
 @export var rotation_speed : float = 10
 var rot_speed_rad : float :
 	get:
@@ -17,16 +22,15 @@ func _tick(delta: float) -> Status:
 	var quat_v : Quaternion = blackboard.get_var(GameConstants.TARGET_QUAT_V)
 	var handle : Node3D = blackboard.get_var(GameConstants.HANDLE_ROOT)
 	var gun : Node3D = blackboard.get_var(GameConstants.GUN_ROOT)
-	
 	var global_quat_handle = handle.global_transform.basis.get_rotation_quaternion()
 	var global_quat_gun = gun.global_transform.basis.get_rotation_quaternion()
 	
 	var should_rotate_h = blackboard.get_var(GameConstants.ONLY_STARTS_ROTATING)
 	
-	if quat_h.angle_to(global_quat_handle) > 0.1 && should_rotate_h:
+	if quat_h.angle_to(global_quat_handle) > _rotation_threshold_rad && should_rotate_h:
 		handle.global_transform.basis = Basis(G_GameHelpers.rotate_quat_towards(handle.global_transform.basis.get_rotation_quaternion(),\
 		quat_h, rot_speed_rad, delta))
-	elif quat_v.angle_to(global_quat_gun) > 0.1:
+	elif quat_v.angle_to(global_quat_gun) > _rotation_threshold_rad:
 		blackboard.set_var(GameConstants.ONLY_STARTS_ROTATING, false)
 		gun.global_transform.basis = Basis(G_GameHelpers.rotate_quat_towards(gun.global_transform.basis.get_rotation_quaternion(),\
 		quat_v, rot_speed_rad, delta))

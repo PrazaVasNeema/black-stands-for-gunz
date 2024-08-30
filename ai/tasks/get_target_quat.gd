@@ -39,7 +39,7 @@ func _tick(delta: float) -> Status:
 	target_os = target.global_position * gun.global_transform
 	#target_os = Vector3(0, target_os.y, target_os.z)
 	target_ws_correct = gun.global_transform * target_os
-	print (str(target_ws_correct))
+	# print (str(target_ws_correct))
 	target_dir = (target_ws_correct - gun.global_position).normalized()
 	
 	quat_v = Quaternion(Vector3.BACK, target_dir)

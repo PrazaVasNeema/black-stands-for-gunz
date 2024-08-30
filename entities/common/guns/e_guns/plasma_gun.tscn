@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://c4f3gvy03luc"]
+
+[ext_resource type="Script" path="res://entities/common/guns/e_guns/plasma_gun.gd" id="1_0y4fa"]
+[ext_resource type="PackedScene" uid="uid://d4mu6ag00g208" path="res://entities/common/guns/e_guns/projectiles/plasma_ball.tscn" id="2_rl2l2"]
+[ext_resource type="Script" path="res://entities/common/components/battery_component.gd" id="3_4kq7y"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_8poxh"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_rkcym"]
+top_radius = 0.1
+bottom_radius = 0.1
+
+[node name="PlasmaGun" type="Node3D" node_paths=PackedStringArray("shoot_points_arr", "ready_timer", "battery_component")]
+script = ExtResource("1_0y4fa")
+shoot_points_arr = [NodePath("ShootPoints/Marker3D"), NodePath("ShootPoints/Marker3D2")]
+plasma_ball = ExtResource("2_rl2l2")
+ready_timer = NodePath("ReadyTimer")
+battery_component = NodePath("BatteryComponent")
+
+[node name="BatteryComponent" type="Node" parent="."]
+script = ExtResource("3_4kq7y")
+
+[node name="ReadyTimer" type="Timer" parent="."]
+
+[node name="CGs" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CGs"]
+mesh = SubResource("BoxMesh_8poxh")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="CGs"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.3, 0.148678, 0.722)
+mesh = SubResource("CylinderMesh_rkcym")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="CGs"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.3, 0.148678, 0.722)
+mesh = SubResource("CylinderMesh_rkcym")
+
+[node name="ShootPoints" type="Node3D" parent="."]
+
+[node name="Marker3D" type="Marker3D" parent="ShootPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.142749, 1.74838)
+
+[node name="Marker3D2" type="Marker3D" parent="ShootPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.142749, 1.74838)

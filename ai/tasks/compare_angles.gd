@@ -26,10 +26,10 @@ func _tick(delta: float) -> Status:
 	var dir_to_target = (target.global_position - gun.global_position).normalized()
 	
 	var angle : float = acos(gun.global_transform.basis.z.dot(dir_to_target))
-	#print(str(angle))
+	# print_debug(str(angle) + " " + str(_angle_threshold))
 
 	if (angle > _angle_threshold if should_be_more else angle < _angle_threshold):
 		return SUCCESS
 	else:
-		
+		# print_debug("haha?")
 		return FAILURE

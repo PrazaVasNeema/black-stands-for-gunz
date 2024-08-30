@@ -1,9 +1,10 @@
-[gd_resource type="BehaviorTree" load_steps=19 format=3 uid="uid://n5hmsmd172pv"]
+[gd_resource type="BehaviorTree" load_steps=25 format=3 uid="uid://n5hmsmd172pv"]
 
 [ext_resource type="Script" path="res://ai/tasks/setup_turret.gd" id="1_08amq"]
 [ext_resource type="Script" path="res://ai/tasks/get_first_node_in_group.gd" id="1_hirrq"]
 [ext_resource type="Script" path="res://ai/tasks/get_target_quat.gd" id="1_ltqqd"]
-[ext_resource type="Script" path="res://ai/tasks/angle_is_less_than.gd" id="3_vnlm8"]
+[ext_resource type="Script" path="res://ai/tasks/compare_angles.gd" id="3_7uuvp"]
+[ext_resource type="Script" path="res://ai/tasks/shoot_turret.gd" id="5_2n1rv"]
 [ext_resource type="Script" path="res://ai/tasks/rotate_turret.gd" id="5_kxd1f"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_0f0c0"]
@@ -34,10 +35,18 @@ var/handle_root/name = &"handle_root"
 var/handle_root/type = 24
 var/handle_root/hint = 0
 var/handle_root/hint_string = ""
+var/e_gun/name = &"e_gun"
+var/e_gun/type = 24
+var/e_gun/hint = 0
+var/e_gun/hint_string = ""
+
+[sub_resource type="BBNode" id="BBNode_hy34t"]
+saved_value = NodePath("Handle/PlasmaGun")
+resource_name = "Handle/PlasmaGun"
 
 [sub_resource type="BBNode" id="BBNode_saxsj"]
-saved_value = NodePath("Handle/Gun")
-resource_name = "Handle/Gun"
+saved_value = NodePath("Handle/PlasmaGun")
+resource_name = "Handle/PlasmaGun"
 
 [sub_resource type="BBNode" id="BBNode_16qh2"]
 saved_value = NodePath("Handle")
@@ -47,8 +56,10 @@ resource_name = "Handle"
 script = ExtResource("1_08amq")
 gun_root_bb = &"gun_root"
 handle_root_bb = &"handle_root"
+e_gun_bb = &"e_gun"
 gun_root = SubResource("BBNode_saxsj")
 handle_root = SubResource("BBNode_16qh2")
+e_gun = SubResource("BBNode_hy34t")
 
 [sub_resource type="BTRunLimit" id="BTRunLimit_pw4x0"]
 children = [SubResource("BTAction_spq84")]
@@ -58,10 +69,10 @@ script = ExtResource("1_hirrq")
 group = &"player"
 output_var = &"target"
 
-[sub_resource type="BTAction" id="BTAction_oel72"]
-script = ExtResource("3_vnlm8")
+[sub_resource type="BTAction" id="BTAction_11gi0"]
+script = ExtResource("3_7uuvp")
 should_be_more = true
-angle_threshold = 10.0
+angle_threshold = 1.0
 target_var = &"target"
 gun_var = &"gun_root"
 
@@ -75,14 +86,31 @@ gun_var = &"gun_root"
 
 [sub_resource type="BTAction" id="BTAction_7stwa"]
 script = ExtResource("5_kxd1f")
+rotation_threshold = 0.5
 rotation_speed = 50.0
 
 [sub_resource type="BTSequence" id="BTSequence_gtxnr"]
 custom_name = "Aim"
-children = [SubResource("BTAction_oel72"), SubResource("BTAction_hvgru"), SubResource("BTAction_7stwa")]
+children = [SubResource("BTAction_11gi0"), SubResource("BTAction_hvgru"), SubResource("BTAction_7stwa")]
+
+[sub_resource type="BTAction" id="BTAction_64vyt"]
+script = ExtResource("5_2n1rv")
+
+[sub_resource type="BTTimeLimit" id="BTTimeLimit_xq4lv"]
+time_limit = 1.0
+children = [SubResource("BTAction_64vyt")]
+
+[sub_resource type="BTCooldown" id="BTCooldown_ukrvg"]
+duration = 1.0
+trigger_on_failure = true
+children = [SubResource("BTTimeLimit_xq4lv")]
+
+[sub_resource type="BTSequence" id="BTSequence_rnbwp"]
+custom_name = "Shoot"
+children = [SubResource("BTCooldown_ukrvg")]
 
 [sub_resource type="BTSelector" id="BTSelector_oeekw"]
-children = [SubResource("BTSequence_gtxnr")]
+children = [SubResource("BTSequence_gtxnr"), SubResource("BTSequence_rnbwp")]
 
 [sub_resource type="BTSequence" id="BTSequence_qekku"]
 children = [SubResource("BTAction_315mo"), SubResource("BTSelector_oeekw")]

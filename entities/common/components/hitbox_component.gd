@@ -3,7 +3,7 @@ extends Area3D
 
 @export var damage : float = 10
 
-@onready var collision_shape := $CollisionShape2D
+@onready var collision_shape : CollisionShape3D= $CollisionShape3D
 
 
 func set_disabled(is_disabled: bool) -> void:

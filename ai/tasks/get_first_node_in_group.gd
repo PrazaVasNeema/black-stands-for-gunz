@@ -17,9 +17,10 @@ func _generate_name() -> String:
 		]
 
 func _tick(_delta: float) -> Status:
-	#print("testing")
+	# print("testing")
 	
-
+	var e_gun : EGun = blackboard.get_var(GameConstants.E_GUN)
+	e_gun.should_fire = false
 	blackboard.set_var(GameConstants.ONLY_STARTS_ROTATING, true)
 	var nodes: Array[Node] = agent.get_tree().get_nodes_in_group(group)
 	if nodes.size() == 0:

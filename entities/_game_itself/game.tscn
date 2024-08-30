@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bg4vrn12w1kgx"]
+[gd_scene load_steps=19 format=3 uid="uid://bg4vrn12w1kgx"]
 
 [ext_resource type="Script" path="res://entities/_game_itself/game.gd" id="1_kobut"]
 [ext_resource type="Script" path="res://entities/common/state_machine/reactive/game_state/game_state_machine.gd" id="2_ned6v"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://cdijxjinyqd3g" path="res://entities/common/world/textures/tron_tex_1.png" id="8_27dp4"]
 [ext_resource type="Script" path="res://ai/tasks/get_transform_basis_z.gd" id="8_dlvk8"]
 [ext_resource type="PackedScene" uid="uid://frtrt2nfty4f" path="res://entities/in_game/enemies/scenes/turret.tscn" id="9_caf7h"]
+[ext_resource type="PackedScene" uid="uid://c4f3gvy03luc" path="res://entities/common/guns/e_guns/plasma_gun.tscn" id="10_v0qgh"]
+[ext_resource type="PackedScene" uid="uid://bwpj6vwsiqhrh" path="res://rnd/dummy_target_player.tscn" id="11_prah2"]
 
 [sub_resource type="Sky" id="Sky_ageq4"]
 
@@ -28,6 +30,9 @@ radial_segments = 16
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n78jq"]
 albedo_color = Color(0, 0, 0, 1)
 emission_enabled = true
+emission = Color(1.92523e-07, 0.495589, 0.721753, 1)
+emission_energy_multiplier = 3.83
+emission_operator = 1
 emission_texture = ExtResource("8_27dp4")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_bgr3m"]
@@ -65,8 +70,9 @@ mesh = SubResource("CylinderMesh_3y3m6")
 transform = Transform3D(1, 0, 0, 0, 0.196117, -0.98058, 0, 0.98058, 0.196117, 0, 20.205, 0)
 mesh = SubResource("PlaneMesh_bgr3m")
 
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="." groups=["player"]]
-transform = Transform3D(1, 3.55271e-15, -2.98023e-08, 0, 1, 0, 2.98023e-08, -3.55271e-15, 1, -12.5852, 4.54009, 7.18486)
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 3.55271e-15, -2.98023e-08, 0, 1, 0, 2.98023e-08, -3.55271e-15, 1, 6.894, 5.4681, 2.09002)
+layers = 0
 mesh = SubResource("BoxMesh_k0y1t")
 
 [node name="Node3D2" type="Node3D" parent="."]
@@ -85,3 +91,21 @@ skeleton = NodePath("../../..")
 
 [node name="Turret" parent="." instance=ExtResource("9_caf7h")]
 transform = Transform3D(0.643309, 0, -0.765607, 0, 1, 0, 0.765607, 0, 0.643309, 3.09203, 1.9232, -4.19525)
+
+[node name="PlasmaGun" parent="." instance=ExtResource("10_v0qgh")]
+transform = Transform3D(0.697027, 0, 0.717044, 0, 1, 0, -0.717044, 0, 0.697027, -0.264458, 3.18334, -5.68701)
+fire_rate = 4.0
+
+[node name="DummiesPlayer" type="Node3D" parent="."]
+
+[node name="DummyTargetPlayer" parent="DummiesPlayer" instance=ExtResource("11_prah2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.57114, 0)
+
+[node name="DummyTargetPlayer2" parent="DummiesPlayer" instance=ExtResource("11_prah2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.71313, 6.57114, 0)
+
+[node name="DummyTargetPlayer3" parent="DummiesPlayer" instance=ExtResource("11_prah2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.75761, 6.57114, 0)
+
+[node name="DummyTargetPlayer4" parent="DummiesPlayer" instance=ExtResource("11_prah2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.69923, 6.57114, 0)

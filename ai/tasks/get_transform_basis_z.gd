@@ -19,7 +19,7 @@ func _process(delta : float) -> void:
 	#print ("target ws pos: " + str(global_transform * ls_pos))
 	
 	var target_os = target.global_position * global_transform
-	print(str(target_os))
+	# print(str(target_os))
 	#target_os = Vector3(0, target_os.y, target_os.z)
 	var target_ws_correct = global_transform * target_os
 	var target_dir = ((target.global_position - global_position)).normalized()
@@ -27,7 +27,7 @@ func _process(delta : float) -> void:
 	var target_dir_ls = (target_os - position).normalized()
 	
 	target_dir_ls = target_os.normalized()
-	print(str(target_dir_ls))
+	# print(str(target_dir_ls))
 	
 	#print(str(target_ws_correct))
 	
@@ -35,7 +35,7 @@ func _process(delta : float) -> void:
 	
 	#quaternion = rotate_towards2(quaternion, quat_v, delta)
 	global_transform.basis = Basis(rotate_towards2(global_transform.basis.get_rotation_quaternion(), quat_v, delta))
-	print(str(quaternion))
+	# print(str(quaternion))
 	#global
 
 

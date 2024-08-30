@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://bwpj6vwsiqhrh"]
+
+[ext_resource type="Script" path="res://entities/common/components/hurtbox_component.gd" id="1_hqqn3"]
+[ext_resource type="Script" path="res://entities/common/components/health_component.gd" id="2_ddf66"]
+
+[sub_resource type="GDScript" id="GDScript_ev5e5"]
+script/source = "extends Node3D
+
+@onready var hurtbox : HurtboxComponent = $HurtboxComponent
+@onready var health : HealthComponent = $HealthComponent
+
+func _ready() -> void:
+	hurtbox.got_damage.connect(health.take_damage)
+	health.died.connect(func() : queue_free())
+"
+
+[sub_resource type="BoxMesh" id="BoxMesh_6dtxd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_soka5"]
+
+[node name="DummyTargetPlayer" type="Node3D" groups=["player"]]
+script = SubResource("GDScript_ev5e5")
+
+[node name="CGs" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CGs"]
+mesh = SubResource("BoxMesh_6dtxd")
+
+[node name="HurtboxComponent" type="Area3D" parent="."]
+collision_layer = 268435456
+collision_mask = 1073741824
+script = ExtResource("1_hqqn3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtboxComponent"]
+shape = SubResource("BoxShape3D_soka5")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2_ddf66")
