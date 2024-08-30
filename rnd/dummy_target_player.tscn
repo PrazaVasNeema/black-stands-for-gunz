@@ -9,9 +9,14 @@ script/source = "extends Node3D
 @onready var hurtbox : HurtboxComponent = $HurtboxComponent
 @onready var health : HealthComponent = $HealthComponent
 
+
 func _ready() -> void:
 	hurtbox.got_damage.connect(health.take_damage)
-	health.died.connect(func() : queue_free())
+	health.died.connect(func() : call_deferred(\"dead\"))
+
+
+func dead():
+	queue_free()
 "
 
 [sub_resource type="BoxMesh" id="BoxMesh_6dtxd"]

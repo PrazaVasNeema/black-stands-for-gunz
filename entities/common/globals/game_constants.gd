@@ -46,12 +46,12 @@ enum IMPACT_TYPE {
 	ACTIVATE,
 }
 
+class turret_ai:
+	const TARGET = &"target"
+	const TURRET_QUAT = &"target"
+	const QUAT_H = &"target_quat_h"
+	const QUAT = &"target_quat"
+	const ONLY_STARTS_ROTATING = &"starts_rotating"
+	const ANGLE = &"angle"
 
 # Turret AI
-const TURRET_TARGET = &"target"
-const HANDLE_ROOT = &"handle_root"
-const GUN_ROOT = &"gun_root"
-const TARGET_QUAT_H = &"target_quat_h"
-const TARGET_QUAT_V = &"target_quat_v"
-const ONLY_STARTS_ROTATING = &"starts_rotating"
-const E_GUN = &"e_gun"

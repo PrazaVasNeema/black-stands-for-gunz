@@ -1,7 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://frtrt2nfty4f"]
+[gd_scene load_steps=27 format=3 uid="uid://frtrt2nfty4f"]
 
-[ext_resource type="BehaviorTree" uid="uid://n5hmsmd172pv" path="res://ai/trees/turret.tres" id="1_8j8e7"]
+[ext_resource type="Script" path="res://entities/in_game/enemies/scripts/turret.gd" id="1_go7r8"]
 [ext_resource type="PackedScene" uid="uid://c4f3gvy03luc" path="res://entities/common/guns/e_guns/plasma_gun.tscn" id="1_xvloh"]
+[ext_resource type="Script" path="res://addons/behaviour_toolkit/behaviour_tree/bt_root.gd" id="2_rs007"]
+[ext_resource type="Script" path="res://addons/behaviour_toolkit/behaviour_tree/composites/bt_selector.gd" id="3_qnjf8"]
+[ext_resource type="Script" path="res://addons/behaviour_toolkit/behaviour_tree/composites/bt_sequence.gd" id="4_dedxt"]
+[ext_resource type="Script" path="res://addons/behaviour_toolkit/behaviour_tree/leaves/leaf_condition.gd" id="6_hh1s6"]
+[ext_resource type="Script" path="res://addons/behaviour_toolkit/custom/decorator_limiter_time.gd" id="7_kxns8"]
+[ext_resource type="Script" path="res://addons/behaviour_toolkit/behaviour_tree/leaves/leaf_wait.gd" id="8_ojt6c"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_25j22"]
 top_radius = 0.3
@@ -16,8 +22,6 @@ top_radius = 0.1
 bottom_radius = 0.1
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_mxue7"]
-
-[sub_resource type="BlackboardPlan" id="BlackboardPlan_05ykp"]
 
 [sub_resource type="Animation" id="Animation_lcfpy"]
 length = 0.001
@@ -113,13 +117,184 @@ _data = {
 
 [sub_resource type="TorusMesh" id="TorusMesh_a0ln8"]
 
-[node name="Turret" type="Node3D"]
+[sub_resource type="GDScript" id="GDScript_07r6e"]
+resource_name = "set_fire_false"
+script/source = "@tool
+extends BTLeaf
+
+
+# Gets called every tick of the behavior tree
+func tick(_delta: float, _actor: Node, _blackboard: Blackboard) -> BTStatus:
+	(_actor as Turret).e_gun.should_fire = false
+	# Handle leaf logic
+	# Return SUCCESS, FAILURE, or RUNNING
+	return BTStatus.SUCCESS
+
+
+# Add custom configuration warnings
+# Note: Can be deleted if you don't want to define your own warnings.
+func _get_configuration_warnings() -> PackedStringArray:
+	var warnings: Array = []
+
+	warnings.append_array(super._get_configuration_warnings())
+
+	# Add your own warnings to the array here
+
+	return warnings
+"
+
+[sub_resource type="GDScript" id="GDScript_yxf1y"]
+resource_name = "get_first_in_group"
+script/source = "@tool
+extends BTLeaf
+
+@export var group: StringName
+
+
+# Gets called every tick of the behavior tree
+func tick(_delta: float, _actor: Node, _blackboard: Blackboard) -> BTStatus:
+	var nodes: Array[Node] = _actor.get_tree().get_nodes_in_group(group)
+	if nodes.size() == 0:
+		return BTStatus.FAILURE
+	if !is_instance_valid(_blackboard.get_value(GameConstants.turret_ai.TARGET)):
+		_blackboard.set_value(GameConstants.turret_ai.TARGET, nodes[randi() % nodes.size()])
+	return BTStatus.SUCCESS
+"
+
+[sub_resource type="GDScript" id="GDScript_2gkoe"]
+resource_name = "reset_turret"
+script/source = "@tool
+extends BTLeaf
+
+
+# Gets called every tick of the behavior tree
+func tick(_delta: float, _actor: Node, _blackboard: Blackboard) -> BTStatus:
+	_blackboard.set_value(GameConstants.turret_ai.ONLY_STARTS_ROTATING, false)
+	
+	if is_instance_valid(_blackboard.get_value(GameConstants.turret_ai.TARGET)):
+		var target: Node3D = _blackboard.get_value(GameConstants.turret_ai.TARGET)
+		var gun: Node3D = (_actor as Turret).gun_root
+		var dir_to_target = (target.global_position - gun.global_position).normalized()
+		var angle : float = acos(gun.global_transform.basis.z.dot(dir_to_target))
+		_blackboard.set_value(GameConstants.turret_ai.ANGLE, rad_to_deg(angle))
+		return BTStatus.SUCCESS
+	else:
+		return BTStatus.FAILURE
+"
+
+[sub_resource type="GDScript" id="GDScript_fjjfw"]
+script/source = "@export var should_be_more : bool
+@export var angle_threshold: float
+var _angle_threshold : float :
+	get:
+		return deg_to_rad(angle_threshold)
+# Custom Condition
+static func is_valid(_actor: Node, _blackboard: Blackboard) -> bool:
+	# Compute your custom logic here
+	var angle = _blackboard.get_value(GameConstants.turret_ai.ANGLE)
+	
+	if angle && angle > 1:
+		return true
+	else:
+		return false
+"
+
+[sub_resource type="GDScript" id="GDScript_8s6xf"]
+resource_name = "get_target_quat"
+script/source = "@tool
+extends BTLeaf
+
+
+# Gets called every tick of the behavior tree
+func tick(_delta: float, _actor: Node, _blackboard: Blackboard) -> BTStatus:
+	var actor : Turret = _actor
+	if !is_instance_valid(_blackboard.get_value(GameConstants.turret_ai.TARGET)):
+		return BTStatus.FAILURE
+	var target : Node3D = _blackboard.get_value(GameConstants.turret_ai.TARGET)
+	
+	var quat : Quaternion
+	var quat_h : Quaternion
+	
+	# Horizontal quat (handle)
+	var target_os : Vector3 = target.global_position * actor.handle_root.global_transform
+	target_os = Vector3(target_os.x, 0, target_os.z)
+	var target_ws_correct : Vector3 = actor.handle_root.global_transform * target_os
+	var target_dir : Vector3 = (target_ws_correct - actor.handle_root.global_position).normalized()
+	quat_h = Quaternion(Vector3.BACK, target_dir)
+
+	# General quat (gun)
+	target_dir = (target.global_position - actor.gun_root.global_position).normalized()
+	quat = Quaternion(Vector3.BACK, target_dir)
+	
+	_blackboard.set_value(GameConstants.turret_ai.QUAT_H, quat_h)
+	_blackboard.set_value(GameConstants.turret_ai.QUAT, quat)
+
+	return BTStatus.SUCCESS
+"
+
+[sub_resource type="GDScript" id="GDScript_s51yd"]
+resource_name = "rotate_turret"
+script/source = "@tool
+extends BTLeaf
+
+@export var rotation_threshold : float = 1
+var _rotation_threshold_rad : float :
+	get:
+		return deg_to_rad(rotation_threshold)
+
+@export var rotation_speed : float = 10
+var rot_speed_rad : float :
+	get:
+		return deg_to_rad(rotation_speed)
+
+
+# Gets called every tick of the behavior tree
+func tick(_delta: float, _actor: Node, _blackboard: Blackboard) -> BTStatus:
+	var actor : Turret = _actor
+	var quat_h : Quaternion = _blackboard.get_value(GameConstants.turret_ai.QUAT_H)
+	var quat : Quaternion = _blackboard.get_value(GameConstants.turret_ai.QUAT)
+	var handle : Node3D = actor.handle_root
+	var gun : Node3D = actor.gun_root
+	var global_quat_handle = actor.handle_root.global_transform.basis.get_rotation_quaternion()
+	var global_quat_gun = actor.gun_root.global_transform.basis.get_rotation_quaternion()
+	
+	var should_rotate_h = _blackboard.get_value(GameConstants.turret_ai.ONLY_STARTS_ROTATING)
+	if quat_h.angle_to(global_quat_handle) > _rotation_threshold_rad && should_rotate_h:
+		handle.global_transform.basis = Basis(G_GameHelpers.rotate_quat_towards(\\
+		handle.global_transform.basis.get_rotation_quaternion(), quat_h, rot_speed_rad, _delta))
+	elif quat.angle_to(global_quat_gun) > _rotation_threshold_rad:
+		_blackboard.set_value(GameConstants.turret_ai.ONLY_STARTS_ROTATING, false)
+		gun.global_transform.basis = Basis(G_GameHelpers.rotate_quat_towards(\\
+		gun.global_transform.basis.get_rotation_quaternion(), quat, rot_speed_rad, _delta))
+	else:
+		return BTStatus.SUCCESS
+	return BTStatus.RUNNING
+"
+
+[sub_resource type="GDScript" id="GDScript_wulxn"]
+resource_name = "shoot"
+script/source = "@tool
+extends BTLeaf
+
+
+# Gets called every tick of the behavior tree
+func tick(_delta: float, _actor: Node, _blackboard: Blackboard) -> BTStatus:
+	(_actor as Turret).e_gun.should_fire = true
+
+	return BTStatus.SUCCESS
+"
+
+[node name="Turret" type="Node3D" node_paths=PackedStringArray("handle_root", "gun_root", "e_gun")]
+script = ExtResource("1_go7r8")
+handle_root = NodePath("Handle")
+gun_root = NodePath("Handle/PlasmaGun")
+e_gun = NodePath("Handle/PlasmaGun")
 
 [node name="Handle" type="Node3D" parent="."]
 
 [node name="PlasmaGun" parent="Handle" instance=ExtResource("1_xvloh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.08024, 0)
-fire_rate = 6.0
+fire_rate = 10.0
 
 [node name="Gun" type="Node3D" parent="Handle"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1593, 0)
@@ -135,10 +310,6 @@ mesh = SubResource("CylinderMesh_thxex")
 
 [node name="CGs" type="MeshInstance3D" parent="Handle"]
 mesh = SubResource("CylinderMesh_mxue7")
-
-[node name="BTPlayer" type="BTPlayer" parent="."]
-behavior_tree = ExtResource("1_8j8e7")
-blackboard_plan = SubResource("BlackboardPlan_05ykp")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -158,3 +329,61 @@ visible = false
 mesh = SubResource("TorusMesh_a0ln8")
 
 [node name="Node3D" type="Node3D" parent="."]
+
+[node name="BTRoot" type="Node" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("2_rs007")
+autostart = true
+actor = NodePath("..")
+
+[node name="BTSequence" type="Node" parent="BTRoot"]
+script = ExtResource("4_dedxt")
+
+[node name="SetFireFalse" type="Node" parent="BTRoot/BTSequence"]
+script = SubResource("GDScript_07r6e")
+
+[node name="GetFirstInGroup" type="Node" parent="BTRoot/BTSequence"]
+script = SubResource("GDScript_yxf1y")
+group = &"player"
+
+[node name="ResetTurret" type="Node" parent="BTRoot/BTSequence"]
+script = SubResource("GDScript_2gkoe")
+
+[node name="BTSelector" type="Node" parent="BTRoot/BTSequence"]
+script = ExtResource("3_qnjf8")
+
+[node name="Aim" type="Node" parent="BTRoot/BTSequence/BTSelector"]
+script = ExtResource("4_dedxt")
+
+[node name="LeafCondition" type="Node" parent="BTRoot/BTSequence/BTSelector/Aim"]
+script = ExtResource("6_hh1s6")
+condition_property = &"angle"
+condition_type = 6
+custom_script = SubResource("GDScript_fjjfw")
+value_type = 2
+condition_value_float = 1.0
+
+[node name="GetTargetQuat" type="Node" parent="BTRoot/BTSequence/BTSelector/Aim"]
+script = SubResource("GDScript_8s6xf")
+
+[node name="BTLimiterTimer" type="Node" parent="BTRoot/BTSequence/BTSelector/Aim"]
+script = ExtResource("7_kxns8")
+seconds = 5.0
+
+[node name="RotateTurret" type="Node" parent="BTRoot/BTSequence/BTSelector/Aim/BTLimiterTimer"]
+script = SubResource("GDScript_s51yd")
+rotation_threshold = 0.5
+rotation_speed = 60.0
+
+[node name="Shoot" type="Node" parent="BTRoot/BTSequence/BTSelector"]
+script = ExtResource("4_dedxt")
+
+[node name="BTLimiterTimer" type="Node" parent="BTRoot/BTSequence/BTSelector/Shoot"]
+script = ExtResource("7_kxns8")
+seconds = 1.0
+
+[node name="Shoot" type="Node" parent="BTRoot/BTSequence/BTSelector/Shoot/BTLimiterTimer"]
+script = SubResource("GDScript_wulxn")
+
+[node name="LeafWait" type="Node" parent="BTRoot/BTSequence/BTSelector/Shoot"]
+script = ExtResource("8_ojt6c")
+wait_for_ticks = 60
