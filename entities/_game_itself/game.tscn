@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bg4vrn12w1kgx"]
+[gd_scene load_steps=18 format=3 uid="uid://bg4vrn12w1kgx"]
 
 [ext_resource type="Script" path="res://entities/_game_itself/game.gd" id="1_kobut"]
 [ext_resource type="Script" path="res://entities/common/state_machine/reactive/game_state/game_state_machine.gd" id="2_ned6v"]
@@ -8,7 +8,6 @@
 [ext_resource type="Material" uid="uid://doc35las278mu" path="res://entities/common/guns/materials/laser.tres" id="6_ph74l"]
 [ext_resource type="Texture2D" uid="uid://cdijxjinyqd3g" path="res://entities/common/world/textures/tron_tex_1.png" id="8_27dp4"]
 [ext_resource type="Script" path="res://ai/tasks/get_transform_basis_z.gd" id="8_dlvk8"]
-[ext_resource type="PackedScene" uid="uid://frtrt2nfty4f" path="res://entities/in_game/enemies/scenes/turret.tscn" id="9_caf7h"]
 [ext_resource type="PackedScene" uid="uid://c4f3gvy03luc" path="res://entities/common/guns/e_guns/plasma_gun.tscn" id="10_v0qgh"]
 [ext_resource type="PackedScene" uid="uid://bwpj6vwsiqhrh" path="res://rnd/dummy_target_player.tscn" id="11_prah2"]
 
@@ -88,9 +87,6 @@ speed = 180.0
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 mesh = SubResource("CylinderMesh_qcbyc")
 skeleton = NodePath("../../..")
-
-[node name="Turret" parent="." instance=ExtResource("9_caf7h")]
-transform = Transform3D(0.643309, 0, -0.765607, 0, 1, 0, 0.765607, 0, 0.643309, 3.09203, 1.9232, -4.19525)
 
 [node name="PlasmaGun" parent="." instance=ExtResource("10_v0qgh")]
 transform = Transform3D(0.697027, 0, 0.717044, 0, 1, 0, -0.717044, 0, 0.697027, -0.264458, 3.18334, -5.68701)

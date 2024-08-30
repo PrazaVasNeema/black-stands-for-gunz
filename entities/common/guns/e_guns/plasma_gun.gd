@@ -24,7 +24,7 @@ func init() -> void:
 	ready_timer.one_shot = true
 	
 	var ready_state := LimboState.new().named("ready") \
-        .call_on_update(_ready_update)
+		.call_on_update(_ready_update)
 	var fire_state := LimboState.new().named("fire") \
 		.call_on_enter(_fire_start)
 	var get_ready_state := LimboState.new().named("get_ready") \

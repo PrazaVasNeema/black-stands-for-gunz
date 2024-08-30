@@ -10,9 +10,8 @@
 top_radius = 0.1
 bottom_radius = 0.1
 
-[node name="PlasmaGun" type="Node3D" node_paths=PackedStringArray("shoot_points_arr", "ready_timer", "battery_component")]
+[node name="PlasmaGun" type="Node3D" node_paths=PackedStringArray("ready_timer", "battery_component")]
 script = ExtResource("1_0y4fa")
-shoot_points_arr = [NodePath("ShootPoints/Marker3D"), NodePath("ShootPoints/Marker3D2")]
 plasma_ball = ExtResource("2_rl2l2")
 ready_timer = NodePath("ReadyTimer")
 battery_component = NodePath("BatteryComponent")
