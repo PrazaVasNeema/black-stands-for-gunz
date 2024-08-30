@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://c4f3gvy03luc"]
+[gd_scene load_steps=13 format=3 uid="uid://c4f3gvy03luc"]
 
 [ext_resource type="Script" path="res://entities/common/guns/e_guns/plasma_gun.gd" id="1_0y4fa"]
 [ext_resource type="PackedScene" uid="uid://d4mu6ag00g208" path="res://entities/common/guns/e_guns/projectiles/plasma_ball.tscn" id="2_rl2l2"]
 [ext_resource type="Script" path="res://entities/common/components/battery_component.gd" id="3_4kq7y"]
+[ext_resource type="Script" path="res://addons/behaviour_toolkit/finite_state_machine/fsm.gd" id="4_0ev2o"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_8poxh"]
 
@@ -10,8 +11,103 @@
 top_radius = 0.1
 bottom_radius = 0.1
 
-[node name="PlasmaGun" type="Node3D" node_paths=PackedStringArray("ready_timer", "battery_component")]
+[sub_resource type="GDScript" id="GDScript_qrtuh"]
+script/source = "@tool
+extends FSMState
+
+
+# Executes after the state is entered.
+func _on_enter(_actor: Node, _blackboard: Blackboard) -> void:
+	pass
+
+
+# Executes every _process call, if the state is active.
+func _on_update(_delta: float, _actor: Node, _blackboard: Blackboard) -> void:
+	pass
+
+
+# Executes before the state is exited.
+func _on_exit(_actor: Node, _blackboard: Blackboard) -> void:
+	pass
+"
+
+[sub_resource type="GDScript" id="GDScript_ur4k8"]
+script/source = "@tool
+extends FSMTransition
+
+
+# Executed when the transition is taken.
+func _on_transition(_delta: float, _actor: Node, _blackboard: Blackboard) -> void:
+	pass
+
+
+# Evaluates true, if the transition conditions are met.
+func is_valid(_actor: Node, _blackboard: Blackboard) -> bool:
+	if (_actor as PlasmaGun).should_fire:
+		return true
+	else:
+		return false
+
+
+# Add custom configuration warnings
+# Note: Can be deleted if you don't want to define your own warnings.
+func _get_configuration_warnings() -> PackedStringArray:
+	var warnings: Array = []
+
+	warnings.append_array(super._get_configuration_warnings())
+
+	# Add your own warnings to the array here
+
+	return warnings
+"
+
+[sub_resource type="GDScript" id="GDScript_gy3ft"]
+script/source = "@tool
+extends FSMState
+
+
+# Executes after the state is entered.
+func _on_enter(_actor: Node, _blackboard: Blackboard) -> void:
+	(_actor as PlasmaGun).shoot()
+"
+
+[sub_resource type="GDScript" id="GDScript_mgqve"]
+script/source = "@tool
+extends FSMTransition
+
+
+# Evaluates true, if the transition conditions are met.
+func is_valid(_actor: Node, _blackboard: Blackboard) -> bool:
+	return true
+"
+
+[sub_resource type="GDScript" id="GDScript_suroh"]
+script/source = "@tool
+extends FSMState
+
+
+# Executes after the state is entered.
+func _on_enter(_actor: Node, _blackboard: Blackboard) -> void:
+	(_actor as PlasmaGun).ready_timer.start()
+"
+
+[sub_resource type="GDScript" id="GDScript_y77b5"]
+script/source = "@tool
+extends FSMTransition
+
+
+# Evaluates true, if the transition conditions are met.
+func is_valid(_actor: Node, _blackboard: Blackboard) -> bool:
+	if (_actor as PlasmaGun). ready_timer.is_stopped():
+		return true
+	else:
+		return false
+"
+
+[node name="PlasmaGun" type="Node3D" node_paths=PackedStringArray("shoot_points_arr", "ready_timer", "battery_component")]
 script = ExtResource("1_0y4fa")
+shoot_points_arr = [NodePath("ShootPoints/Marker3D"), NodePath("ShootPoints/Marker3D2")]
+fire_rate = 6.0
 plasma_ball = ExtResource("2_rl2l2")
 ready_timer = NodePath("ReadyTimer")
 battery_component = NodePath("BatteryComponent")
@@ -41,3 +137,30 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.142749, 1.74838)
 
 [node name="Marker3D2" type="Marker3D" parent="ShootPoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.142749, 1.74838)
+
+[node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "actor")]
+script = ExtResource("4_0ev2o")
+autostart = true
+initial_state = NodePath("Ready")
+actor = NodePath("..")
+
+[node name="Ready" type="Node" parent="FiniteStateMachine"]
+script = SubResource("GDScript_qrtuh")
+
+[node name="FSMTransition" type="Node" parent="FiniteStateMachine/Ready" node_paths=PackedStringArray("next_state")]
+script = SubResource("GDScript_ur4k8")
+next_state = NodePath("../../Fire")
+
+[node name="Fire" type="Node" parent="FiniteStateMachine"]
+script = SubResource("GDScript_gy3ft")
+
+[node name="FSMTransition" type="Node" parent="FiniteStateMachine/Fire" node_paths=PackedStringArray("next_state")]
+script = SubResource("GDScript_mgqve")
+next_state = NodePath("../../GetReady")
+
+[node name="GetReady" type="Node" parent="FiniteStateMachine"]
+script = SubResource("GDScript_suroh")
+
+[node name="FSMTransition" type="Node" parent="FiniteStateMachine/GetReady" node_paths=PackedStringArray("next_state")]
+script = SubResource("GDScript_y77b5")
+next_state = NodePath("../../Ready")

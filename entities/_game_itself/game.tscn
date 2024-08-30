@@ -90,7 +90,7 @@ skeleton = NodePath("../../..")
 
 [node name="PlasmaGun" parent="." instance=ExtResource("10_v0qgh")]
 transform = Transform3D(0.697027, 0, 0.717044, 0, 1, 0, -0.717044, 0, 0.697027, -0.264458, 3.18334, -5.68701)
-fire_rate = 4.0
+fire_rate = 10.0
 
 [node name="DummiesPlayer" type="Node3D" parent="."]
 
