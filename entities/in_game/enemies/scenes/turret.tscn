@@ -1,7 +1,7 @@
 [gd_scene load_steps=27 format=3 uid="uid://frtrt2nfty4f"]
 
 [ext_resource type="Script" path="res://entities/in_game/enemies/scripts/turret.gd" id="1_go7r8"]
-[ext_resource type="PackedScene" uid="uid://c4f3gvy03luc" path="res://entities/common/guns/e_guns/plasma_gun.tscn" id="1_xvloh"]
+[ext_resource type="PackedScene" uid="uid://c4f3gvy03luc" path="res://entities/common/guns/e_guns/scenes/plasma_gun.tscn" id="1_xvloh"]
 [ext_resource type="Script" path="res://addons/behaviour_toolkit/behaviour_tree/bt_root.gd" id="2_rs007"]
 [ext_resource type="Script" path="res://addons/behaviour_toolkit/behaviour_tree/composites/bt_selector.gd" id="3_qnjf8"]
 [ext_resource type="Script" path="res://addons/behaviour_toolkit/behaviour_tree/composites/bt_sequence.gd" id="4_dedxt"]

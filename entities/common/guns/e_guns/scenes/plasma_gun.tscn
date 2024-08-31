@@ -1,9 +1,9 @@
 [gd_scene load_steps=13 format=3 uid="uid://c4f3gvy03luc"]
 
-[ext_resource type="Script" path="res://entities/common/guns/e_guns/plasma_gun.gd" id="1_0y4fa"]
-[ext_resource type="PackedScene" uid="uid://d4mu6ag00g208" path="res://entities/common/guns/e_guns/projectiles/plasma_ball.tscn" id="2_rl2l2"]
-[ext_resource type="Script" path="res://entities/common/components/battery_component.gd" id="3_4kq7y"]
-[ext_resource type="Script" path="res://addons/behaviour_toolkit/finite_state_machine/fsm.gd" id="4_0ev2o"]
+[ext_resource type="Script" path="res://entities/common/guns/e_guns/code/plasma_gun.gd" id="1_2cn1q"]
+[ext_resource type="PackedScene" uid="uid://d4mu6ag00g208" path="res://entities/common/guns/e_guns/projectiles/plasma_ball.tscn" id="2_oci4p"]
+[ext_resource type="Script" path="res://entities/common/components/battery_component.gd" id="3_mu5p8"]
+[ext_resource type="Script" path="res://addons/behaviour_toolkit/finite_state_machine/fsm.gd" id="4_ev885"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_8poxh"]
 
@@ -105,15 +105,15 @@ func is_valid(_actor: Node, _blackboard: Blackboard) -> bool:
 "
 
 [node name="PlasmaGun" type="Node3D" node_paths=PackedStringArray("shoot_points_arr", "ready_timer", "battery_component")]
-script = ExtResource("1_0y4fa")
+script = ExtResource("1_2cn1q")
 shoot_points_arr = [NodePath("ShootPoints/Marker3D"), NodePath("ShootPoints/Marker3D2")]
 fire_rate = 6.0
-plasma_ball = ExtResource("2_rl2l2")
+plasma_ball = ExtResource("2_oci4p")
 ready_timer = NodePath("ReadyTimer")
 battery_component = NodePath("BatteryComponent")
 
 [node name="BatteryComponent" type="Node" parent="."]
-script = ExtResource("3_4kq7y")
+script = ExtResource("3_mu5p8")
 
 [node name="ReadyTimer" type="Timer" parent="."]
 
@@ -139,7 +139,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.142749, 1.74838)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.142749, 1.74838)
 
 [node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "actor")]
-script = ExtResource("4_0ev2o")
+script = ExtResource("4_ev885")
 autostart = true
 initial_state = NodePath("Ready")
 actor = NodePath("..")

@@ -30,7 +30,7 @@ point_count = 2
 transparency = 1
 albedo_color = Color(0.847059, 0, 0.309804, 0.623529)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pohsn"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4mrfs"]
 resource_local_to_scene = true
 albedo_color = Color(0.454902, 0.313726, 0.917647, 0.705882)
 emission_enabled = true
@@ -40,7 +40,7 @@ disable_receive_shadows = true
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_w4j31"]
 resource_local_to_scene = true
-material = SubResource("StandardMaterial3D_pohsn")
+material = SubResource("StandardMaterial3D_4mrfs")
 radial_segments = 16
 
 [node name="LaserGun" type="Node3D" node_paths=PackedStringArray("targeting_component", "battery_component", "power_module")]

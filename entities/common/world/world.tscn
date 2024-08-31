@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://uc265cnfk3e0"]
+[gd_scene load_steps=10 format=3 uid="uid://uc265cnfk3e0"]
 
 [ext_resource type="Script" path="res://entities/common/world/world_provider.gd" id="1_fj45i"]
 [ext_resource type="PackedScene" uid="uid://dlt0nwg5c3wrd" path="res://entities/common/world/player.tscn" id="1_ocwlt"]
 [ext_resource type="Script" path="res://entities/common/components/hurtbox_component.gd" id="2_0vei4"]
+[ext_resource type="Script" path="res://camera.gd" id="3_7gc70"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_c20xy"]
 
@@ -94,7 +95,8 @@ light_energy = 0.2
 shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.311446, -0.513431, 0.799618, 0, 0.84147, 0.540304, -0.950264, 0.168276, -0.262073, 43.8326, 32.6124, -16.7232)
+transform = Transform3D(-0.240128, -0.54219, 0.805213, 0, 0.829483, 0.558532, -0.970741, 0.134119, -0.199182, 10.4465, 10.1915, -5.16241)
+script = ExtResource("3_7gc70")
 
 [node name="Camera3D2" type="Camera3D" parent="."]
 transform = Transform3D(0.767187, -0.213034, 0.605014, 0, 0.943235, 0.332126, -0.641424, -0.254803, 0.723637, 6.43056, 5.3364, 6.18558)

@@ -1,0 +1,184 @@
+[gd_scene load_steps=13 format=3 uid="uid://bcphjce3fubv2"]
+
+[ext_resource type="Script" path="res://entities/common/guns/e_guns/code/laser_gun.gd" id="1_8n5os"]
+[ext_resource type="Script" path="res://entities/common/components/battery_component.gd" id="2_o351u"]
+[ext_resource type="Script" path="res://entities/common/guns/power_modules/projectiles/laser_beam.gd" id="3_11fdf"]
+[ext_resource type="Script" path="res://addons/behaviour_toolkit/finite_state_machine/fsm.gd" id="4_q5lyj"]
+[ext_resource type="Script" path="res://addons/behaviour_toolkit/finite_state_machine/fsm_state.gd" id="5_tkpjr"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1x5l5"]
+height = 1.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_o4asr"]
+top_radius = 0.2
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pohsn"]
+resource_local_to_scene = true
+albedo_color = Color(0.454902, 0.313726, 0.917647, 0.705882)
+emission_enabled = true
+emission = Color(0.0922522, 0.0280383, 0.246842, 1)
+emission_energy_multiplier = 8.0
+disable_receive_shadows = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_yg6o3"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_pohsn")
+radial_segments = 16
+
+[sub_resource type="GDScript" id="GDScript_l6bju"]
+resource_name = "ActivateBeam"
+script/source = "@tool
+extends FSMTransition
+
+
+# Executed when the transition is taken.
+func _on_transition(_delta: float, _actor: Node, _blackboard: Blackboard) -> void:
+	pass
+
+
+# Evaluates true, if the transition conditions are met.
+func is_valid(_actor: Node, _blackboard: Blackboard) -> bool:
+	if (_actor as LaserGun).can_n_should_fire:
+		return true
+	return false
+
+
+# Add custom configuration warnings
+# Note: Can be deleted if you don't want to define your own warnings.
+func _get_configuration_warnings() -> PackedStringArray:
+	var warnings: Array = []
+
+	warnings.append_array(super._get_configuration_warnings())
+
+	# Add your own warnings to the array here
+
+	return warnings
+"
+
+[sub_resource type="GDScript" id="GDScript_4xgbo"]
+resource_name = "beam_is_active"
+script/source = "@tool
+extends FSMState
+
+
+# Executes after the state is entered.
+func _on_enter(_actor: Node, _blackboard: Blackboard) -> void:
+	(_actor as LaserGun).beam.turn_on_beam()
+
+
+# Executes every _process call, if the state is active.
+func _on_update(_delta: float, _actor: Node, _blackboard: Blackboard) -> void:
+	pass
+
+
+# Executes before the state is exited.
+func _on_exit(_actor: Node, _blackboard: Blackboard) -> void:
+	(_actor as LaserGun).beam.turn_off_beam()
+
+
+# Add custom configuration warnings
+# Note: Can be deleted if you don't want to define your own warnings.
+func _get_configuration_warnings() -> PackedStringArray:
+	var warnings: Array = []
+
+	warnings.append_array(super._get_configuration_warnings())
+
+	# Add your own warnings to the array here
+
+	return warnings
+"
+
+[sub_resource type="GDScript" id="GDScript_lwq0j"]
+resource_name = "deactivate_beam"
+script/source = "@tool
+extends FSMTransition
+
+
+# Executed when the transition is taken.
+func _on_transition(_delta: float, _actor: Node, _blackboard: Blackboard) -> void:
+	pass
+
+
+# Evaluates true, if the transition conditions are met.
+func is_valid(_actor: Node, _blackboard: Blackboard) -> bool:
+	if not (_actor as LaserGun).can_n_should_fire:
+		return true
+	return false
+
+
+# Add custom configuration warnings
+# Note: Can be deleted if you don't want to define your own warnings.
+func _get_configuration_warnings() -> PackedStringArray:
+	var warnings: Array = []
+
+	warnings.append_array(super._get_configuration_warnings())
+
+	# Add your own warnings to the array here
+
+	return warnings
+"
+
+[node name="LaserGun" type="Node3D" node_paths=PackedStringArray("shoot_point", "beam", "battery_component")]
+script = ExtResource("1_8n5os")
+shoot_point = NodePath("ShootPoint")
+lazer_depl_per_tick = 5.0
+damage_per_tick = 5.0
+beam = NodePath("Beam")
+battery_component = NodePath("BatteryComponent")
+
+[node name="BatteryComponent" type="Node" parent="."]
+script = ExtResource("2_o351u")
+
+[node name="CGs" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CGs"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_1x5l5")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="CGs"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.996822)
+mesh = SubResource("CylinderMesh_o4asr")
+skeleton = NodePath("../..")
+
+[node name="ShootPoint" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.86926)
+
+[node name="Beam" type="Node3D" parent="." node_paths=PackedStringArray("tick_timer", "beam_cgs")]
+script = ExtResource("3_11fdf")
+beam_radius = 0.2
+ray_length = 300.0
+hit_layer_mask = 201326598
+tick_timer = NodePath("BeamTickTimer")
+beam_cgs = NodePath("CGs/BeamCGs")
+
+[node name="CGs" type="Node3D" parent="Beam"]
+
+[node name="BeamCGs" type="MeshInstance3D" parent="Beam/CGs"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+rotation_edit_mode = 1
+visible = false
+mesh = SubResource("CylinderMesh_yg6o3")
+
+[node name="BeamTickTimer" type="Timer" parent="Beam"]
+
+[node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "actor")]
+script = ExtResource("4_q5lyj")
+autostart = true
+initial_state = NodePath("Ready")
+actor = NodePath("..")
+
+[node name="Ready" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("5_tkpjr")
+
+[node name="FSMTransition" type="Node" parent="FiniteStateMachine/Ready" node_paths=PackedStringArray("next_state")]
+script = SubResource("GDScript_l6bju")
+next_state = NodePath("../../BeamIsActive")
+
+[node name="BeamIsActive" type="Node" parent="FiniteStateMachine"]
+script = SubResource("GDScript_4xgbo")
+
+[node name="FSMTransition" type="Node" parent="FiniteStateMachine/BeamIsActive" node_paths=PackedStringArray("next_state")]
+script = SubResource("GDScript_lwq0j")
+next_state = NodePath("../../Ready")

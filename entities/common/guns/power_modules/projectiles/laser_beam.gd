@@ -1,6 +1,8 @@
 class_name LaserBeam
 extends Node3D
 
+signal tick_happened
+
 @export_category("Physical properties")
 @export var beam_radius : float = 0.5
 @export var ray_length : float = 30.0
@@ -21,7 +23,7 @@ var _visualizer : Node3D
 var _beam_tween : Tween
 var material_instance : BaseMaterial3D
 
-func init():
+func _ready() -> void:
 	_visualizer = MeshInstance3D.new()
 	_visualizer.mesh = SphereMesh.new()
 	add_child(_visualizer)
@@ -73,10 +75,11 @@ func turn_off_beam():
 
 func calculate_beam():
 	var s_g_position : Vector3 = to_global(position)
-	var e_g_position : Vector3 = s_g_position + Quaternion(global_transform.basis) * quaternion * Vector3.FORWARD * ray_length
+	#print_debug(str(global_transform.basis.z))
+	var e_g_position : Vector3 = s_g_position + global_transform.basis.z * ray_length
 	#var e_g_position = Vector3(100, 0, 0)
 	var results = G_GameHelpers.get_raycast_results(s_g_position, e_g_position, hit_layer_mask)
-	#print(str(results))
+	
 	var length_2x : float
 	if results.size():
 		_visualizer.global_position = results.get("position")
@@ -90,8 +93,9 @@ func calculate_beam():
 		length_2x = (s_g_position - e_g_position).length_squared()
 		_visualizer.global_position = e_g_position
 	update_beam_visuals(sqrt(length_2x))
+	tick_happened.emit()
 
 
 func update_beam_visuals(length : float):
 	_beam_mesh.height = length
-	beam_cgs.position = Vector3(0, 0, -length / 2)
+	beam_cgs.position = Vector3(0, 0, length / 2)

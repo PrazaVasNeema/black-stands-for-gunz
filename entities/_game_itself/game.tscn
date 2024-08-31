@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bg4vrn12w1kgx"]
+[gd_scene load_steps=17 format=3 uid="uid://bg4vrn12w1kgx"]
 
 [ext_resource type="Script" path="res://entities/_game_itself/game.gd" id="1_kobut"]
 [ext_resource type="Script" path="res://entities/common/state_machine/reactive/game_state/game_state_machine.gd" id="2_ned6v"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://uc265cnfk3e0" path="res://entities/common/world/world.tscn" id="5_wh3il"]
 [ext_resource type="Material" uid="uid://doc35las278mu" path="res://entities/common/guns/materials/laser.tres" id="6_ph74l"]
 [ext_resource type="Texture2D" uid="uid://cdijxjinyqd3g" path="res://entities/common/world/textures/tron_tex_1.png" id="8_27dp4"]
+[ext_resource type="PackedScene" uid="uid://bcphjce3fubv2" path="res://entities/common/guns/e_guns/scenes/laser_gun.tscn" id="10_c72ut"]
 [ext_resource type="PackedScene" uid="uid://frtrt2nfty4f" path="res://entities/in_game/enemies/scenes/turret.tscn" id="11_irlrg"]
 [ext_resource type="PackedScene" uid="uid://bwpj6vwsiqhrh" path="res://rnd/dummy_target_player.tscn" id="11_prah2"]
 
@@ -77,3 +78,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.57114, 0)
 
 [node name="Turret" parent="." instance=ExtResource("11_irlrg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.16877, 2.7937, -4.11172)
+
+[node name="LaserGun" parent="." instance=ExtResource("10_c72ut")]
+transform = Transform3D(-0.997753, 0, 0.0670054, 0, 1, 0, -0.0670054, 0, -0.997753, 0, 4.02059, 6.27464)
